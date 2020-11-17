@@ -73,10 +73,10 @@ public class User implements Serializable {
     private String username;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 40)
+    @Size(min = 1, max = 68)
     @Column(name = "password")
     private String password;
-    @Size(max = 50)
+    @Size(max = 100)
     @Column(name = "image")
     private String image;
     @Basic(optional = false)
