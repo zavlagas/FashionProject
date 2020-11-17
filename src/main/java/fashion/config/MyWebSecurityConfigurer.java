@@ -6,25 +6,52 @@
 package fashion.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
 public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    private UserDetailsService userService;
+
+    ////THis is for developing only 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        UserBuilder users = User.builder();
+//
+//        auth.inMemoryAuthentication()
+//                .withUser(users.username("admin").password("{noop}1234").roles("ADMIN", "USER"))
+//                .withUser(users.username("user").password("{noop}1234").roles("USER"));
+//
+//    }
+    ///This is for connection to db Users Checking
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        UserBuilder users = User.builder();
+        auth.authenticationProvider(authenticationProvider());
+    }
 
-        auth.inMemoryAuthentication()
-                .withUser(users.username("admin").password("{noop}1234").roles("ADMIN", "USER"))
-                .withUser(users.username("user").password("{noop}1234").roles("USER"));
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setUserDetailsService(userService);
+        provider.setPasswordEncoder(passwordEncoder());
+        return (provider);
+    }
+
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+
     }
 
     @Override
@@ -39,7 +66,8 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .loginPage("/loginPage")//The login form will be found in this url 
                 .loginProcessingUrl("/authenticate")//The check of gredientials will be performed by this url 
                 .permitAll()//Allow everyone to see login page ,users dont have to been logged in 
-                .and().logout().permitAll();
+                .and().logout().permitAll()
+                .and().exceptionHandling().accessDeniedPage("/access-denied");
 
     }
 
