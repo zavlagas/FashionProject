@@ -25,17 +25,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userService;
 
-    ////THis is for developing only 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        UserBuilder users = User.builder();
-//
-//        auth.inMemoryAuthentication()
-//                .withUser(users.username("admin").password("{noop}1234").roles("ADMIN", "USER"))
-//                .withUser(users.username("user").password("{noop}1234").roles("USER"));
-//
-//    }
-    ///This is for connection to db Users Checking
+    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
