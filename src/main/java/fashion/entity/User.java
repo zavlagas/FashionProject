@@ -36,7 +36,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")})
+    @NamedQuery(name = "User.findAll", query = "SELECT m FROM User m"),
+    @NamedQuery(name = "User.findByUid", query = "SELECT m FROM User m WHERE m.id = :id"),
+    @NamedQuery(name = "User.findByFname", query = "SELECT m FROM User m WHERE m.firstName = :firstName"),
+    @NamedQuery(name = "User.findByLname", query = "SELECT m FROM User m WHERE m.lastName = :lastName"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT m FROM User m WHERE m.username = :username"),
+    @NamedQuery(name = "User.findByPasswd", query = "SELECT m FROM User m WHERE m.password = :password")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -254,5 +259,5 @@ public class User implements Serializable {
     public String toString() {
         return "fashion.entity.User[ id=" + id + " ]";
     }
-    
+
 }
