@@ -15,6 +15,7 @@
     <body>
         <main class="container">
             <h1>You shall not pass.This is Spring Security!Asta La Vista</h1>
+            <img src="images/seo-image.jpg" alt=""/>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown button
@@ -25,6 +26,7 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </div>
+            
         </main>
 
     </div>
