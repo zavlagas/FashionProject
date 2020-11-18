@@ -25,9 +25,9 @@ public class MyWebAppConfig implements WebMvcConfigurer {
         registry.viewResolver(viewResolver);
     }
 
+    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**")
-                .addResourceLocations("/static/").setCachePeriod(Integer.MAX_VALUE);
+        registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
     }
     
 //     @Override
