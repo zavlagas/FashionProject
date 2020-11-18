@@ -1,8 +1,10 @@
 package fashion.config;
 
+import java.util.concurrent.TimeUnit;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -13,10 +15,9 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = "fashion")
 public class MyWebAppConfig implements WebMvcConfigurer {
-    
+
 //    @Autowired
 //    StringToObjectSizeConverter_Example objectConverter;
-
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
@@ -27,13 +28,14 @@ public class MyWebAppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/")
+                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
     }
-    
+
 //     @Override
 //    public void addFormatters(FormatterRegistry registry) {
 ////       registry.addConverter(this.objectConverter);
 ////     
 //    }
-
 }
