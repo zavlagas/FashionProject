@@ -27,6 +27,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -58,7 +60,7 @@ public class Brand implements Serializable {
     @NotNull
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;
+    private Date creationDate;//dont insert it to a form , its on auto
     @Size(max = 100)
     @Column(name = "image_path")
     private String imagePath;
@@ -66,6 +68,7 @@ public class Brand implements Serializable {
     @ManyToOne(optional = false)
     private User user;
     @OneToMany(mappedBy = "brand")
+    @Cascade(CascadeType.SAVE_UPDATE)
     private List<Product> productList;
 
     public Brand() {

@@ -45,8 +45,8 @@ public class Role implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
-    private List<UserRole> userRoleList;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+//    private List<UserRole> userRoleList;
 
     public Role() {
     }
@@ -76,14 +76,14 @@ public class Role implements Serializable {
         this.type = type;
     }
 
-    @XmlTransient
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
-    }
-
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
-    }
+//    @XmlTransient
+//    public List<UserRole> getUserRoleList() {
+//        return userRoleList;
+//    }
+//
+//    public void setUserRoleList(List<UserRole> userRoleList) {
+//        this.userRoleList = userRoleList;
+//    }
 
     @Override
     public int hashCode() {

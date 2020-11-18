@@ -48,8 +48,8 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.authorizeRequests()//Restrict access bases on the HTtp Request
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/fashionMaker/**").hasRole("MAKER")
+                .antMatchers("/fashionLover/**").hasRole("LOVER")
                 .anyRequest().authenticated()//Any request to the application must be authenticated (--Logged IN--)
                 .and()//Return again the HTTP SECURITY OBJECT TO ADD MORE RULES
                 .formLogin()//We will customize a login process
