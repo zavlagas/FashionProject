@@ -18,6 +18,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -41,6 +43,7 @@ public class UserSubscription implements Serializable {
     private SubscriptionStatu status;
     @JoinColumn(name = "subscriptions_id", referencedColumnName = "id")
     @ManyToOne
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Subscription subscriptions;
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @ManyToOne

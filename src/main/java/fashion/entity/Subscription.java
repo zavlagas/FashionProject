@@ -25,6 +25,8 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -55,9 +57,11 @@ public class Subscription implements Serializable {
     private Date endDate;
     @JoinColumn(name = "pay_method_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private PayMethod payMethod;
     @JoinColumn(name = "plan_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Plan plan;
     @OneToMany(mappedBy = "subscriptions")
     private List<UserSubscription> userSubscriptionList;

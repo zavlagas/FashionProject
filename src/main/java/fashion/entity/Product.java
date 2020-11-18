@@ -24,6 +24,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -54,6 +56,7 @@ public class Product implements Serializable {
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     @ManyToOne
     private Brand brand;
+    @Cascade(CascadeType.SAVE_UPDATE)
     @OneToMany(mappedBy = "product")
     private List<ProductImage> productImageList;
 
