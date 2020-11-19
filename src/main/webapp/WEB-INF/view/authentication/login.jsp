@@ -185,7 +185,7 @@
             <div class="d-flex justify-content-center h-100">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="text-center">Sign In</h3>
+                        <h3 class="text-center">Log In</h3>
                     </div>
                     <div class="card-body">
                         <c:if test="${param.error != null}" >
@@ -221,10 +221,10 @@
                     </div>
                     <div class="card-footer">
                         <div class="d-flex justify-content-center links">
-                            Don't have an account?<a href="#">Sign Up</a>
+                            Don't have an account?<a class="text-warning" href="${pageContext.request.contextPath}/signup">Sign Up</a>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <a href="#">Forgot your password?</a>
+                        <div class="d-flex justify-content-center links">
+                            <a class="text-warning" href="#">Forgot your password?</a>
                         </div>
                     </div>
                 </div>

@@ -45,11 +45,11 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         http.authorizeRequests()//Restrict access bases on the HTtp Request
+
+                .antMatchers("/webjars/**", "https://use.fontawesome.com/releases/v5.3.1/css/all.css", "/images/*", "/signup/**").permitAll()
                 .antMatchers("/fashionMaker/**").hasRole("MAKER")
                 .antMatchers("/fashionLover/**").hasRole("LOVER")
-                .antMatchers("/webjars/**","https://use.fontawesome.com/releases/v5.3.1/css/all.css","/images/*").permitAll()
                 .anyRequest().authenticated()//Any request to the application must be authenticated (--Logged IN--)
                 .and()//Return again the HTTP SECURITY OBJECT TO ADD MORE RULES
                 .formLogin()//We will customize a login process
