@@ -14,7 +14,7 @@ public class AuthenticationController {
 
     @RequestMapping("/loginPage")
     private String getLoginPage() {
-        return ("login");
+        return ("authentication/login");
     }
     
     @GetMapping("/access-denied")

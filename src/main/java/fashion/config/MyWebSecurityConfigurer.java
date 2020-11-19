@@ -25,7 +25,6 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userService;
 
-    
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
@@ -50,6 +49,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()//Restrict access bases on the HTtp Request
                 .antMatchers("/fashionMaker/**").hasRole("MAKER")
                 .antMatchers("/fashionLover/**").hasRole("LOVER")
+                .antMatchers("/webjars/**","https://use.fontawesome.com/releases/v5.3.1/css/all.css","/images/*").permitAll()
                 .anyRequest().authenticated()//Any request to the application must be authenticated (--Logged IN--)
                 .and()//Return again the HTTP SECURITY OBJECT TO ADD MORE RULES
                 .formLogin()//We will customize a login process
