@@ -93,9 +93,9 @@ public class User implements Serializable {
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private List<Brand> brandList;
+//    @OneToMany(mappedBy = "user")
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    private List<Brand> brandList;
     @OneToMany(mappedBy = "user")
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<UserRole> userRoleList;
@@ -205,14 +205,14 @@ public class User implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-    @XmlTransient
-    public List<Brand> getBrandList() {
-        return brandList;
-    }
-
-    public void setBrandList(List<Brand> brandList) {
-        this.brandList = brandList;
-    }
+//    @XmlTransient
+//    public List<Brand> getBrandList() {
+//        return brandList;
+//    }
+//
+//    public void setBrandList(List<Brand> brandList) {
+//        this.brandList = brandList;
+//    }
 
     @XmlTransient
     public List<UserRole> getUserRoleList() {
