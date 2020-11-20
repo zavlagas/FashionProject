@@ -42,4 +42,10 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    @Override
+    public String registerUserClient(fashion.entity.User newUser) {
+        int userId = udao.registerUserToDb(newUser);
+        return "The user successfully subscribed";
+    }
+
 }

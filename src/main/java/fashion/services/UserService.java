@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
 
+    public String registerUserClient(User newUser);
+
 //    public void create(User user);
     
 
