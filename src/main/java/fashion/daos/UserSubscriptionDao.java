@@ -3,10 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fashion.services;
+package fashion.daos;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import fashion.entity.UserSubscription;
 
-public interface UserService extends UserDetailsService {
+/**
+ *
+ * @author User
+ */
+public interface UserSubscriptionDao {
+
+    boolean register(UserSubscription newSubscription);
 
 }

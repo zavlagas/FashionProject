@@ -15,8 +15,4 @@ public interface UserDao {
 
     User findByUsername(String username);
 
-    public int registerUserToDb(User newUser);
-
-    
-
 }

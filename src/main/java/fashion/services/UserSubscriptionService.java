@@ -5,8 +5,14 @@
  */
 package fashion.services;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
+import fashion.entity.UserSubscription;
 
-public interface UserService extends UserDetailsService {
+/**
+ *
+ * @author User
+ */
+public interface UserSubscriptionService {
+
+    public String register(UserSubscription newSubscription);
 
 }

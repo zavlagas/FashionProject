@@ -3,11 +3,11 @@ package fashion.controllers;
 import fashion.entity.Gender;
 import fashion.entity.Plan;
 import fashion.entity.Role;
-import fashion.entity.User;
+import fashion.entity.UserSubscription;
 import fashion.services.GenderService;
 import fashion.services.PlanService;
 import fashion.services.RoleService;
-import fashion.services.UserService;
+import fashion.services.UserSubscriptionService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +28,7 @@ public class UserController {
     @Autowired
     private PlanService planService;
     @Autowired
-    private UserService userService;
+    private UserSubscriptionService userSubscriptionService;
 
     @ModelAttribute("genders")
     private List<Gender> getGenders() {
@@ -47,15 +47,14 @@ public class UserController {
 
     @GetMapping("/signup")
     private String getSignUpPageForCreatingANewUser(Model model) {
-        model.addAttribute("user", new User());
+        model.addAttribute("user_subscription", new UserSubscription());
         return ("/authentication/signup");
     }
 
     @PostMapping("/singup")
-    private String registerUser(@ModelAttribute("user")User newUser,RedirectAttributes ra){
-        String proccessInfo=userService.registerUserClient(newUser);
-        ra.addAttribute("message",proccessInfo);
-        return("redirect:/loginPage");
-        
+    private String registerUser(@ModelAttribute("user_subscription") UserSubscription newSubscription, RedirectAttributes ra) {
+        String proccessInfo = userSubscriptionService.register(newSubscription);
+        ra.addAttribute("subscribed", proccessInfo);
+        return ("redirect:/loginPage");
     }
 }

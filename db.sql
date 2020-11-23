@@ -87,6 +87,9 @@ CREATE TABLE `pay_methods` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+
+INSERT INTO fashion.pay_methods(`type`) values ('CREDID CARD'),('WIRE TRANSFER');
+
 --
 -- Dumping data for table `pay_methods`
 --
@@ -111,6 +114,10 @@ CREATE TABLE `plans` (
   UNIQUE KEY `name` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+
+INSERT INTO `plans`(name,price) values ('FASHION LOVER',0.0),('FASHION MAKER',20.0);
+
 
 --
 -- Dumping data for table `plans`
@@ -241,6 +248,8 @@ CREATE TABLE `subscription_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
+INSERT INTO `subscription_status`(status) VALUES ('ACTIVE'),('INACTIVE');
+
 --
 -- Dumping data for table `subscription_status`
 --
@@ -265,6 +274,7 @@ CREATE TABLE `subscriptions` (
   `end_date` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `pay_method_id` (`pay_method_id`),
+  KEY `plan_id` (`plan_id`),
   KEY `plan_id` (`plan_id`),
   CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`pay_method_id`) REFERENCES `pay_methods` (`id`),
   CONSTRAINT `subscriptions_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`)
