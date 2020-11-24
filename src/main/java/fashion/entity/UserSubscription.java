@@ -60,31 +60,27 @@ public class UserSubscription implements Serializable {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public SubscriptionStatu getStatusId() {
         return status;
     }
 
-    public void setStatusId(SubscriptionStatu status) {
+    public void setStatus(SubscriptionStatu status) {
         this.status = status;
     }
 
-    public Subscription getSubscriptionsId() {
+    public Subscription getSubscriptions() {
         return subscriptions;
     }
 
-    public void setSubscriptionsId(Subscription subscriptionsId) {
+    public void setSubscriptions(Subscription subscriptionsId) {
         this.subscriptions = subscriptionsId;
     }
 
-    public User getUserId() {
+    public User getUser() {
         return user;
     }
 
-    public void setUserId(User user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

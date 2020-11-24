@@ -13,12 +13,11 @@ import org.hibernate.Session;
  * @author User
  */
 public class UserSubscriptionDaoImpl extends SuperDao implements UserSubscriptionDao {
-
     
-
+    
     @Override
-    public boolean register(UserSubscription newSubscription) {
-        
+    public void register(UserSubscription newUserSubscription) {
+        getSession().save(newUserSubscription);
     }
 
 }

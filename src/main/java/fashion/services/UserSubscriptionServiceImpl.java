@@ -8,19 +8,25 @@ package fashion.services;
 import fashion.daos.UserSubscriptionDao;
 import fashion.entity.UserSubscription;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-/**
- *
- * @author User
- */
+@Service
+@Transactional
 public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     @Autowired
     private UserSubscriptionDao dao;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
-    public String register(UserSubscription newSubscription) {
-        return (dao.register(newSubscription));
+    public void register(UserSubscription newUserSubscription) {
+        newUserSubscription
+                .getUser()
+                .setPassword(passwordEncoder.encode(newUserSubscription.getUser().getPassword()));
+        dao.register(newUserSubscription);
     }
 
 }

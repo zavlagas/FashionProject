@@ -13,6 +13,6 @@ import fashion.entity.UserSubscription;
  */
 public interface UserSubscriptionDao {
 
-    boolean register(UserSubscription newSubscription);
+    void register(UserSubscription newUserSubscription);
 
 }
