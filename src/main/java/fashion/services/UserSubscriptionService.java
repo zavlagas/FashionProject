@@ -13,6 +13,6 @@ import fashion.entity.UserSubscription;
  */
 public interface UserSubscriptionService {
 
-    public String register(UserSubscription newSubscription);
+    public void register(UserSubscription newUserSubscription);
 
 }
