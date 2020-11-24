@@ -6,7 +6,6 @@
 package fashion.daos;
 
 import fashion.entity.UserSubscription;
-import org.hibernate.Session;
 
 /**
  *
