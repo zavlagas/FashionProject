@@ -5,18 +5,32 @@
  */
 package fashion.daos;
 
+import fashion.entity.User;
 import fashion.entity.UserSubscription;
+import javax.persistence.NoResultException;
+import org.hibernate.Session;
 
 /**
  *
  * @author User
  */
 public class UserSubscriptionDaoImpl extends SuperDao implements UserSubscriptionDao {
-    
-    
+
     @Override
     public void register(UserSubscription newUserSubscription) {
         getSession().save(newUserSubscription);
+    }
+
+    @Override
+    public boolean checkIfUserExistsInDb(User newUser) {
+        boolean userExist = true;
+        try {
+            getSession().createNamedQuery("User.findByUsername", User.class).getSingleResult();
+        } catch (NoResultException e) {
+            userExist = false;
+        }
+        return (userExist);
+
     }
 
 }

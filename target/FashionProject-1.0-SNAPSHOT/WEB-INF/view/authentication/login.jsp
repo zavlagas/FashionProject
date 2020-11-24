@@ -161,26 +161,6 @@
         </style>
     </head>
     <body>
-        <!--        <div align="center">
-                    <h3>Please Login</h3>
-        <c:if test="${param.error != null}">
-            <p>
-                <strong>Credentrials are not correct</strong>
-            </p>
-        </c:if>
-        <form:form action="${pageContext.request.contextPath}/authenticate" method="POST" >
-            <P>
-                USERNAME: 
-            </P>
-            <P>
-                PASSWORD: 
-            </P>
-            <p>
-                <button type="submit">Submit</button>
-
-            </p>
-        </form:form>
-    </div>-->
         <div class="container">
             <div class="d-flex justify-content-center h-100">
                 <div class="card">

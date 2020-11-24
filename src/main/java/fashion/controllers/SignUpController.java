@@ -53,8 +53,9 @@ public class SignUpController {
     }
 
     @PostMapping
-    private String registerUser(@ModelAttribute("user_subscription") UserSubscription newUserSubscription) {
-        userSubscriptionService.register(newUserSubscription);
+    private String registerUser(@ModelAttribute("user_subscription") UserSubscription newUserSubscription, RedirectAttributes ra) {
+        String message = userSubscriptionService.checkIfUserExistsInDbAndIfNotRegisterThe(newUserSubscription);
+        ra.addAttribute("exists", message);
         return ("redirect:/loginPage");
     }
 
