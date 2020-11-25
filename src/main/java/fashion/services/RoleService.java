@@ -8,4 +8,6 @@ public interface RoleService {
     
     List <Role> getAllRoles();
     
+    public Role findByRole(short id);
+    
 }

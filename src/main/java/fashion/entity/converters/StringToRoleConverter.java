@@ -1,22 +1,22 @@
 package fashion.entity.converters;
 
-import fashion.entity.Plan;
-import fashion.services.PlanService;
+import fashion.entity.Role;
+import fashion.services.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StringToPlanConverter implements Converter<String, Plan> {
+public class StringToRoleConverter implements Converter<String, Role> {
 
     @Autowired
-    private PlanService service;
+    private RoleService service;
     
     @Override
-    public Plan convert(String s) {
+    public Role convert(String s) {
         short id = Short.parseShort(s);
-        Plan plan = service.findById(id);
-        return(plan);
+        Role role = service.findByRole(id);
+        return(role);
     }
     
 }

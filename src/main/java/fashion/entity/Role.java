@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "roles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
+    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
+    @NamedQuery(name = "Role.findById", query = "SELECT r FROM Role r WHERE r.id = :id")})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;

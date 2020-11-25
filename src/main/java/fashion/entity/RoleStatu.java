@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "role_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "RoleStatu.findAll", query = "SELECT r FROM RoleStatu r")})
+    @NamedQuery(name = "RoleStatu.findAll", query = "SELECT r FROM RoleStatu r"),
+    @NamedQuery(name = "RoleStatu.findById", query = "SELECT r FROM RoleStatu r WHERE r.id = :id")})
 public class RoleStatu implements Serializable {
 
     private static final long serialVersionUID = 1L;
