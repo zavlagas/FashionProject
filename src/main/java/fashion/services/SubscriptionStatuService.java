@@ -5,6 +5,6 @@ import fashion.entity.SubscriptionStatu;
 
 public interface SubscriptionStatuService {
 
-    public SubscriptionStatu findById(int id);
+    public SubscriptionStatu findById(short id);
     
 }

@@ -13,7 +13,7 @@ public class SubscriptionStatuServiceImpl implements SubscriptionStatuService{
     private SubscriptionStatuDao dao;
 
     @Override
-    public SubscriptionStatu findById(int id) {
+    public SubscriptionStatu findById(short id) {
         return(dao.findById(id));
     }
 }

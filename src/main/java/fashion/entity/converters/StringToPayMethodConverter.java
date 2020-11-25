@@ -13,7 +13,7 @@ public class StringToPayMethodConverter implements Converter<String, PayMethod> 
 
     @Override
     public PayMethod convert(String s) {
-        int id = Integer.parseInt(s);
+        short id = Short.parseShort(s);
         PayMethod payMethod = service.findByPaymentMethod(id);
         return(payMethod);
                 

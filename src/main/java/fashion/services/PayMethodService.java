@@ -4,5 +4,5 @@ import fashion.entity.PayMethod;
 
 
 public interface PayMethodService {
-    public PayMethod findByPaymentMethod(int id);
+    public PayMethod findByPaymentMethod(short id);
 }

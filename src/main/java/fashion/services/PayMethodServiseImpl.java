@@ -13,7 +13,7 @@ public class PayMethodServiseImpl implements PayMethodService {
     private PayMethodDao dao; 
 
     @Override
-    public PayMethod findByPaymentMethod(int id) {
+    public PayMethod findByPaymentMethod(short id) {
         return(dao.findByPaymentMethod(id));
     }
 }

@@ -19,4 +19,9 @@ public class PlanServiceImpl implements PlanService {
         return (dao.findAllPlans());
     }
 
+    @Override
+    public Plan findById(short id) {
+        return(dao.findById(id));
+    }
+
 }

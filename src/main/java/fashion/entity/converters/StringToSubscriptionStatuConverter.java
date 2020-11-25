@@ -13,7 +13,7 @@ public class StringToSubscriptionStatuConverter implements Converter<String, Sub
     
     @Override
     public SubscriptionStatu convert(String s) {
-        int id = Integer.parseInt(s);
+        short id = Short.parseShort(s);
         SubscriptionStatu status = service.findById(id);
         return(status);
     }

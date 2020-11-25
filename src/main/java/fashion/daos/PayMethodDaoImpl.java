@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public class PayMethodDaoImpl extends SuperDao implements PayMethodDao {
 
     @Override
-    public PayMethod findByPaymentMethod(int id) {
+    public PayMethod findByPaymentMethod(short id) {
         return(getSession().createNamedQuery("PayMethod.findById", PayMethod.class).setParameter("id", id).getSingleResult());
     }
     
