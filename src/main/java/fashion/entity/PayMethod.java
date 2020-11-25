@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "pay_methods")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "PayMethod.findAll", query = "SELECT p FROM PayMethod p")})
+    @NamedQuery(name = "PayMethod.findAll", query = "SELECT p FROM PayMethod p"),
+    @NamedQuery(name = "PayMethod.findById", query = "SELECT p FROM PayMethod p WHERE p.id = :id")})
 public class PayMethod implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -108,6 +109,10 @@ public class PayMethod implements Serializable {
     @Override
     public String toString() {
         return "fashion.entity.PayMethod[ id=" + id + " ]";
+    }
+
+    public PayMethod findByPaymentMethod(int paymentMethod) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
