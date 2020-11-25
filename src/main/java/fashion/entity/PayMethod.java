@@ -111,8 +111,5 @@ public class PayMethod implements Serializable {
         return "fashion.entity.PayMethod[ id=" + id + " ]";
     }
 
-    public PayMethod findByPaymentMethod(int paymentMethod) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

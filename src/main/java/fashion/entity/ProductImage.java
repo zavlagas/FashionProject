@@ -75,11 +75,11 @@ public class ProductImage implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public Product getProductId() {
+    public Product getProduct() {
         return product;
     }
 
-    public void setProductId(Product productId) {
+    public void setProduct(Product productId) {
         this.product = productId;
     }
 

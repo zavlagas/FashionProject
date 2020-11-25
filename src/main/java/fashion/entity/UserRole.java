@@ -58,19 +58,19 @@ public class UserRole implements Serializable {
         this.id = id;
     }
 
-    public RoleStatu getStatusId() {
+    public RoleStatu getStatus() {
         return status;
     }
 
-    public void setStatusId(RoleStatu status) {
+    public void setStatus(RoleStatu status) {
         this.status = status;
     }
 
-    public Role getRoleId() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRoleId(Role role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

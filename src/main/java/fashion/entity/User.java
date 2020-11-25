@@ -223,11 +223,11 @@ public class User implements Serializable {
         this.userRoleList = userRoleList;
     }
 
-    public Gender getGenderId() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGenderId(Gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

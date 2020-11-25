@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
 
     private List<GrantedAuthority> convertRolesToGrantedAuthorities(List<UserRole> roles) {
         List<GrantedAuthority> authorities = new ArrayList();
-        roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleId().getType())).forEachOrdered(authority -> {
+        roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole().getType())).forEachOrdered(authority -> {
             authorities.add(authority);
         });
         return (authorities);
