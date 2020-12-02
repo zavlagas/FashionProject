@@ -9,11 +9,9 @@ import fashion.entity.User;
 import fashion.entity.UserSubscription;
 import javax.persistence.NoResultException;
 import org.hibernate.Session;
+import org.springframework.stereotype.Repository;
 
-/**
- *
- * @author User
- */
+@Repository
 public class UserSubscriptionDaoImpl extends SuperDao implements UserSubscriptionDao {
 
     @Override

@@ -46,6 +46,8 @@ public class Role implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "type")
     private String type;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+//    private List<UserRole> userRoleList;
 
     public Role() {
     }
@@ -99,5 +101,5 @@ public class Role implements Serializable {
     public String toString() {
         return "fashion.entity.Role[ id=" + id + " ]";
     }
-    
+
 }

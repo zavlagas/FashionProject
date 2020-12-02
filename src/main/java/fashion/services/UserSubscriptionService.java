@@ -13,7 +13,6 @@ import fashion.entity.UserSubscription;
  */
 public interface UserSubscriptionService {
     
-    
     public String checkIfUserExistsInDbAndIfNotRegisterThe(UserSubscription newUserSubscription);
     
     public void register(UserSubscription newUserSubscription);

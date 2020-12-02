@@ -45,7 +45,7 @@ import org.hibernate.annotations.CascadeType;
     @NamedQuery(name = "User.findByPasswd", query = "SELECT m FROM User m WHERE m.password = :password")})
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+ private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -93,6 +93,9 @@ public class User implements Serializable {
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
+//    @OneToMany(mappedBy = "user")
+//    @Cascade(CascadeType.SAVE_UPDATE)
+//    private List<Brand> brandList;
     @OneToMany(mappedBy = "user")
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<UserRole> userRoleList;

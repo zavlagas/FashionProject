@@ -42,6 +42,9 @@ public class UserRole implements Serializable {
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Role role;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private User user;
 
     public UserRole() {
     }
@@ -97,6 +100,14 @@ public class UserRole implements Serializable {
     @Override
     public String toString() {
         return "fashion.entity.UserRole[ id=" + id + " ]";
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
 }
