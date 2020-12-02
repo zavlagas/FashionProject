@@ -44,7 +44,7 @@ public class SignUpController {
     @ModelAttribute("plans")
     private List<Plan> getPlans() {
         return (planService.getAllPlans());
-    }
+    }Str
 
     @GetMapping
     private String getSignUpPageForCreatingANewUser(Model model) {
