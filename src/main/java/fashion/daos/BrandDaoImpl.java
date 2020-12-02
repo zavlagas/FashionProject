@@ -19,5 +19,11 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
     public void update(Brand oldBrand) {
         getSession().save(oldBrand);
     }
+
+    @Override
+    public void deleteBrandBy(int brandId) {
+        Brand deletedBrand = findBrandBy(brandId);
+        getSession().delete(deletedBrand);
+    }
     
 }

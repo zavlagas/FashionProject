@@ -10,5 +10,7 @@ public interface BrandDao {
     public Brand findBrandBy(Integer brandId);
 
     public void update(Brand oldBrand);
+
+    public void deleteBrandBy(int brandId);
     
 }

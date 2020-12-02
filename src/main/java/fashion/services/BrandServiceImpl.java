@@ -28,5 +28,10 @@ public class BrandServiceImpl implements BrandService {
     public void update(Brand oldBrand) {
         dao.update(oldBrand);
     }
+
+    @Override
+    public void deleteBrandBy(int brandId) {
+        dao.deleteBrandBy(brandId);
+    }
     
 }

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -18,23 +19,23 @@ public class BrandController {
     @Autowired
     private BrandService service;
 
-    @GetMapping
+    @GetMapping("/create")
     public String getBrandPageForm(Model model) {
         model.addAttribute("brand", new Brand());
         return ("/brand/create");
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public String createBrand(@ModelAttribute("brand") Brand newBrand, RedirectAttributes ra) {
         service.create(newBrand);
     }
 
-    @GetMapping
+    @GetMapping("/update")
     public String getUpdatePageFormForProductsToBrand() {
         return ("/brand/update");
     }
 
-    @PostMapping
+    @PostMapping("/update")
     public String updateBrandWithNewProducts(@ModelAttribute("brand") Brand newBrand) {
         Brand oldBrand = service.findByIdThe(newBrand.getId());
         oldBrand.setName(newBrand.getName());
@@ -43,5 +44,10 @@ public class BrandController {
         oldBrand.setImagePath(newBrand.getImagePath());
         oldBrand.setUser(newBrand.getUser());
         service.update(oldBrand);
+    }
+    
+    @GetMapping("/detele")
+    public String DeleteBrand(@RequestParam("id") int brandId){
+        service.deleteBrandBy(brandId);
     }
 }

@@ -13,6 +13,8 @@ public interface BrandService {
     public Brand findByIdThe(Integer brandId);
 
     public void update(Brand oldBrand);
+
+    public void deleteBrandBy(int brandId);
     
     
     
