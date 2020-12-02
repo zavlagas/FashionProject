@@ -1,10 +1,10 @@
 package fashion.daos;
 
-import fashion.entity.SubscriptionStatu;
+import fashion.entity.SubscriptionStatus;
 
 
 public interface SubscriptionStatuDao {
 
-    public SubscriptionStatu findById(short id);
+    public SubscriptionStatus findById(short id);
     
 }

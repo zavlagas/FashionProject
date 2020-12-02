@@ -1,21 +1,21 @@
 package fashion.entity.converters;
 
-import fashion.entity.SubscriptionStatu;
+import fashion.entity.SubscriptionStatus;
 import fashion.services.SubscriptionStatuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StringToSubscriptionStatuConverter implements Converter<String, SubscriptionStatu> {
+public class StringToSubscriptionStatuConverter implements Converter<String, SubscriptionStatus> {
 
     @Autowired
     private SubscriptionStatuService service;
     
     @Override
-    public SubscriptionStatu convert(String s) {
+    public SubscriptionStatus convert(String s) {
         short id = Short.parseShort(s);
-        SubscriptionStatu status = service.findById(id);
+        SubscriptionStatus status = service.findById(id);
         return(status);
     }
     

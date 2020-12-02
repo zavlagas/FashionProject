@@ -38,7 +38,7 @@ public class UserRole implements Serializable {
     private Short id;
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private RoleStatu status;
+    private RoleStatus status;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Role role;
@@ -58,11 +58,11 @@ public class UserRole implements Serializable {
         this.id = id;
     }
 
-    public RoleStatu getStatus() {
+    public RoleStatus getStatus() {
         return status;
     }
 
-    public void setStatus(RoleStatu status) {
+    public void setStatus(RoleStatus status) {
         this.status = status;
     }
 

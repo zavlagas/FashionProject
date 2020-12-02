@@ -1,7 +1,7 @@
 package fashion.services;
 
 import fashion.daos.SubscriptionStatuDao;
-import fashion.entity.SubscriptionStatu;
+import fashion.entity.SubscriptionStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ public class SubscriptionStatuServiceImpl implements SubscriptionStatuService{
     private SubscriptionStatuDao dao;
 
     @Override
-    public SubscriptionStatu findById(short id) {
+    public SubscriptionStatus findById(short id) {
         return(dao.findById(id));
     }
 }

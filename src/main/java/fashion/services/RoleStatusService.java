@@ -1,11 +1,10 @@
 package fashion.services;
 
-import fashion.entity.RoleStatu;
-import javax.management.relation.RoleStatus;
+import fashion.entity.RoleStatus;
 
 
 public interface RoleStatusService {
     
-    public RoleStatu findByRoleStatus(short id);
+    public RoleStatus findByRoleStatus(short id);
     
 }

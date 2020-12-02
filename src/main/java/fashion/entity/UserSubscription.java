@@ -40,7 +40,7 @@ public class UserSubscription implements Serializable {
     private Integer id;
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne
-    private SubscriptionStatu status;
+    private SubscriptionStatus status;
     @JoinColumn(name = "subscriptions_id", referencedColumnName = "id")
     @ManyToOne
     @Cascade(CascadeType.SAVE_UPDATE)
@@ -60,11 +60,11 @@ public class UserSubscription implements Serializable {
         return id;
     }
 
-    public SubscriptionStatu getStatusId() {
+    public SubscriptionStatus getStatusId() {
         return status;
     }
 
-    public void setStatus(SubscriptionStatu status) {
+    public void setStatus(SubscriptionStatus status) {
         this.status = status;
     }
 

@@ -93,9 +93,6 @@ public class User implements Serializable {
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
-//    @OneToMany(mappedBy = "user")
-//    @Cascade(CascadeType.SAVE_UPDATE)
-//    private List<Brand> brandList;
     @OneToMany(mappedBy = "user")
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<UserRole> userRoleList;
@@ -114,7 +111,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password, Date createDate) {
+    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -122,7 +119,6 @@ public class User implements Serializable {
         this.dob = dob;
         this.username = username;
         this.password = password;
-        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -204,15 +200,6 @@ public class User implements Serializable {
     public void setUpdatedDate(Date updatedDate) {
         this.updatedDate = updatedDate;
     }
-
-//    @XmlTransient
-//    public List<Brand> getBrandList() {
-//        return brandList;
-//    }
-//
-//    public void setBrandList(List<Brand> brandList) {
-//        this.brandList = brandList;
-//    }
 
     @XmlTransient
     public List<UserRole> getUserRoleList() {

@@ -1,10 +1,10 @@
 package fashion.services;
 
-import fashion.entity.SubscriptionStatu;
+import fashion.entity.SubscriptionStatus;
 
 
 public interface SubscriptionStatuService {
 
-    public SubscriptionStatu findById(short id);
+    public SubscriptionStatus findById(short id);
     
 }

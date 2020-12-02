@@ -1,8 +1,7 @@
 package fashion.services;
 
 import fashion.daos.RoleStatusDao;
-import fashion.entity.RoleStatu;
-import javax.management.relation.RoleStatus;
+import fashion.entity.RoleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +13,7 @@ public class RoleStatusServiceImpl implements RoleStatusService {
     private RoleStatusDao dao;
 
     @Override
-    public RoleStatu findByRoleStatus(short id) {
+    public RoleStatus findByRoleStatus(short id) {
         return(dao.findByRoleStatus(id));
     }
 
