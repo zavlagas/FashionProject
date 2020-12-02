@@ -96,11 +96,11 @@ public class Product implements Serializable {
         this.descr = descr;
     }
 
-    public Brand getBrandId() {
+    public Brand getBrand() {
         return brand;
     }
 
-    public void setBrandId(Brand brand) {
+    public void setBrand(Brand brand) {
         this.brand = brand;
     }
 

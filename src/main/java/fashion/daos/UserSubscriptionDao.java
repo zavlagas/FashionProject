@@ -5,6 +5,7 @@
  */
 package fashion.daos;
 
+import fashion.entity.User;
 import fashion.entity.UserSubscription;
 
 /**
@@ -14,5 +15,7 @@ import fashion.entity.UserSubscription;
 public interface UserSubscriptionDao {
 
     void register(UserSubscription newUserSubscription);
+
+    public boolean checkIfUserExistsInDb(User newUser);
 
 }

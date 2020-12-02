@@ -31,8 +31,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "role_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "RoleStatu.findAll", query = "SELECT r FROM RoleStatu r")})
-public class RoleStatu implements Serializable {
+    @NamedQuery(name = "RoleStatus.findAll", query = "SELECT r FROM RoleStatus r"),
+    @NamedQuery(name = "RoleStatus.findById", query = "SELECT r FROM RoleStatus r WHERE r.id = :id")})
+public class RoleStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -48,14 +49,14 @@ public class RoleStatu implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "status")
     private List<UserRole> userRoleList;
 
-    public RoleStatu() {
+    public RoleStatus() {
     }
 
-    public RoleStatu(Short id) {
+    public RoleStatus(Short id) {
         this.id = id;
     }
 
-    public RoleStatu(Short id, String type) {
+    public RoleStatus(Short id, String type) {
         this.id = id;
         this.type = type;
     }
@@ -95,10 +96,10 @@ public class RoleStatu implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RoleStatu)) {
+        if (!(object instanceof RoleStatus)) {
             return false;
         }
-        RoleStatu other = (RoleStatu) object;
+        RoleStatus other = (RoleStatus) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

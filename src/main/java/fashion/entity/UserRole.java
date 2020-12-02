@@ -38,7 +38,7 @@ public class UserRole implements Serializable {
     private Short id;
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private RoleStatu status;
+    private RoleStatus status;
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Role role;
@@ -61,28 +61,20 @@ public class UserRole implements Serializable {
         this.id = id;
     }
 
-    public RoleStatu getStatusId() {
+    public RoleStatus getStatus() {
         return status;
     }
 
-    public void setStatusId(RoleStatu status) {
+    public void setStatus(RoleStatus status) {
         this.status = status;
     }
 
-    public Role getRoleId() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRoleId(Role role) {
+    public void setRole(Role role) {
         this.role = role;
-    }
-
-    public User getUserId() {
-        return user;
-    }
-
-    public void setUserId(User user) {
-        this.user = user;
     }
 
     @Override
@@ -109,5 +101,13 @@ public class UserRole implements Serializable {
     public String toString() {
         return "fashion.entity.UserRole[ id=" + id + " ]";
     }
-    
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
 }

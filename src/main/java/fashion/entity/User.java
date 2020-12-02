@@ -45,7 +45,7 @@ import org.hibernate.annotations.CascadeType;
     @NamedQuery(name = "User.findByPasswd", query = "SELECT m FROM User m WHERE m.password = :password")})
 public class User implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+ private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -114,7 +114,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password, Date createDate) {
+    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -122,7 +122,6 @@ public class User implements Serializable {
         this.dob = dob;
         this.username = username;
         this.password = password;
-        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -205,15 +204,6 @@ public class User implements Serializable {
         this.updatedDate = updatedDate;
     }
 
-//    @XmlTransient
-//    public List<Brand> getBrandList() {
-//        return brandList;
-//    }
-//
-//    public void setBrandList(List<Brand> brandList) {
-//        this.brandList = brandList;
-//    }
-
     @XmlTransient
     public List<UserRole> getUserRoleList() {
         return userRoleList;
@@ -223,11 +213,11 @@ public class User implements Serializable {
         this.userRoleList = userRoleList;
     }
 
-    public Gender getGenderId() {
+    public Gender getGender() {
         return gender;
     }
 
-    public void setGenderId(Gender gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 

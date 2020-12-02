@@ -30,8 +30,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "subscription_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SubscriptionStatu.findAll", query = "SELECT s FROM SubscriptionStatu s")})
-public class SubscriptionStatu implements Serializable {
+    @NamedQuery(name = "SubscriptionStatu.findAll", query = "SELECT s FROM SubscriptionStatus s"),
+    @NamedQuery(name = "SubscriptionStatu.findById", query = "SELECT s FROM SubscriptionStatus s WHERE s.id = :id")})
+public class SubscriptionStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -47,14 +48,14 @@ public class SubscriptionStatu implements Serializable {
     @OneToMany(mappedBy = "status")
     private List<UserSubscription> userSubscriptionList;
 
-    public SubscriptionStatu() {
+    public SubscriptionStatus() {
     }
 
-    public SubscriptionStatu(Short id) {
+    public SubscriptionStatus(Short id) {
         this.id = id;
     }
 
-    public SubscriptionStatu(Short id, String status) {
+    public SubscriptionStatus(Short id, String status) {
         this.id = id;
         this.status = status;
     }
@@ -94,10 +95,10 @@ public class SubscriptionStatu implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SubscriptionStatu)) {
+        if (!(object instanceof SubscriptionStatus)) {
             return false;
         }
-        SubscriptionStatu other = (SubscriptionStatu) object;
+        SubscriptionStatus other = (SubscriptionStatus) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }

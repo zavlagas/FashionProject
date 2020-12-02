@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "roles")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r")})
+    @NamedQuery(name = "Role.findAll", query = "SELECT r FROM Role r"),
+    @NamedQuery(name = "Role.findById", query = "SELECT r FROM Role r WHERE r.id = :id")})
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -76,15 +77,6 @@ public class Role implements Serializable {
         this.type = type;
     }
 
-//    @XmlTransient
-//    public List<UserRole> getUserRoleList() {
-//        return userRoleList;
-//    }
-//
-//    public void setUserRoleList(List<UserRole> userRoleList) {
-//        this.userRoleList = userRoleList;
-//    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -109,5 +101,5 @@ public class Role implements Serializable {
     public String toString() {
         return "fashion.entity.Role[ id=" + id + " ]";
     }
-    
+
 }

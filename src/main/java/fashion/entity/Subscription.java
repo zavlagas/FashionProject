@@ -103,19 +103,19 @@ public class Subscription implements Serializable {
         this.endDate = endDate;
     }
 
-    public PayMethod getPayMethodId() {
+    public PayMethod getPayMethod() {
         return payMethod;
     }
 
-    public void setPayMethodId(PayMethod payMethod) {
+    public void setPayMethod(PayMethod payMethod) {
         this.payMethod = payMethod;
     }
 
-    public Plan getPlanId() {
+    public Plan getPlan() {
         return plan;
     }
 
-    public void setPlanId(Plan plan) {
+    public void setPlan(Plan plan) {
         this.plan = plan;
     }
 

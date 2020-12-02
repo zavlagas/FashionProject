@@ -22,6 +22,18 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
     private PasswordEncoder passwordEncoder;
 
     @Override
+    public String checkIfUserExistsInDbAndIfNotRegisterThe(UserSubscription newUserSubscription) {
+        boolean foundTheUser = dao.checkIfUserExistsInDb(newUserSubscription.getUser());
+        String processInfo = null;
+        if (foundTheUser) {
+            processInfo = "";
+        } else {
+           register(newUserSubscription);
+        }
+        return (processInfo);
+    }
+
+    @Override
     public void register(UserSubscription newUserSubscription) {
         newUserSubscription
                 .getUser()
