@@ -275,7 +275,6 @@ CREATE TABLE `subscriptions` (
   PRIMARY KEY (`id`),
   KEY `pay_method_id` (`pay_method_id`),
   KEY `plan_id` (`plan_id`),
-  KEY `plan_id` (`plan_id`),
   CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`pay_method_id`) REFERENCES `pay_methods` (`id`),
   CONSTRAINT `subscriptions_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
