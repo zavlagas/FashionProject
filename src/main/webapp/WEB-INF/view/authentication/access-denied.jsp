@@ -13,6 +13,7 @@
         <title>Access Denied</title>
     </head>
     <body>
+        
         <main class="container">
             <h1>You shall not pass.This is Spring Security!Asta La Vista</h1>
             <img src="images/seo-image.jpg" alt=""/>
