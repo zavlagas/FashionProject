@@ -17,6 +17,9 @@
         <p>
             <a href="${pageContext.request.contextPath}/books">List Of Books</a> 
         </p>
+        <p>
+            <a href="${pageContext.request.contextPath}/fashionMaker">Maker DashBoard</a> 
+        </p>
 
         <form:form action="${pageContext.request.contextPath}/logout" method="POST">
             <input type="submit" value="logout"/>

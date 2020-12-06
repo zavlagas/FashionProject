@@ -48,7 +48,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()//Restrict access bases on the HTtp Request
 
-                .antMatchers("/webjars/**", "https://use.fontawesome.com/releases/v5.3.1/css/all.css", "/images/*", "/signup/**").permitAll()
+                .antMatchers("/webjars/**", "https://use.fontawesome.com/releases/v5.3.1/css/all.css", "/images/*","/css/*","/javascript/*", "/signup/**").permitAll()
                 .antMatchers("/fashionMaker/**").hasRole("MAKER")
                 .antMatchers("/fashionLover/**").hasRole("LOVER")
                 .anyRequest().authenticated()//Any request to the application must be authenticated (--Logged IN--)

@@ -38,7 +38,8 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "brands")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Brand.findAll", query = "SELECT b FROM Brand b")})
+    @NamedQuery(name = "Brand.findAll", query = "SELECT b FROM Brand b"),
+    @NamedQuery(name = "Brand.findById", query = "SELECT b FROM Brand b WHERE b.id = :id")})
 public class Brand implements Serializable {
 
     private static final long serialVersionUID = 1L;
