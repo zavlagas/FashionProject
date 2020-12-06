@@ -33,6 +33,7 @@ fashion\services\GenderServiceImpl.class
 fashion\services\PlanServiceImpl.class
 fashion\services\UserSubscriptionServiceImpl.class
 fashion\config\MyWebSecurityApplicationInitializer.class
+fashion\controllers\FashionMakerAdministrationController.class
 fashion\services\UserServiceImpl.class
 fashion\entity\Plan.class
 fashion\entity\converters\StringToPlanConverter.class
