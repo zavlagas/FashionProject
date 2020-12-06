@@ -28,6 +28,7 @@ public class BrandController {
     @PostMapping("/create")
     public String createBrand(@ModelAttribute("brand") Brand newBrand, RedirectAttributes ra) {
         service.create(newBrand);
+        return (null);
     }
 
     @GetMapping("/update")
@@ -44,10 +45,12 @@ public class BrandController {
         oldBrand.setImagePath(newBrand.getImagePath());
         oldBrand.setUser(newBrand.getUser());
         service.update(oldBrand);
+        return (null);
     }
-    
+
     @GetMapping("/detele")
-    public String DeleteBrand(@RequestParam("id") int brandId){
+    public String DeleteBrand(@RequestParam("id") int brandId) {
         service.deleteBrandBy(brandId);
+        return (null);
     }
 }

@@ -9,9 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel='stylesheet' type="text/css" href='css/style.css''>
         <title>JSP Page</title>
     </head>
     <body>
         <h1>Hello World!</h1>
     </body>
+    <script type="text/javascript" src="javascript/javascript.js">
+        
+        
+        
+        
+    </script>
 </html>

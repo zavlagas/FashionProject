@@ -1,5 +1,6 @@
 fashion\services\SubscriptionStatuServiceImpl.class
 fashion\services\RoleServiceImpl.class
+fashion\daos\BrandDaoImpl.class
 fashion\entity\SubscriptionStatus.class
 fashion\entity\PayMethod.class
 fashion\config\DatabaseConfig.class
@@ -14,6 +15,7 @@ fashion\entity\converters\StringToRoleConverter.class
 fashion\services\PayMethodServiseImpl.class
 fashion\services\RoleService.class
 fashion\controllers\HomeController.class
+fashion\services\BrandServiceImpl.class
 fashion\daos\RoleStatusDao.class
 fashion\config\MyWebAppConfig.class
 fashion\daos\RoleDaoImpl.class
@@ -22,9 +24,12 @@ fashion\controllers\AuthenticationController.class
 fashion\daos\GenderDao.class
 fashion\daos\RoleStatusDaoImpl.class
 fashion\entity\Subscription.class
+fashion\services\BrandService.class
+fashion\controllers\BrandController.class
 fashion\daos\RoleDao.class
 fashion\daos\SubscriptionStatuDao.class
 fashion\services\UserService.class
+fashion\daos\BrandDao.class
 fashion\entity\RoleStatus.class
 fashion\config\MyWebSecurityConfigurer.class
 fashion\services\RoleStatusServiceImpl.class

@@ -28,8 +28,9 @@ public class MyWebAppConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/images/")
-                .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
+        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/static/images/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/static/css/");
+        registry.addResourceHandler("/javascript/**").addResourceLocations("/WEB-INF/static/javascript/");
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
     }
 

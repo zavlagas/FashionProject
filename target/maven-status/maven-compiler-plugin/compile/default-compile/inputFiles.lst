@@ -9,6 +9,7 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\se
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\RoleDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\SubscriptionStatuDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\UserSubscriptionService.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\BrandDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\converters\StringToPayMethodConverter.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\SuperDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\UserDao.java
@@ -31,6 +32,7 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\en
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\Subscription.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\RoleStatusDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\GenderServiceImpl.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\BrandServiceImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\controllers\SignUpController.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\UserService.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\PlanService.java
@@ -41,6 +43,7 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\da
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\MyWebSecurityApplicationInitializer.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\SubscriptionStatuDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\DatabaseConfig.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\BrandDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\RoleStatusDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\Role.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\PlanDaoImpl.java
@@ -52,8 +55,10 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\se
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\RoleDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\PayMethodDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\Gender.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\controllers\BrandController.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\UserRole.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\UserSubscriptionDaoImpl.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\BrandService.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\converters\StringToRoleConverter.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\converters\StringToRoleStatusConverter.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\ProductImage.java
