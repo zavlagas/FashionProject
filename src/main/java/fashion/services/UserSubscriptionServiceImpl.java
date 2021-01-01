@@ -6,6 +6,7 @@
 package fashion.services;
 
 import fashion.daos.UserSubscriptionDao;
+import fashion.entity.User;
 import fashion.entity.UserSubscription;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,12 +24,13 @@ public class UserSubscriptionServiceImpl implements UserSubscriptionService {
 
     @Override
     public String checkIfUserExistsInDbAndIfNotRegisterThe(UserSubscription newUserSubscription) {
-        boolean foundTheUser = dao.checkIfUserExistsInDb(newUserSubscription.getUser());
-        String processInfo = null;
-        if (foundTheUser) {
-            processInfo = "";
-        } else {
-           register(newUserSubscription);
+        String processInfo = "";
+        User userExists = dao.checkIfUserExistsInDb(newUserSubscription.getUser());
+        if(userExists != null){
+            dao.register(newUserSubscription);
+            processInfo = "User Subscription Completed";
+        }else{
+            processInfo = "User Exists , Try Again With Different Credentials";
         }
         return (processInfo);
     }

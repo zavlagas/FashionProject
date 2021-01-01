@@ -45,8 +45,6 @@ public class Gender implements Serializable {
     @Size(min = 1, max = 20)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "gender")
-    private List<User> userList;
 
     public Gender() {
     }
@@ -74,15 +72,6 @@ public class Gender implements Serializable {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    @XmlTransient
-    public List<User> getUserList() {
-        return userList;
-    }
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
     }
 
     @Override

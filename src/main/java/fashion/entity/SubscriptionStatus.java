@@ -30,8 +30,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "subscription_status")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "SubscriptionStatu.findAll", query = "SELECT s FROM SubscriptionStatus s"),
-    @NamedQuery(name = "SubscriptionStatu.findById", query = "SELECT s FROM SubscriptionStatus s WHERE s.id = :id")})
+    @NamedQuery(name = "SubscriptionStatus.findAll", query = "SELECT s FROM SubscriptionStatus s"),
+    @NamedQuery(name = "SubscriptionStatus.findById", query = "SELECT s FROM SubscriptionStatus s WHERE s.id = :id")})
 public class SubscriptionStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,8 +45,6 @@ public class SubscriptionStatus implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "status")
     private String status;
-    @OneToMany(mappedBy = "status")
-    private List<UserSubscription> userSubscriptionList;
 
     public SubscriptionStatus() {
     }
@@ -74,15 +72,6 @@ public class SubscriptionStatus implements Serializable {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    @XmlTransient
-    public List<UserSubscription> getUserSubscriptionList() {
-        return userSubscriptionList;
-    }
-
-    public void setUserSubscriptionList(List<UserSubscription> userSubscriptionList) {
-        this.userSubscriptionList = userSubscriptionList;
     }
 
     @Override

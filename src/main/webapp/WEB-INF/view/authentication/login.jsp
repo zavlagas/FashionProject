@@ -13,12 +13,155 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
         <link rel='stylesheet' href='webjars/bootstrap/4.5.3/css/bootstrap.min.css''>
-       
+
         <!--Fontawesome CDN-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
               integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" 
               crossorigin="anonymous">
-         <link rel='stylesheet' type="text/css" href='css/style.css''>
+        <link rel='stylesheet' type="text/css" href='css/style.css''>
+        <style>
+            /*--------START ----LOGIN PAGE STYLING*/ 
+
+            
+
+            html,body{              
+                background-image: url('images/fashion_login_picture.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                height: 100%;
+                font-family: 'Numans', sans-serif;
+            }
+
+            .container{
+                height: 100%;
+                align-content: center;
+            }
+
+            .card{
+                height: 370px;
+                margin-top: auto;
+                margin-bottom: auto;
+                width: 400px;
+                background-color: rgba(0,0,0,0.5) !important;
+            }
+
+            .social_icon span{
+                font-size: 60px;
+                margin-left: 10px;
+                color: #FFC312;
+            }
+
+            .social_icon span:hover{
+                color: white;
+                cursor: pointer;
+            }
+
+            .card-header h3{
+                color: white;
+            }
+
+            .social_icon{
+                position: absolute;
+                right: 20px;
+                top: -45px;
+            }
+
+            .input-group-prepend span{
+                width: 50px;
+                background-color: #ffffff;
+                color: black;
+                border:0 !important;
+            }
+
+            input:focus{
+                outline: 0 0 0 0  !important;
+                box-shadow: 0 0 0 0 !important;
+
+            }
+
+            .remember{
+                color: white;
+            }
+
+            .remember input
+            {
+                width: 20px;
+                height: 20px;
+                margin-left: 15px;
+                margin-right: 5px;
+            }
+
+
+            .links{
+                color: white;
+            }
+
+            .links a{
+                margin-left: 4px;
+            }
+
+            .glow-on-hover {
+                color: white;
+                background-color: #ffffff;
+                width: 100px;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                position: relative;
+                bottom: 30px;
+                z-index: 0;
+                border-radius: 10px;
+            }
+
+            .glow-on-hover:before {
+                content: '';
+                background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+                position: absolute;
+                top: -2px;
+                left:-2px;
+                background-size: 400%;
+                z-index: -1;
+                filter: blur(5px);
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                animation: glowing 20s linear infinite;
+                opacity: 0;
+                transition: opacity .3s ease-in-out;
+                border-radius: 10px;
+            }
+
+            .glow-on-hover:active {
+                color: #000
+            }
+
+            .glow-on-hover:active:after {
+                background: transparent;
+            }
+
+            .glow-on-hover:hover:before {
+                opacity: 1;
+            }
+
+            .glow-on-hover:after {
+                z-index: -1;
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #111;
+                left: 0;
+                top: 0;
+                border-radius: 10px;
+            }
+
+            @keyframes glowing {
+                0% { background-position: 0 0; }
+                50% { background-position: 400% 0; }
+                100% { background-position: 0 0; }
+            }
+
+            /*--------END ----LOGIN PAGE STYLING*/ 
+        </style>
         <title>Login Page</title>
     </head>
     <body>

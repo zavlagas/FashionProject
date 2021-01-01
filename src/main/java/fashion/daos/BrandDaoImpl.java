@@ -1,6 +1,7 @@
 package fashion.daos;
 
 import fashion.entity.Brand;
+import java.util.List;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -13,7 +14,8 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
 
     @Override
     public Brand findBrandBy(Integer brandId) {
-        return (getSession().createNamedQuery("Brand.findById", Brand.class).setParameter("id", brandId).getSingleResult());
+        return (getSession().createNamedQuery("Brand.findById", Brand.class).setParameter("id", brandId).uniqueResult());
+
     }
 
     @Override
@@ -23,8 +25,13 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
 
     @Override
     public void deleteBrandBy(int brandId) {
-        Brand deletedBrand = findBrandBy(brandId);
-        getSession().delete(deletedBrand);
+        Brand brand = findBrandBy(brandId);
+        getSession().delete(brand);
+    }
+
+    @Override
+    public List<Brand> findAll() {
+        return getSession().createNamedQuery("Brand.findAll", Brand.class).getResultList();
     }
 
 }

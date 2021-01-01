@@ -8,7 +8,6 @@ package fashion.daos;
 import fashion.entity.User;
 import fashion.entity.UserSubscription;
 import javax.persistence.NoResultException;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -20,15 +19,8 @@ public class UserSubscriptionDaoImpl extends SuperDao implements UserSubscriptio
     }
 
     @Override
-    public boolean checkIfUserExistsInDb(User newUser) {
-        boolean userExist = true;
-        try {
-            getSession().createNamedQuery("User.findByUsername", User.class).getSingleResult();
-        } catch (NoResultException e) {
-            userExist = false;
-        }
-        return (userExist);
-
+    public User checkIfUserExistsInDb(User newUser) {
+        return (getSession().createNamedQuery("User.findByUid",User.class).setParameter("id", newUser.getId()).uniqueResult());
     }
 
 }

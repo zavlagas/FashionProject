@@ -16,6 +16,6 @@ public interface UserSubscriptionDao {
 
     void register(UserSubscription newUserSubscription);
 
-    public boolean checkIfUserExistsInDb(User newUser);
+    public User checkIfUserExistsInDb(User newUser);
 
 }

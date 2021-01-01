@@ -46,8 +46,9 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors();
         http.authorizeRequests()//Restrict access bases on the HTtp Request
-
+                    
                 .antMatchers("/webjars/**", "https://use.fontawesome.com/releases/v5.3.1/css/all.css", "/images/*","/css/*","/javascript/*", "/signup/**").permitAll()
                 .antMatchers("/fashionMaker/**").hasRole("MAKER")
                 .antMatchers("/fashionLover/**").hasRole("LOVER")
@@ -59,6 +60,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .permitAll()//Allow everyone to see login page ,users dont have to been logged in 
                 .and().logout().permitAll()
                 .and().exceptionHandling().accessDeniedPage("/access-denied");
+                
 
     }
 
