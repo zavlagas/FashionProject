@@ -1,56 +1,63 @@
 package fashion.controllers;
 
-import com.mysql.cj.x.protobuf.MysqlxCrud.Update;
 import fashion.entity.Brand;
-import fashion.entity.UserSubscription;
 import fashion.services.BrandService;
+import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class BrandController {
 
     @Autowired
     private BrandService service;
 
-    @GetMapping("/create")
-    public String getBrandPageForm(Model model) {
-        model.addAttribute("brand", new Brand());
-        return ("/brand/create");
+    @GetMapping("/brands")
+    public ResponseEntity<List<Brand>> getAllBrands() {
+        return ResponseEntity.ok().body(service.findAll());
     }
 
-    @PostMapping("/create")
-    public String createBrand(@ModelAttribute("brand") Brand newBrand, RedirectAttributes ra) {
+    @GetMapping("/brands/{id}")
+    public ResponseEntity<Brand> getBrandById(@PathVariable("id") int brandId) {
+
+        return (Optional
+                .ofNullable(service.findByIdThe(brandId))
+                .map(brand -> ResponseEntity.ok().body(brand))
+                .orElseGet(() -> ResponseEntity.notFound().build()));
+
+    }
+
+    @PutMapping("/brands")
+    public ResponseEntity<?> createBrand(@RequestBody Brand newBrand) {
         service.create(newBrand);
-        return (null);
+        return ResponseEntity.ok().body("New Brand has Been Saved");
     }
 
-    @GetMapping("/update")
-    public String getUpdatePageFormForProductsToBrand() {
-        return ("/brand/update");
-    }
-
-    @PostMapping("/update")
-    public String updateBrandWithNewProducts(@ModelAttribute("brand") Brand newBrand) {
-        Brand oldBrand = service.findByIdThe(newBrand.getId());
+    @PostMapping("/brands/{id}")
+    public ResponseEntity<?> updateBrand(@RequestBody Brand newBrand, @PathVariable("id") int id) {
+        Brand oldBrand = service.findByIdThe(id);
         oldBrand.setName(newBrand.getName());
         oldBrand.setProductList(newBrand.getProductList());
         oldBrand.setDescr(newBrand.getDescr());
         oldBrand.setImagePath(newBrand.getImagePath());
         oldBrand.setUser(newBrand.getUser());
         service.update(oldBrand);
-        return (null);
+        return (ResponseEntity.ok().body("The Brand With The Id : " + oldBrand.getId() + " Has Been Updated"));
     }
 
-    @GetMapping("/detele")
-    public String DeleteBrand(@RequestParam("id") int brandId) {
+    @DeleteMapping("/brands/{id}")
+    public ResponseEntity<?> deleteBrand(@PathVariable("id") int brandId) {
         service.deleteBrandBy(brandId);
-        return (null);
+        return (ResponseEntity.ok().body("The Brand With The Id : " + brandId + " Has Been Deleted"));
     }
 }

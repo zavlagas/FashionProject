@@ -10,6 +10,7 @@
         <title>Home Page</title>
     </head>
     <body>
+        
         <h1>Welcome Home</h1>
         User:<security:authentication property="principal.username"/><br>
         Roles: <security:authentication property="principal.authorities" />

@@ -46,8 +46,6 @@ public class PayMethod implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "type")
     private String type;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payMethod")
-    private List<Subscription> subscriptionList;
 
     public PayMethod() {
     }
@@ -77,14 +75,6 @@ public class PayMethod implements Serializable {
         this.type = type;
     }
 
-    @XmlTransient
-    public List<Subscription> getSubscriptionList() {
-        return subscriptionList;
-    }
-
-    public void setSubscriptionList(List<Subscription> subscriptionList) {
-        this.subscriptionList = subscriptionList;
-    }
 
     @Override
     public int hashCode() {

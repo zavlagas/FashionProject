@@ -15,6 +15,8 @@ public interface BrandService {
     public void update(Brand oldBrand);
 
     public void deleteBrandBy(int brandId);
+
+    public List<Brand> findAll();
     
     
     
