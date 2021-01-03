@@ -8,60 +8,82 @@ package fashion.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userService;
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider());
-    }
+    @Autowired
+    private UserDetailsService jwtUserDetailsService;
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userService);
-        provider.setPasswordEncoder(passwordEncoder());
-        return (provider);
+    @Autowired
+    private JwtRequestFilter jwtRequestFilter;
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        // configure AuthenticationManager so that it knows from where to load
+        // user for matching credentials
+        // Use BCryptPasswordEncoder
+        auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
 
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("*")
+                .allowedMethods("HEAD", "GET", "PUT", "POST",
+                        "DELETE", "PATCH").allowedHeaders("*");
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors();
-        http.authorizeRequests()//Restrict access bases on the HTtp Request
-                    
-                .antMatchers("/webjars/**", "https://use.fontawesome.com/releases/v5.3.1/css/all.css", "/images/*","/css/*","/javascript/*", "/signup/**").permitAll()
-                .antMatchers("/fashionMaker/**").hasRole("MAKER")
-                .antMatchers("/fashionLover/**").hasRole("LOVER")
-                .anyRequest().authenticated()//Any request to the application must be authenticated (--Logged IN--)
-                .and()//Return again the HTTP SECURITY OBJECT TO ADD MORE RULES
-                .formLogin()//We will customize a login process
-                .loginPage("/loginPage")//The login form will be found in this url 
-                .loginProcessingUrl("/authenticate")//The check of gredientials will be performed by this url 
-                .permitAll()//Allow everyone to see login page ,users dont have to been logged in 
-                .and().logout().permitAll()
-                .and().exceptionHandling().accessDeniedPage("/access-denied");
-                
+    protected void configure(HttpSecurity httpSecurity) throws Exception {
 
+        httpSecurity
+                .cors()
+                .and()
+                .csrf()
+                .disable()
+                .headers()
+                .frameOptions()
+                .deny()
+                .and()
+                // dont authenticate this particular request
+                .authorizeRequests().antMatchers("/authenticate").permitAll().
+                // all other requests need to be authenticated
+                anyRequest().authenticated().and().
+                // make sure we use stateless session; session won't be used to
+                // store user's state.
+                exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // Add a filter to validate the tokens with every request
+        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
 }

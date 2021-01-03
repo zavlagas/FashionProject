@@ -9,14 +9,18 @@ import fashion.services.SubscriptionStatusService;
 import fashion.services.UserSubscriptionService;
 import java.util.ArrayList;
 import java.util.List;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/api")
 public class SignUpController {
@@ -35,6 +39,7 @@ public class SignUpController {
     private UserSubscriptionService userSubscriptionService;
 
     @GetMapping("/signup")
+    @Produces(MediaType.APPLICATION_JSON)
     public ResponseEntity<List<List<?>>> getAllDropDownListInformations() {
         List<List<?>> dropDownLists = new ArrayList<>();
         dropDownLists.add(genderService.getAllGenders());

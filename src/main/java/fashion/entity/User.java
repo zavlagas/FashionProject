@@ -43,7 +43,7 @@ import org.hibernate.annotations.CascadeType;
     @NamedQuery(name = "User.findByLname", query = "SELECT m FROM User m WHERE m.lastName = :lastName"),
     @NamedQuery(name = "User.findByUsername", query = "SELECT m FROM User m WHERE m.username = :username"),
     @NamedQuery(name = "User.findByPasswd", query = "SELECT m FROM User m WHERE m.password = :password")})
-public class User implements Serializable {
+public class User implements Serializable  {
 
  private static final long serialVersionUID = 1L;
     @Id
