@@ -1,28 +1,36 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class login extends Component {
+function LoginPage(params) {}
+
+class Login extends Component {
   constructor() {
     super();
-
     this.state = {
-      username: "admin",
-      password: "admin",
+      username: "",
+      password: "",
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+   
   }
+
+  changeReactValue = (event) => {
+    if (event.target.getAttribute("name") === "username") {
+      this.setState({ username: event.target.value.trim() });
+    }
+    if (event.target.getAttribute("name") === "password") {
+      this.setState({ password: event.target.value.trim() });
+    }
+  };
 
   handleFormSubmit = (event) => {
     event.preventDefault();
 
-    const endpoint = "http://localhost:8080/FashionProject/api/authenticate";
-
-    const username = this.state.username;
-    const password = this.state.password;
+    const endpoint = "http://localhost:8080/FashionProject/authenticate";
 
     const user_object = {
-      username: username,
-      password: password,
+      username: this.state.username,
+      password: this.state.password,
     };
 
     axios.post(endpoint, user_object).then((res) => {
@@ -32,15 +40,13 @@ class login extends Component {
   };
 
   handleDashboard() {
-    axios
-      .get("http://localhost:8080/FashionProject/api/dashboard")
-      .then((res) => {
-        if (res.data === "success") {
-          this.props.history.push("/dashboard");
-        } else {
-          alert("Authentication failure");
-        }
-      });
+    axios.get("http://localhost:8080/FashionProject/dashboard").then((res) => {
+      if (res.data === "success") {
+        this.props.history.push("/dashboard");
+      } else {
+        alert("Authentication failure");
+      }
+    });
   }
 
   render() {
@@ -63,9 +69,10 @@ class login extends Component {
                     <input
                       className="form-control"
                       type="text"
-                      defaultValue="admin"
+                      onChange={this.changeReactValue}
                       name="username"
                       placeholder="username"
+                      autoComplete="on"
                     />
                   </div>
                   <div className="input-group form-group">
@@ -76,10 +83,11 @@ class login extends Component {
                     </div>
                     <input
                       className="form-control"
-                      defaultValue="admin"
+                      onChange={this.changeReactValue}
                       placeholder="password"
                       type="password"
                       name="password"
+                      autoComplete="on"
                     />
                   </div>
                   <div className="row align-items-center remember">
@@ -99,12 +107,7 @@ class login extends Component {
               <div className="card-footer">
                 <div className="d-flex justify-content-center links">
                   Don't have an account?
-                  <a className="text-warning">Sign Up</a>
-                </div>
-                <div className="d-flex justify-content-center links">
-                  <a className="text-warning" href="#">
-                    Forgot your password?
-                  </a>
+                  <button className="text-warning">Sign Up</button>
                 </div>
               </div>
             </div>
@@ -114,4 +117,4 @@ class login extends Component {
     );
   }
 }
-export default login;
+export default Login;

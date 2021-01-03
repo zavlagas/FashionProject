@@ -1,12 +1,13 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Route } from "react-router-dom";
-import Interceptors from "./components/Interceptors.jsx";
+import interceptors from "./Interceptors.js";
 import Login from "./components/Login.jsx";
 import Dashboard from "./components/Dashboard";
 
 function App() {
-  return (
+  
+  return(
     <div className="App">
       <header className="App-header">
         <BrowserRouter>

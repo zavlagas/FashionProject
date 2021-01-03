@@ -11,7 +11,7 @@ public class UserDaoImpl extends SuperDao implements UserDao {
         return (getSession()
                 .createNamedQuery("User.findByUsername", User.class)
                 .setParameter("username", username)
-                .getSingleResult());
+                .uniqueResult());
     }
 
 }

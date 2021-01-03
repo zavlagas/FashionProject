@@ -11,14 +11,13 @@ class Dashboard extends Component {
       <div>
         <h1>WELCOME TO DASHBOARD</h1>
 
-        <a
-          href="javascript:void(0);"
+        <button
+          type="button"
           onClick={this.handleLogout}
           className="d-b td-n pY-5 bgcH-grey-100 c-grey-700"
         >
-          <i className="ti-power-off mR-10"></i>
-          <span style={{ color: "white" }}>Logout</span>
-        </a>
+          Signout
+        </button>
       </div>
     );
   }

@@ -44,6 +44,7 @@ fashion\controllers\ProductController.class
 fashion\controllers\JwtAuthenticationController.class
 fashion\entity\Role.class
 fashion\services\PlanService.class
+fashion\config\DispatcherServletInitializer.class
 fashion\entity\Brand.class
 fashion\entity\UserSubscription.class
 fashion\config\JwtRequestFilter.class
