@@ -19,26 +19,25 @@ public class MyWebAppConfig implements WebMvcConfigurer {
 
 //    @Autowired
 //    StringToObjectSizeConverter_Example objectConverter;
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setPrefix("/WEB-INF/view/");
-        viewResolver.setSuffix(".jsp");
-        registry.viewResolver(viewResolver);
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/static/images/");
-        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/static/css/");
-        registry.addResourceHandler("/javascript/**").addResourceLocations("/WEB-INF/static/javascript/");
-        registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**");
-    }
-
+//    @Override
+//    public void configureViewResolvers(ViewResolverRegistry registry) {
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//        viewResolver.setPrefix("/WEB-INF/view/");
+//        viewResolver.setSuffix(".jsp");
+//        registry.viewResolver(viewResolver);
+//    }
+//
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/images/**").addResourceLocations("/WEB-INF/static/images/");
+//        registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/static/css/");
+//        registry.addResourceHandler("/javascript/**").addResourceLocations("/WEB-INF/static/javascript/");
+//        registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/");
+//
+//    }
     
+    
+
+
+
 }
