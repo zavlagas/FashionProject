@@ -1,21 +1,36 @@
 /*--------START ----LOGIN PAGE STYLING*/
-
+#{
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
 html,
 body {
- 
   height: 100vh;
+  width: 100vw;
   font-family: "Numans", sans-serif;
 }
 
-.App-header {
-   background-image: url("./img/fashion_login_picture.jpg");
+.app-container {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  background-image: url("./img/fashion_login_picture.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
 
-.container {
-  height: 100%;
-  align-content: center;
+.app-context {
+  display: grid;
+  grid-template-rows: 100px auto 100px;
+  width: 1080px;
+  height: 100vh;
+}
+
+.login {
+ grid-row: 2/3;
+ align-self: center;
 }
 
 .card {

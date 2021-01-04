@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(username);
         fashion.entity.User myUser = udao.findByUsername(username);
         List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(myUser.getUserRoleList());
         UserDetails userDetails = new User(myUser.getUsername(), myUser.getPassword(), authorities);

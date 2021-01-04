@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-function LoginPage(params) {}
-
 class Login extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       password: "",
+      hasError: false,
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-   
   }
 
   changeReactValue = (event) => {
@@ -34,17 +32,22 @@ class Login extends Component {
     };
 
     axios.post(endpoint, user_object).then((res) => {
-      localStorage.setItem("authorization", res.data.token);
-      return this.handleDashboard();
+      try {
+        localStorage.setItem("authorization", res.data.token);
+        return this.handleDashboard();
+      } catch (error) {
+        this.setState({ hasError: true });
+      }
     });
   };
 
   handleDashboard() {
     axios.get("http://localhost:8080/FashionProject/dashboard").then((res) => {
       if (res.data === "success") {
+        this.props.authenticationProtocol(true);
         this.props.history.push("/dashboard");
       } else {
-        alert("Authentication failure");
+        this.props.authenticationProtocol(false);
       }
     });
   }
@@ -52,62 +55,67 @@ class Login extends Component {
   render() {
     return (
       <>
-        <div className="container">
-          <div className="d-flex justify-content-center h-100">
-            <div className="card">
-              <div className="card-header">
-                <h3 className="text-center">Log In</h3>
-              </div>
-              <div className="card-body">
-                <form className="form-signin" onSubmit={this.handleFormSubmit}>
-                  <div className="input-group form-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-user"></i>
-                      </span>
+        <div className="login">
+          <div className="container">
+            <div className="d-flex justify-content-center h-100">
+              <div className="card">
+                <div className="card-header">
+                  <h3 className="text-center">Log In</h3>
+                </div>
+                <div className="card-body">
+                  <form
+                    className="form-signin"
+                    onSubmit={this.handleFormSubmit}
+                  >
+                    <div className="input-group form-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-user"></i>
+                        </span>
+                      </div>
+                      <input
+                        className="form-control"
+                        type="text"
+                        onChange={this.changeReactValue}
+                        name="username"
+                        placeholder="username"
+                        autoComplete="on"
+                      />
                     </div>
-                    <input
-                      className="form-control"
-                      type="text"
-                      onChange={this.changeReactValue}
-                      name="username"
-                      placeholder="username"
-                      autoComplete="on"
-                    />
-                  </div>
-                  <div className="input-group form-group">
-                    <div className="input-group-prepend">
-                      <span className="input-group-text">
-                        <i className="fas fa-key"></i>
-                      </span>
+                    <div className="input-group form-group">
+                      <div className="input-group-prepend">
+                        <span className="input-group-text">
+                          <i className="fas fa-key"></i>
+                        </span>
+                      </div>
+                      <input
+                        className="form-control"
+                        onChange={this.changeReactValue}
+                        placeholder="password"
+                        type="password"
+                        name="password"
+                        autoComplete="on"
+                      />
                     </div>
-                    <input
-                      className="form-control"
-                      onChange={this.changeReactValue}
-                      placeholder="password"
-                      type="password"
-                      name="password"
-                      autoComplete="on"
-                    />
+                    <div className="row align-items-center remember">
+                      <input type="checkbox" />
+                      Remember Me
+                    </div>
+                    <div className="form-group">
+                      <button
+                        className="btn float-right glow-on-hover"
+                        type="submit"
+                      >
+                        Login
+                      </button>
+                    </div>
+                  </form>
+                </div>
+                <div className="card-footer">
+                  <div className="d-flex justify-content-center links">
+                    Don't have an account?
+                    <button className="text-warning">Sign Up</button>
                   </div>
-                  <div className="row align-items-center remember">
-                    <input type="checkbox" />
-                    Remember Me
-                  </div>
-                  <div className="form-group">
-                    <button
-                      className="btn float-right glow-on-hover"
-                      type="submit"
-                    >
-                      Login
-                    </button>
-                  </div>
-                </form>
-              </div>
-              <div className="card-footer">
-                <div className="d-flex justify-content-center links">
-                  Don't have an account?
-                  <button className="text-warning">Sign Up</button>
                 </div>
               </div>
             </div>

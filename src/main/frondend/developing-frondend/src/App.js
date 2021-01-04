@@ -1,21 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter, Route } from "react-router-dom";
-import interceptors from "./Interceptors.js";
-import Login from "./components/Login.jsx";
-import Dashboard from "./components/Dashboard";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-function App() {
-  
-  return(
-    <div className="App">
-      <header className="App-header">
-        <BrowserRouter>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/dashboard" component={Dashboard} />
-        </BrowserRouter>
-      </header>
-    </div>
-  );
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import interceptors from "./Interceptors";
+
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userAuthentication: false,
+    };
+  }
+
+  authenticateUser(e) {
+    this.setState({ userAuthentication: e });
+  }
+
+  render() {
+    return (
+      <>
+        <div className="app-context">
+          <Router>
+            <Route
+              exact
+              path="/login"
+              render={(props) => (
+                <Login
+                  {...props}
+                  authenticationProtocol={(e) => this.authenticateUser(e)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/dashboard"
+              render={(props) => (
+                <Dashboard
+                  {...props}
+                  authenticationProtocol={(e) => this.authenticateUser(e)}
+                  loggedInStatus={this.state.userAuthentication}
+                />
+              )}
+            />
+          </Router>
+        </div>
+      </>
+    );
+  }
 }
 export default App;

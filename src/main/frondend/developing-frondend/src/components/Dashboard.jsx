@@ -1,24 +1,39 @@
 import React, { Component } from "react";
-
+import NavBar from "./NavBar";
 class Dashboard extends Component {
-  handleLogout() {
-    localStorage.clear();
-    window.location.href = "/";
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleLogout = this.handleLogout.bind(this);
   }
+
+  componentDidMount(){
+    if(this.props.loggedInStatus === false){
+      this.handleLogout();
+    }
+  }
+
+
+  handleLogout = () => {
+    localStorage.clear();
+    this.props.authenticationProtocol(false);
+    this.props.history.push("/login");
+    
+  };
 
   render() {
     return (
-      <div>
-        <h1>WELCOME TO DASHBOARD</h1>
-
-        <button
-          type="button"
-          onClick={this.handleLogout}
-          className="d-b td-n pY-5 bgcH-grey-100 c-grey-700"
-        >
-          Signout
-        </button>
-      </div>
+      <>
+        <header className="app-header">
+          <NavBar></NavBar>
+        </header>
+        <main>
+          <h1>WELCOME TO DASHBOARD</h1>
+          <button type="button" onClick={this.handleLogout}>
+            Signout
+          </button>
+        </main>
+      </>
     );
   }
 }
