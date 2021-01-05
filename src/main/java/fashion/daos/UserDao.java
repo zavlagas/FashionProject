@@ -5,14 +5,14 @@
  */
 package fashion.daos;
 
-import fashion.entity.User;
-
 /**
  *
  * @author User
  */
 public interface UserDao {
 
-    User findByUsername(String username);
+    fashion.entity.User findByUsername(String username);
+    
+    fashion.entity.User fetchAllUserDetails(String username);
 
 }

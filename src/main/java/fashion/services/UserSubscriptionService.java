@@ -5,7 +5,7 @@
  */
 package fashion.services;
 
-import fashion.entity.UserSubscription;
+
 
 /**
  *
@@ -13,8 +13,8 @@ import fashion.entity.UserSubscription;
  */
 public interface UserSubscriptionService {
     
-    public String checkIfUserExistsInDbAndIfNotRegisterThe(UserSubscription newUserSubscription);
-    
-    public void register(UserSubscription newUserSubscription);
+//    public String checkIfUserExistsInDbAndIfNotRegisterThe(UserSubscription newUserSubscription);
+//    
+//    public void register(UserSubscription newUserSubscription);
 
 }

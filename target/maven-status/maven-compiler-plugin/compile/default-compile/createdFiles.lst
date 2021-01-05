@@ -4,7 +4,6 @@ fashion\entity\SubscriptionStatus.class
 fashion\daos\ProductDaoImpl.class
 fashion\entity\PayMethod.class
 fashion\config\DatabaseConfig.class
-fashion\services\RoleStatusService.class
 fashion\daos\UserSubscriptionDaoImpl.class
 fashion\daos\SuperDao.class
 fashion\entity\JwtResponse.class
@@ -12,16 +11,13 @@ fashion\entity\User.class
 fashion\daos\PayMethodDaoImpl.class
 fashion\services\RoleService.class
 fashion\services\BrandServiceImpl.class
-fashion\daos\RoleStatusDao.class
 fashion\daos\SubscriptionStatusDaoImpl.class
 fashion\config\MyWebAppConfig.class
 fashion\daos\RoleDaoImpl.class
-fashion\entity\UserRole.class
 fashion\services\SubscriptionStatusServiceImpl.class
 fashion\daos\GenderDao.class
 fashion\entity\JwtRequest.class
 fashion\config\JwtTokenUtil.class
-fashion\daos\RoleStatusDaoImpl.class
 fashion\entity\Subscription.class
 fashion\services\BrandService.class
 fashion\controllers\BrandController.class
@@ -30,9 +26,7 @@ fashion\config\JwtAuthenticationEntryPoint.class
 fashion\services\ProductService.class
 fashion\services\UserService.class
 fashion\daos\BrandDao.class
-fashion\entity\RoleStatus.class
 fashion\config\MyWebSecurityConfigurer.class
-fashion\services\RoleStatusServiceImpl.class
 fashion\daos\PlanDaoImpl.class
 fashion\services\GenderServiceImpl.class
 fashion\services\PlanServiceImpl.class
@@ -46,7 +40,6 @@ fashion\entity\Role.class
 fashion\services\PlanService.class
 fashion\config\DispatcherServletInitializer.class
 fashion\entity\Brand.class
-fashion\entity\UserSubscription.class
 fashion\config\JwtRequestFilter.class
 fashion\daos\UserDao.class
 fashion\daos\PayMethodDao.class

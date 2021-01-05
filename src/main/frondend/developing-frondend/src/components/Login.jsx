@@ -4,6 +4,7 @@ import axios from "axios";
 class Login extends Component {
   constructor(props) {
     super(props);
+   console.log( this.props.authenticationProtocol(false))
     this.state = {
       username: "",
       password: "",
@@ -11,6 +12,7 @@ class Login extends Component {
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
+
 
   changeReactValue = (event) => {
     if (event.target.getAttribute("name") === "username") {
@@ -42,12 +44,20 @@ class Login extends Component {
   };
 
   handleDashboard() {
-    axios.get("http://localhost:8080/FashionProject/dashboard").then((res) => {
-      if (res.data === "success") {
+    const endpoint = "http://localhost:8080/FashionProject/dashboard";
+    const user_object = {
+      username: this.state.username,
+      password: this.state.password,
+    };
+    axios.post(endpoint, user_object).then((res) => {
+      console.log(res);
+      if (res.status === 200) {
         this.props.authenticationProtocol(true);
+        localStorage.setItem("user", JSON.stringify(res.data.success));
         this.props.history.push("/dashboard");
       } else {
-        this.props.authenticationProtocol(false);
+        this.props.authenticationProtocol(false, {});
+        console.log("not showing");
       }
     });
   }

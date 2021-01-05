@@ -7,7 +7,6 @@ package fashion.entity;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,15 +17,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -36,7 +31,10 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "subscriptions")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Subscription.findAll", query = "SELECT s FROM Subscription s")})
+    @NamedQuery(name = "Subscription.findAll", query = "SELECT s FROM Subscription s"),
+    @NamedQuery(name = "Subscription.findById", query = "SELECT s FROM Subscription s WHERE s.id = :id"),
+    @NamedQuery(name = "Subscription.findByStartDate", query = "SELECT s FROM Subscription s WHERE s.startDate = :startDate"),
+    @NamedQuery(name = "Subscription.findByEndDate", query = "SELECT s FROM Subscription s WHERE s.endDate = :endDate")})
 public class Subscription implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,16 +53,11 @@ public class Subscription implements Serializable {
     @Column(name = "end_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-    @JoinColumn(name = "pay_method_id", referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private PayMethod payMethod;
-    @JoinColumn(name = "plan_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Plan plan;
-    @OneToMany(mappedBy = "subscriptions")
-    private List<UserSubscription> userSubscriptionList;
+    private SubscriptionStatus statusId;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subscriptionId")
+//    private List<User> userList;
 
     public Subscription() {
     }
@@ -103,30 +96,22 @@ public class Subscription implements Serializable {
         this.endDate = endDate;
     }
 
-    public PayMethod getPayMethod() {
-        return payMethod;
+    public SubscriptionStatus getStatusId() {
+        return statusId;
     }
 
-    public void setPayMethod(PayMethod payMethod) {
-        this.payMethod = payMethod;
+    public void setStatusId(SubscriptionStatus statusId) {
+        this.statusId = statusId;
     }
 
-    public Plan getPlan() {
-        return plan;
-    }
-
-    public void setPlan(Plan plan) {
-        this.plan = plan;
-    }
-
-    @XmlTransient
-    public List<UserSubscription> getUserSubscriptionList() {
-        return userSubscriptionList;
-    }
-
-    public void setUserSubscriptionList(List<UserSubscription> userSubscriptionList) {
-        this.userSubscriptionList = userSubscriptionList;
-    }
+//    @XmlTransient
+//    public List<User> getUserList() {
+//        return userList;
+//    }
+//
+//    public void setUserList(List<User> userList) {
+//        this.userList = userList;
+//    }
 
     @Override
     public int hashCode() {

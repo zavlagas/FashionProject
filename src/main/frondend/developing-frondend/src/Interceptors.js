@@ -1,8 +1,11 @@
 const axios = require("axios");
-export const jwtToken = localStorage.getItem("authorization");
+
+
 
 axios.interceptors.request.use(
   function (config) {
+    const jwtToken = localStorage.getItem("authorization");
+    console.log({ jwtToken: jwtToken });
     if (jwtToken) {
       config.headers["authorization"] = "Bearer " + jwtToken;
     }
@@ -12,4 +15,3 @@ axios.interceptors.request.use(
     return Promise.reject(err);
   }
 );
-
