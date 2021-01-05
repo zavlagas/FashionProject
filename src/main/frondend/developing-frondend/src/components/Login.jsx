@@ -4,7 +4,6 @@ import axios from "axios";
 class Login extends Component {
   constructor(props) {
     super(props);
-   console.log( this.props.authenticationProtocol(false))
     this.state = {
       username: "",
       password: "",
@@ -52,11 +51,9 @@ class Login extends Component {
     axios.post(endpoint, user_object).then((res) => {
       console.log(res);
       if (res.status === 200) {
-        this.props.authenticationProtocol(true);
         localStorage.setItem("user", JSON.stringify(res.data.success));
         this.props.history.push("/dashboard");
       } else {
-        this.props.authenticationProtocol(false, {});
         console.log("not showing");
       }
     });

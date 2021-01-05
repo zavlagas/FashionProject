@@ -25,31 +25,8 @@ class App extends Component {
       <>
         <div className="app-context">
           <Router>
-            <Route
-              exact
-              path="/"
-              render={(props) => (
-                <Login
-                  {...props}
-                  authenticationProtocol={(userExists) =>
-                    this.authenticateUser(userExists)
-                  }
-                />
-              )}
-            />
-            <Route
-              exact
-              path="/dashboard"
-              render={(props) => (
-                <Dashboard
-                  {...props}
-                  authenticationProtocol={(userExists) =>
-                    this.authenticateUser(userExists)
-                  }
-                  loggedInStatus={this.state.userAuthentication}
-                />
-              )}
-            />
+            <Route exact path="/" component={Login} />
+            <Route exact path="/dashboard" component={Dashboard} />
           </Router>
         </div>
       </>
