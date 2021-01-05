@@ -8,6 +8,7 @@ package fashion.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -31,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "SubscriptionStatus.findAll", query = "SELECT s FROM SubscriptionStatus s"),
-    @NamedQuery(name = "SubscriptionStatus.findById", query = "SELECT s FROM SubscriptionStatus s WHERE s.id = :id")})
+    @NamedQuery(name = "SubscriptionStatus.findById", query = "SELECT s FROM SubscriptionStatus s WHERE s.id = :id"),
+    @NamedQuery(name = "SubscriptionStatus.findByStatus", query = "SELECT s FROM SubscriptionStatus s WHERE s.status = :status")})
 public class SubscriptionStatus implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +47,8 @@ public class SubscriptionStatus implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "status")
     private String status;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
+//    private List<Subscription> subscriptionList;
 
     public SubscriptionStatus() {
     }
@@ -74,6 +78,15 @@ public class SubscriptionStatus implements Serializable {
         this.status = status;
     }
 
+//    @XmlTransient
+//    public List<Subscription> getSubscriptionList() {
+//        return subscriptionList;
+//    }
+//
+//    public void setSubscriptionList(List<Subscription> subscriptionList) {
+//        this.subscriptionList = subscriptionList;
+//    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -96,7 +109,7 @@ public class SubscriptionStatus implements Serializable {
 
     @Override
     public String toString() {
-        return "fashion.entity.SubscriptionStatu[ id=" + id + " ]";
+        return "fashion.entity.SubscriptionStatus[ id=" + id + " ]";
     }
     
 }

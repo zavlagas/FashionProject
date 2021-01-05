@@ -10,12 +10,14 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userAuthentication: false,
+      userAuthentication: true,
     };
   }
 
-  authenticateUser(e) {
-    this.setState({ userAuthentication: e });
+  authenticateUser(userExists) {
+    this.setState({
+      userAuthentication: userExists,
+    });
   }
 
   render() {
@@ -25,11 +27,13 @@ class App extends Component {
           <Router>
             <Route
               exact
-              path="/login"
+              path="/"
               render={(props) => (
                 <Login
                   {...props}
-                  authenticationProtocol={(e) => this.authenticateUser(e)}
+                  authenticationProtocol={(userExists) =>
+                    this.authenticateUser(userExists)
+                  }
                 />
               )}
             />
@@ -39,7 +43,9 @@ class App extends Component {
               render={(props) => (
                 <Dashboard
                   {...props}
-                  authenticationProtocol={(e) => this.authenticateUser(e)}
+                  authenticationProtocol={(userExists) =>
+                    this.authenticateUser(userExists)
+                  }
                   loggedInStatus={this.state.userAuthentication}
                 />
               )}

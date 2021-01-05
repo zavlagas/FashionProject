@@ -6,21 +6,20 @@
 package fashion.daos;
 
 import fashion.entity.User;
-import fashion.entity.UserSubscription;
 import javax.persistence.NoResultException;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserSubscriptionDaoImpl extends SuperDao implements UserSubscriptionDao {
 
-    @Override
-    public void register(UserSubscription newUserSubscription) {
-        getSession().save(newUserSubscription);
-    }
-
-    @Override
-    public User checkIfUserExistsInDb(User newUser) {
-        return (getSession().createNamedQuery("User.findByUid",User.class).setParameter("id", newUser.getId()).uniqueResult());
-    }
+//    @Override
+//    public void register(UserSubscription newUserSubscription) {
+//        getSession().save(newUserSubscription);
+//    }
+//
+//    @Override
+//    public User checkIfUserExistsInDb(User newUser) {
+//        return (getSession().createNamedQuery("User.findByUid",User.class).setParameter("id", newUser.getId()).uniqueResult());
+//    }
 
 }

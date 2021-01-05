@@ -15,10 +15,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,8 +27,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -37,15 +36,21 @@ import org.hibernate.annotations.CascadeType;
 @Table(name = "users")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "User.findAll", query = "SELECT m FROM User m"),
-    @NamedQuery(name = "User.findByUid", query = "SELECT m FROM User m WHERE m.id = :id"),
-    @NamedQuery(name = "User.findByFname", query = "SELECT m FROM User m WHERE m.firstName = :firstName"),
-    @NamedQuery(name = "User.findByLname", query = "SELECT m FROM User m WHERE m.lastName = :lastName"),
-    @NamedQuery(name = "User.findByUsername", query = "SELECT m FROM User m WHERE m.username = :username"),
-    @NamedQuery(name = "User.findByPasswd", query = "SELECT m FROM User m WHERE m.password = :password")})
-public class User implements Serializable  {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+    @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName"),
+    @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName"),
+    @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email"),
+    @NamedQuery(name = "User.findByDob", query = "SELECT u FROM User u WHERE u.dob = :dob"),
+    @NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.username = :username"),
+    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
+    @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
+    @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
+    @NamedQuery(name = "User.findByUpdatedDate", query = "SELECT u FROM User u WHERE u.updatedDate = :updatedDate"),
+    @NamedQuery(name = "User.findAllDetailsByUsername", query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")})
+public class User implements Serializable {
 
- private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -74,7 +79,7 @@ public class User implements Serializable  {
     private Date dob;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 50)
+    @Size(min = 1, max = 68)
     @Column(name = "username")
     private String username;
     @Basic(optional = false)
@@ -87,25 +92,20 @@ public class User implements Serializable  {
     private String image;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "create_date") //Let it be , its on auto 
+    @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
     @Column(name = "updated_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedDate;
-//    @OneToMany(mappedBy = "user")
-//    @Cascade(CascadeType.SAVE_UPDATE)
-//    private List<Brand> brandList;
-    @OneToMany(mappedBy = "user")
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private List<UserRole> userRoleList;
-    @JoinColumn(name = "gender_id", referencedColumnName = "id")
+    @JoinTable(name = "user_roles", joinColumns = {
+        @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "role_id", referencedColumnName = "id")})
+    @ManyToMany
+    private List<Role> roleList;
+    @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
-    private Gender gender;
-    @Cascade(CascadeType.SAVE_UPDATE)
-    @OneToMany(mappedBy = "user")
-    private List<UserSubscription> userSubscriptionList;
+    private Subscription subscription;
 
     public User() {
     }
@@ -114,7 +114,7 @@ public class User implements Serializable  {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password) {
+    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password, Date createDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -122,6 +122,7 @@ public class User implements Serializable  {
         this.dob = dob;
         this.username = username;
         this.password = password;
+        this.createDate = createDate;
     }
 
     public Integer getId() {
@@ -205,29 +206,20 @@ public class User implements Serializable  {
     }
 
     @XmlTransient
-    public List<UserRole> getUserRoleList() {
-        return userRoleList;
+    public List<Role> getRoleList() {
+        return roleList;
     }
 
-    public void setUserRoleList(List<UserRole> userRoleList) {
-        this.userRoleList = userRoleList;
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 
-    public Gender getGender() {
-        return gender;
+    public Subscription getSubscription() {
+        return subscription;
     }
 
-    public void setGender(Gender gender) {
-        this.gender = gender;
-    }
-
-    @XmlTransient
-    public List<UserSubscription> getUserSubscriptionList() {
-        return userSubscriptionList;
-    }
-
-    public void setUserSubscriptionList(List<UserSubscription> userSubscriptionList) {
-        this.userSubscriptionList = userSubscriptionList;
+    public void setSubscriptionId(Subscription subscription) {
+        this.subscription = subscription;
     }
 
     @Override

@@ -6,7 +6,7 @@
 package fashion.services;
 
 import fashion.daos.UserDao;
-import fashion.entity.UserRole;
+import fashion.entity.Role;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,18 +29,24 @@ public class UserServiceImpl implements UserService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println(username);
         fashion.entity.User myUser = udao.findByUsername(username);
-        List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(myUser.getUserRoleList());
+        List<GrantedAuthority> authorities = convertRolesToGrantedAuthorities(myUser.getRoleList());
         UserDetails userDetails = new User(myUser.getUsername(), myUser.getPassword(), authorities);
         return userDetails;
     }
 
-    private List<GrantedAuthority> convertRolesToGrantedAuthorities(List<UserRole> roles) {
+    private List<GrantedAuthority> convertRolesToGrantedAuthorities(List<Role> roles) {
         List<GrantedAuthority> authorities = new ArrayList();
-        roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole().getType())).forEachOrdered(authority -> {
+        roles.stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role.getType())).forEachOrdered(authority -> {
             authorities.add(authority);
         });
         return (authorities);
 
+    }
+
+    @Override
+    public fashion.entity.User getAuthorizedUser(String username) {
+        fashion.entity.User databaseUser = udao.fetchAllUserDetails(username);
+        return databaseUser;
     }
 
 }

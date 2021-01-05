@@ -1,6 +1,6 @@
 package fashion.controllers;
 
-import fashion.entity.UserSubscription;
+import fashion.entity.User;
 import fashion.services.GenderService;
 import fashion.services.PayMethodService;
 import fashion.services.PlanService;
@@ -51,9 +51,10 @@ public class SignUpController {
     }
 
     @PutMapping("/signup")
-    public ResponseEntity<?> signUpNewUser(@RequestBody UserSubscription userSubscription) {
-        String processInfo = userSubscriptionService.checkIfUserExistsInDbAndIfNotRegisterThe(userSubscription);
-        return (ResponseEntity.ok().body(processInfo));
+    public ResponseEntity<?> signUpNewUser(@RequestBody User user) {
+//        String processInfo = userSubscriptionService.checkIfUserExistsInDbAndIfNotRegisterThe(userSubscription);
+//        return (ResponseEntity.ok().body(processInfo));
+        return null;
     }
 
 }

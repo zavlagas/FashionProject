@@ -4,21 +4,20 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    this.handleLogout = this.handleLogout.bind(this);
+    // this.handleLogout = this.handleLogout.bind(this);
   }
 
-  componentDidMount(){
-    if(this.props.loggedInStatus === false){
+  componentDidMount() {
+    console.log(this.props.loggedInStatus);
+    if (this.props.loggedInStatus === false) {
       this.handleLogout();
     }
   }
 
-
   handleLogout = () => {
     localStorage.clear();
     this.props.authenticationProtocol(false);
-    this.props.history.push("/login");
-    
+    this.props.history.push("/");
   };
 
   render() {
