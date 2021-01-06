@@ -15,6 +15,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao udao;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -47,6 +51,21 @@ public class UserServiceImpl implements UserService {
     public fashion.entity.User getAuthorizedUser(String username) {
         fashion.entity.User databaseUser = udao.fetchAllUserDetails(username);
         return databaseUser;
+    }
+
+    @Override
+    public boolean signUpNewUserIfNotExists(fashion.entity.User newUser) {
+        boolean userExists = false;
+        fashion.entity.User isDatabaseUser = udao.findByUsername(newUser.getUsername());
+        if (isDatabaseUser == null) {
+            String userPassword = newUser.getPassword();
+            newUser.setPassword(passwordEncoder.encode(userPassword));
+            udao.signUpToDatabase(newUser);
+        } else {
+            userExists = true;
+
+        }
+        return (userExists);
     }
 
 }

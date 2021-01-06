@@ -56,8 +56,6 @@ public class Subscription implements Serializable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private SubscriptionStatus statusId;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subscriptionId")
-//    private List<User> userList;
 
     public Subscription() {
     }
@@ -103,15 +101,6 @@ public class Subscription implements Serializable {
     public void setStatusId(SubscriptionStatus statusId) {
         this.statusId = statusId;
     }
-
-//    @XmlTransient
-//    public List<User> getUserList() {
-//        return userList;
-//    }
-//
-//    public void setUserList(List<User> userList) {
-//        this.userList = userList;
-//    }
 
     @Override
     public int hashCode() {

@@ -47,8 +47,6 @@ public class SubscriptionStatus implements Serializable {
     @Size(min = 1, max = 30)
     @Column(name = "status")
     private String status;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "statusId")
-//    private List<Subscription> subscriptionList;
 
     public SubscriptionStatus() {
     }
@@ -78,14 +76,6 @@ public class SubscriptionStatus implements Serializable {
         this.status = status;
     }
 
-//    @XmlTransient
-//    public List<Subscription> getSubscriptionList() {
-//        return subscriptionList;
-//    }
-//
-//    public void setSubscriptionList(List<Subscription> subscriptionList) {
-//        this.subscriptionList = subscriptionList;
-//    }
 
     @Override
     public int hashCode() {

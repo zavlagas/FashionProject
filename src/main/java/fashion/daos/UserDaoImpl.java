@@ -22,4 +22,9 @@ public class UserDaoImpl extends SuperDao implements UserDao {
                 .uniqueResult());
     }
 
+    @Override
+    public void signUpToDatabase(User newUser) {
+        getSession().save(newUser);
+    }
+
 }

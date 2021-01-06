@@ -4,7 +4,6 @@ fashion\entity\SubscriptionStatus.class
 fashion\daos\ProductDaoImpl.class
 fashion\entity\PayMethod.class
 fashion\config\DatabaseConfig.class
-fashion\daos\UserSubscriptionDaoImpl.class
 fashion\daos\SuperDao.class
 fashion\entity\JwtResponse.class
 fashion\entity\User.class
@@ -30,7 +29,6 @@ fashion\config\MyWebSecurityConfigurer.class
 fashion\daos\PlanDaoImpl.class
 fashion\services\GenderServiceImpl.class
 fashion\services\PlanServiceImpl.class
-fashion\services\UserSubscriptionServiceImpl.class
 fashion\config\MyWebSecurityApplicationInitializer.class
 fashion\services\UserServiceImpl.class
 fashion\entity\Plan.class
@@ -55,8 +53,6 @@ fashion\daos\UserDaoImpl.class
 fashion\daos\GenderDaoImpl.class
 fashion\controllers\SignUpController.class
 fashion\controllers\UserController.class
-fashion\daos\UserSubscriptionDao.class
 fashion\services\PayMethodService.class
-fashion\services\UserSubscriptionService.class
 fashion\daos\SubscriptionStatusDao.class
 fashion\services\GenderService.class

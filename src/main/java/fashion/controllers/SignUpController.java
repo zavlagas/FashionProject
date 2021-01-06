@@ -6,7 +6,7 @@ import fashion.services.PayMethodService;
 import fashion.services.PlanService;
 import fashion.services.RoleService;
 import fashion.services.SubscriptionStatusService;
-import fashion.services.UserSubscriptionService;
+import fashion.services.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.Produces;
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,7 +37,7 @@ public class SignUpController {
     @Autowired
     private PayMethodService payMethodService;
     @Autowired
-    private UserSubscriptionService userSubscriptionService;
+    private UserService service;
 
     @GetMapping("/signup")
     @Produces(MediaType.APPLICATION_JSON)
@@ -49,12 +50,13 @@ public class SignUpController {
         dropDownLists.add(payMethodService.getAllPaymentMethods());
         return ResponseEntity.ok().body(dropDownLists);
     }
-
+    
+      
     @PutMapping("/signup")
-    public ResponseEntity<?> signUpNewUser(@RequestBody User user) {
-//        String processInfo = userSubscriptionService.checkIfUserExistsInDbAndIfNotRegisterThe(userSubscription);
-//        return (ResponseEntity.ok().body(processInfo));
-        return null;
+    public ResponseEntity<Boolean> signUpNewUser(@RequestBody User newUser) {
+        boolean userExists = service.signUpNewUserIfNotExists(newUser);
+        return (ResponseEntity.ok().body(userExists));
     }
+
 
 }
