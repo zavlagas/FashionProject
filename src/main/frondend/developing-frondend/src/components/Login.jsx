@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
@@ -12,7 +13,6 @@ class Login extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-
   changeReactValue = (event) => {
     if (event.target.getAttribute("name") === "username") {
       this.setState({ username: event.target.value.trim() });
@@ -22,11 +22,13 @@ class Login extends Component {
     }
   };
 
+  handleSignUpClick = (event) => {
+    this.props.history.push("/signup");
+  };
+
   handleFormSubmit = (event) => {
     event.preventDefault();
-
     const endpoint = "http://localhost:8080/FashionProject/authenticate";
-
     const user_object = {
       username: this.state.username,
       password: this.state.password,
@@ -119,9 +121,14 @@ class Login extends Component {
                   </form>
                 </div>
                 <div className="card-footer">
-                  <div className="d-flex justify-content-center links">
-                    Don't have an account?
-                    <button className="text-warning">Sign Up</button>
+                  <div className="d-flex justify-content-center links ">
+                    <span className="p-1">Don't have an account?</span>
+                    <Link
+                      className="btn btn-warning p-1 px-3 mx-2"
+                      to="/signup"
+                    >
+                      Sign Up
+                    </Link>
                   </div>
                 </div>
               </div>

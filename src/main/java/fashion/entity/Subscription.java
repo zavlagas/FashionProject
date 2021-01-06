@@ -53,9 +53,15 @@ public class Subscription implements Serializable {
     @Column(name = "end_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+    @JoinColumn(name = "pay_method_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private PayMethod payMethod;
+    @JoinColumn(name = "plan_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Plan plan;
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private SubscriptionStatus statusId;
+    private SubscriptionStatus status;
 
     public Subscription() {
     }
@@ -94,12 +100,28 @@ public class Subscription implements Serializable {
         this.endDate = endDate;
     }
 
-    public SubscriptionStatus getStatusId() {
-        return statusId;
+    public PayMethod getPayMethodId() {
+        return payMethod;
     }
 
-    public void setStatusId(SubscriptionStatus statusId) {
-        this.statusId = statusId;
+    public void setPayMethodId(PayMethod payMethod) {
+        this.payMethod = payMethod;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
+    public SubscriptionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(SubscriptionStatus status) {
+        this.status = status;
     }
 
     @Override

@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PayMethod.findAll", query = "SELECT p FROM PayMethod p"),
-    @NamedQuery(name = "PayMethod.findById", query = "SELECT p FROM PayMethod p WHERE p.id = :id")})
+    @NamedQuery(name = "PayMethod.findById", query = "SELECT p FROM PayMethod p WHERE p.id = :id"),
+    @NamedQuery(name = "PayMethod.findByType", query = "SELECT p FROM PayMethod p WHERE p.type = :type")})
 public class PayMethod implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -74,8 +75,6 @@ public class PayMethod implements Serializable {
     public void setType(String type) {
         this.type = type;
     }
-
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -100,6 +99,5 @@ public class PayMethod implements Serializable {
     public String toString() {
         return "fashion.entity.PayMethod[ id=" + id + " ]";
     }
-
     
 }

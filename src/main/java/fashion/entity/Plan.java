@@ -1,8 +1,15 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fashion.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,10 +17,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -24,7 +33,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Plan.findAll", query = "SELECT p FROM Plan p"),
-    @NamedQuery(name = "Plan.findById", query = "SELECT p FROM Plan p WHERE p.id = :id")})
+    @NamedQuery(name = "Plan.findById", query = "SELECT p FROM Plan p WHERE p.id = :id"),
+    @NamedQuery(name = "Plan.findByName", query = "SELECT p FROM Plan p WHERE p.name = :name"),
+    @NamedQuery(name = "Plan.findByPrice", query = "SELECT p FROM Plan p WHERE p.price = :price")})
 public class Plan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,8 +52,6 @@ public class Plan implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private BigDecimal price;
-//    @OneToMany(mappedBy = "plan")
-//    private List<Subscription> subscriptionList;
 
     public Plan() {
     }
@@ -79,15 +88,6 @@ public class Plan implements Serializable {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-//    @XmlTransient
-//    public List<Subscription> getSubscriptionList() {
-//        return subscriptionList;
-//    }
-//
-//    public void setSubscriptionList(List<Subscription> subscriptionList) {
-//        this.subscriptionList = subscriptionList;
-//    }
 
     @Override
     public int hashCode() {
