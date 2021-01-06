@@ -2,6 +2,43 @@ import React, { Component } from "react";
 import axios from "axios";
 
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      fname: "",
+      lname: "",
+      email: "",
+      dob: "",
+      password: "",
+      username: "",
+      role: "",
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+    console.log(`${event.target.name} has value of ${event.target.value}`);
+  }
+
+  handleRoleDetailsContainer() {
+    if (this.state.role === "1") {
+      return (
+        <>
+          <p>Fashio Lover Details</p>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <p>Fashio Maker Details</p>
+        </>
+      );
+    }
+  }
+
   render() {
     return (
       <>
@@ -9,102 +46,122 @@ class SignUp extends Component {
           <h1 className="signup-title">Create an account</h1>
           <section className="form-container">
             <form className="form-signup" onSubmit={this.handleFormSubmit}>
-              <div id="firstname-input-section" class="input-form-group ">
-                <label className="signup-label" for="firstname">
-                  First Name :
+              <div id="firstname-input-section" className="input-form-group ">
+                <label className="signup-label" htmlFor="firstname">
+                  First Name
                 </label>
                 <input
                   required
                   type="text"
                   name="fname"
+                  value={this.state.fname}
+                  onChange={this.handleChange}
                   className="signup-input"
                   id="firstname"
                 />
               </div>
-              <div id="lastname-input-section" class="input-form-group">
-                <label className="signup-label" for="lastname">
-                  Last Name :
+              <div id="lastname-input-section" className="input-form-group">
+                <label className="signup-label" htmlFor="lastname">
+                  Last Name
                 </label>
                 <input
                   required
                   type="text"
                   name="lname"
+                  value={this.state.lname}
+                  onChange={this.handleChange}
                   className="signup-input"
                   id="lastname"
                 />
               </div>
-              <div id="dob-input-section" class="input-form-group ">
-                <label className="signup-label" for="dob">
-                  Birth Date :
+              <div id="dob-input-section" className="input-form-group ">
+                <label className="signup-label" htmlFor="dob">
+                  Birth Date
                 </label>
                 <input
                   required
                   type="date"
                   name="dob"
+                  value={this.state.dob}
+                  onChange={this.handleChange}
                   className="signup-input"
                   id="dob"
                 />
               </div>
-              <div id="email-input-section" class="input-form-group ">
-                <label className="signup-label" for="signup-email">
-                  Email :
+              <div id="email-input-section" className="input-form-group ">
+                <label className="signup-label" htmlFor="signup-email">
+                  Email
                 </label>
                 <input
                   required
                   type="email"
                   name="email"
+                  value={this.state.email}
+                  onChange={this.handleChange}
                   className="signup-input"
                   id="signup-email"
                 />
               </div>
-              <div id="username-input-section" class="input-form-group ">
-                <label className="signup-label" for="signup-username">
-                  Username :
+              <div id="username-input-section" className="input-form-group ">
+                <label className="signup-label" htmlFor="signup-username">
+                  Username
                 </label>
                 <input
                   required
                   type="text"
                   name="username"
+                  autoComplete="username"
+                  value={this.state.username}
+                  onChange={this.handleChange}
                   className="signup-input"
                   id="signup-username"
                 />
               </div>
-              <div id="password-input-section" class="input-form-group ">
-                <label className="signup-label" for="signup-password">
-                  Password :
+              <div id="password-input-section" className="input-form-group ">
+                <label className="signup-label" htmlFor="signup-password">
+                  Password
                 </label>
                 <input
                   required
                   type="password"
                   name="password"
+                  value={this.state.password}
+                  onChange={this.handleChange}
+                  autoComplete="current-password"
                   className="signup-input"
                   id="signup-password"
                 />
               </div>
-              <div id="roles-input-section" class="input-form-group ">
-                  <p>Please Select Your Role :</p>
-                  <input
-                    type="radio"
-                    name="role"
-                    class="sr-only"
-                    id="fashion-lover"
-                  />
-                  <label id="fashionlover-label" for="fashion-lover">
-                    <img src="https://i.imgur.com/TdJ21oq.gif" />
-                  </label>
-                  <input
-                    type="radio"
-                    name="role"
-                    class="sr-only"
-                    id="fashion-maker"
-                  />
-                  <label id="fashionmaker-label" for="fashion-maker">
-                    <img src="https://i.imgur.com/HvbINLy.gif" />
-                  </label>
+              <div id="roles-input-section" className="input-form-group ">
+                <p>Please Select Your Role</p>
+                <input
+                  type="radio"
+                  name="role"
+                  value="1"
+                  onChange={this.handleChange}
+                  className="sr-only"
+                  id="fashion-lover"
+                />
+                <label id="fashionlover-label" htmlFor="fashion-lover">
+                  <img src="https://i.imgur.com/TdJ21oq.gif" />
+                </label>
+                <input
+                  type="radio"
+                  name="role"
+                  value="2"
+                  onChange={this.handleChange}
+                  className="sr-only"
+                  id="fashion-maker"
+                />
+                <label id="fashionmaker-label" htmlFor="fashion-maker">
+                  <img src="https://i.imgur.com/HvbINLy.gif" />
+                </label>
+              </div>
+              <div className="role-details-container">
+                {this.handleRoleDetailsContainer()}
               </div>
             </form>
           </section>
-          <section className="signup-footer">footer goes here</section>
         </main>
       </>
     );
