@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import StripeButton from "./StripeButton";
 import axios from "axios";
 
 class SignUp extends Component {
@@ -12,6 +13,7 @@ class SignUp extends Component {
       password: "",
       username: "",
       role: "",
+      paymentStatus: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -43,12 +45,12 @@ class SignUp extends Component {
         <>
           <p className="role-description">
             This plan gives you the opportunity to become a real fashion
-            designer, you have the options to chat with fans 
-            and create new brands and products and make your dreams come true
+            designer, you have the options to chat with fans and create new
+            brands and products and make your dreams come true
           </p>
           <div className="role-subscription">
             <span>Premium Account</span>
-            <button>Pay 20&euro;</button>
+            <StripeButton email={this.state.email} fullname={`${this.state.fname} ${this.state.lname}`} price="20" />
           </div>
         </>
       );

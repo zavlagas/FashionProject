@@ -308,7 +308,7 @@ input:focus {
   font-size: 2rem;
 }
 
-.role-subscription button {
+.role-subscription button , .payButton {
   background-color: #dd5edb;
   justify-self: center;
   align-self: center;
@@ -320,7 +320,7 @@ input:focus {
   transition: all 1s ease;
 }
 
-.role-subscription button:hover{
+.role-subscription button:hover , .payButton:hover{
   background-color:  #a800a5;
   padding: 10px 15px;
   font-size: larger;
