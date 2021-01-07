@@ -16,6 +16,11 @@ class SignUp extends Component {
       paymentStatus: false,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleRoleDetailsContainer = this.handleRoleDetailsContainer.bind(this)
+  }
+
+  handleAuthorizedPayment(isPaymentAuthorized) {
+    this.setState({ paymentStatus: isPaymentAuthorized });
   }
 
   handleChange(event) {
@@ -50,7 +55,13 @@ class SignUp extends Component {
           </p>
           <div className="role-subscription">
             <span>Premium Account</span>
-            <StripeButton email={this.state.email} fullname={`${this.state.fname} ${this.state.lname}`} price="20" />
+            <StripeButton
+              test={this.state.paymentStatus}
+              payStatus={(boolean) => this.handleAuthorizedPayment(boolean)}
+              email={this.state.email}
+              fullname={`${this.state.fname} ${this.state.lname}`}
+              price="20"
+            />
           </div>
         </>
       );

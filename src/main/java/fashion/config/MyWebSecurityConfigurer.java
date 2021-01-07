@@ -75,7 +75,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .deny()
                 .and()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate","/signup/**").permitAll().
+                .authorizeRequests().antMatchers("/authenticate","/signup/**","/payment").permitAll().
                 // all other requests need to be authenticated
                 anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to

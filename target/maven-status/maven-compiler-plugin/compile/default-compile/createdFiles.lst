@@ -4,11 +4,13 @@ fashion\entity\SubscriptionStatus.class
 fashion\daos\ProductDaoImpl.class
 fashion\entity\PayMethod.class
 fashion\config\DatabaseConfig.class
+fashion\controllers\PaymentController.class
 fashion\daos\SuperDao.class
 fashion\entity\JwtResponse.class
 fashion\entity\User.class
 fashion\daos\PayMethodDaoImpl.class
 fashion\services\RoleService.class
+fashion\entity\PaymentRequest$Currency.class
 fashion\services\BrandServiceImpl.class
 fashion\daos\SubscriptionStatusDaoImpl.class
 fashion\config\MyWebAppConfig.class
@@ -18,6 +20,7 @@ fashion\daos\GenderDao.class
 fashion\entity\JwtRequest.class
 fashion\config\JwtTokenUtil.class
 fashion\entity\Subscription.class
+fashion\entity\Token.class
 fashion\services\BrandService.class
 fashion\controllers\BrandController.class
 fashion\daos\RoleDao.class
@@ -46,6 +49,7 @@ fashion\services\ProductServiceImpl.class
 fashion\entity\Product.class
 fashion\daos\PlanDao.class
 fashion\services\SubscriptionStatusService.class
+fashion\entity\PaymentRequest.class
 fashion\entity\Gender.class
 fashion\daos\ProductDao.class
 fashion\services\PayMethodServiceImpl.class

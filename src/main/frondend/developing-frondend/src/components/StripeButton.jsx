@@ -21,9 +21,13 @@ class StripeButton extends Component {
     };
     axios
       .post(endPoint, priceObject)
-      .then((response) => {})
+      .then((response) => {
+        if (response.status === 200) {
+          this.props.payStatus(true);
+        }
+      })
       .catch((error) => {
-        //failed payment
+        this.props.payStatus(false);
       });
   }
   render() {
@@ -33,7 +37,7 @@ class StripeButton extends Component {
         label="Pay Now"
         email={this.props.email}
         name={this.props.fullname}
-        image="https://svgshare.com/i/CUz.svg"
+        image=""
         panelLabel="Pay Now"
         token={this.onToken}
         stripeKey={this.state.publ_stripe_key}

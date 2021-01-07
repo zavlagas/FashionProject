@@ -34,11 +34,13 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\co
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\UserService.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\PlanService.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\ProductServiceImpl.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\controllers\PaymentController.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\GenderDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\GenderDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\MyWebSecurityApplicationInitializer.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\SubscriptionStatusDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\DatabaseConfig.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\Token.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\BrandDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\JwtRequest.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\Role.java
@@ -47,6 +49,7 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\se
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\User.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\PayMethodDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\JwtRequestFilter.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\entity\PaymentRequest.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\ProductDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\RoleDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\PayMethodDaoImpl.java
