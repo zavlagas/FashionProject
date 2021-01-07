@@ -179,7 +179,7 @@ input:focus {
   grid-column: 1/-1;
   display: grid;
   background-color: rgba(0, 0, 0, 0.8);
-  grid-template-rows: 100px auto 100px;
+  grid-template-rows: 70px auto;
   color: white;
 }
 
@@ -191,7 +191,8 @@ input:focus {
 }
 
 .form-signup {
-  gap: 10px;
+  gap: 5px;
+  justify-items: center;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   font-size: 1.2rem;
@@ -218,13 +219,11 @@ input:focus {
   justify-self: center;
   justify-content: center;
   text-align: center;
-  padding: 0px;
-  margin: 0px;
+  margin-left: 10px;
 }
 
 .input-form-group {
   padding: 10px;
-  margin-left: 50px;
   display: grid;
   width: 70%;
   transition: all 1s ease-in-out;
@@ -279,4 +278,40 @@ input:focus {
 
 #roles-input-section input[type="radio"]:checked + label {
   filter: grayscale(0);
+}
+
+.role-details-container {
+  grid-row: 5/6;
+  grid-column: 1/-1;
+  display: grid;
+  gap: 5px;
+  padding: 40px;
+  grid-template-columns: repeat(2, 1fr);
+  border: 1px solid rgb(58, 58, 58);
+}
+
+.role-description {
+  grid-column: 1/2;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.role-subscription {
+  grid-column: 2/3;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.role-subscription span {
+  justify-self: center;
+  align-self: center;
+  padding: 10px;
+  font-size: 2rem;
+}
+
+.role-subscription button {
+  background-color: #dd5edb;
+  justify-self: center;
+  align-self: center;
+  padding: 5px 10px;
+  grid-row: 2/3;
 }

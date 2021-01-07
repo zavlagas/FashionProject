@@ -27,13 +27,29 @@ class SignUp extends Component {
     if (this.state.role === "1") {
       return (
         <>
-          <p>Fashio Lover Details</p>
+          <p className="role-description">
+            This plan gives you the opportunity to become a real lover of
+            fashion, you have the options to chat with the designer of each
+            brand and with other lovers and evaluate their products
+          </p>
+          <div className="role-subscription">
+            <span>Free Account</span>
+            <button>Subscribe Now</button>
+          </div>
         </>
       );
     } else {
       return (
         <>
-          <p>Fashio Maker Details</p>
+          <p className="role-description">
+            This plan gives you the opportunity to become a real fashion
+            designer, you have the options to chat with fans from every country
+            and create new brands and products and make your dreams come true
+          </p>
+          <div className="role-subscription">
+            <span>Premium Account : 20&euro;</span>
+            <button>Procceed To Payment</button>
+          </div>
         </>
       );
     }
