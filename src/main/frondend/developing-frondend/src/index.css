@@ -313,5 +313,15 @@ input:focus {
   justify-self: center;
   align-self: center;
   padding: 5px 10px;
+  width: 250px;
+  color: white;
   grid-row: 2/3;
+  font-weight: 500;
+  transition: all 1s ease;
+}
+
+.role-subscription button:hover{
+  background-color:  #a800a5;
+  padding: 10px 15px;
+  font-size: larger;
 }

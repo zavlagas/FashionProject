@@ -43,12 +43,12 @@ class SignUp extends Component {
         <>
           <p className="role-description">
             This plan gives you the opportunity to become a real fashion
-            designer, you have the options to chat with fans from every country
+            designer, you have the options to chat with fans 
             and create new brands and products and make your dreams come true
           </p>
           <div className="role-subscription">
-            <span>Premium Account : 20&euro;</span>
-            <button>Procceed To Payment</button>
+            <span>Premium Account</span>
+            <button>Pay 20&euro;</button>
           </div>
         </>
       );
