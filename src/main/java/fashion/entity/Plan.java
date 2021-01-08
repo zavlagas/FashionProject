@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package fashion.entity;
 
 import java.io.Serializable;
@@ -24,7 +29,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Plan.findAll", query = "SELECT p FROM Plan p"),
-    @NamedQuery(name = "Plan.findById", query = "SELECT p FROM Plan p WHERE p.id = :id")})
+    @NamedQuery(name = "Plan.findById", query = "SELECT p FROM Plan p WHERE p.id = :id"),
+    @NamedQuery(name = "Plan.findByName", query = "SELECT p FROM Plan p WHERE p.name = :name"),
+    @NamedQuery(name = "Plan.findByPrice", query = "SELECT p FROM Plan p WHERE p.price = :price")})
 public class Plan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,7 +39,7 @@ public class Plan implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Short id;
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 40)
@@ -41,26 +48,24 @@ public class Plan implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private BigDecimal price;
-//    @OneToMany(mappedBy = "plan")
-//    private List<Subscription> subscriptionList;
 
     public Plan() {
     }
 
-    public Plan(Short id) {
+    public Plan(Integer id) {
         this.id = id;
     }
 
-    public Plan(Short id, String name) {
+    public Plan(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public Short getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -79,15 +84,6 @@ public class Plan implements Serializable {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-//    @XmlTransient
-//    public List<Subscription> getSubscriptionList() {
-//        return subscriptionList;
-//    }
-//
-//    public void setSubscriptionList(List<Subscription> subscriptionList) {
-//        this.subscriptionList = subscriptionList;
-//    }
 
     @Override
     public int hashCode() {

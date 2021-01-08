@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
     super(props);
-   console.log( this.props.authenticationProtocol(false))
     this.state = {
       username: "",
       password: "",
@@ -12,7 +12,6 @@ class Login extends Component {
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
-
 
   changeReactValue = (event) => {
     if (event.target.getAttribute("name") === "username") {
@@ -23,11 +22,13 @@ class Login extends Component {
     }
   };
 
+  handleSignUpClick = (event) => {
+    this.props.history.push("/signup");
+  };
+
   handleFormSubmit = (event) => {
     event.preventDefault();
-
     const endpoint = "http://localhost:8080/FashionProject/authenticate";
-
     const user_object = {
       username: this.state.username,
       password: this.state.password,
@@ -52,11 +53,9 @@ class Login extends Component {
     axios.post(endpoint, user_object).then((res) => {
       console.log(res);
       if (res.status === 200) {
-        this.props.authenticationProtocol(true);
         localStorage.setItem("user", JSON.stringify(res.data.success));
         this.props.history.push("/dashboard");
       } else {
-        this.props.authenticationProtocol(false, {});
         console.log("not showing");
       }
     });
@@ -122,9 +121,14 @@ class Login extends Component {
                   </form>
                 </div>
                 <div className="card-footer">
-                  <div className="d-flex justify-content-center links">
-                    Don't have an account?
-                    <button className="text-warning">Sign Up</button>
+                  <div className="d-flex justify-content-center links ">
+                    <span className="p-1">Don't have an account?</span>
+                    <Link
+                      className="btn btn-warning p-1 px-3 mx-2"
+                      to="/signup"
+                    >
+                      Sign Up
+                    </Link>
                   </div>
                 </div>
               </div>

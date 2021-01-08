@@ -8,15 +8,14 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.loggedInStatus);
-    if (this.props.loggedInStatus === false) {
+    const user = localStorage.getItem("user");
+    if (user === null) {
       this.handleLogout();
     }
   }
 
   handleLogout = () => {
     localStorage.clear();
-    this.props.authenticationProtocol(false);
     this.props.history.push("/");
   };
 

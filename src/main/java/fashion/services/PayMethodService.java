@@ -1,11 +1,10 @@
 package fashion.services;
 
-import fashion.entity.PayMethod;
-import java.util.List;
+import com.stripe.exception.StripeException;
+import fashion.entity.PaymentRequest;
 
 
 public interface PayMethodService {
-    public PayMethod findByPaymentMethod(short id);
 
-    public List<PayMethod> getAllPaymentMethods();
+    public String charge(PaymentRequest request) throws StripeException;
 }

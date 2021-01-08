@@ -20,8 +20,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -32,9 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Subscription.findAll", query = "SELECT s FROM Subscription s"),
-    @NamedQuery(name = "Subscription.findById", query = "SELECT s FROM Subscription s WHERE s.id = :id"),
-    @NamedQuery(name = "Subscription.findByStartDate", query = "SELECT s FROM Subscription s WHERE s.startDate = :startDate"),
-    @NamedQuery(name = "Subscription.findByEndDate", query = "SELECT s FROM Subscription s WHERE s.endDate = :endDate")})
+    @NamedQuery(name = "Subscription.findById", query = "SELECT s FROM Subscription s WHERE s.id = :id")})
 public class Subscription implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,22 +42,16 @@ public class Subscription implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "end_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    @JoinColumn(name = "plan_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private SubscriptionStatus statusId;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subscriptionId")
-//    private List<User> userList;
-
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private Plan plan;
+    
+    
     public Subscription() {
     }
 
@@ -66,10 +59,9 @@ public class Subscription implements Serializable {
         this.id = id;
     }
 
-    public Subscription(Integer id, Date startDate, Date endDate) {
+    public Subscription(Integer id, Plan plan) {
         this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.plan = plan;
     }
 
     public Integer getId() {
@@ -88,30 +80,14 @@ public class Subscription implements Serializable {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
+
+    public Plan getPlan() {
+        return plan;
     }
 
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
-
-    public SubscriptionStatus getStatusId() {
-        return statusId;
-    }
-
-    public void setStatusId(SubscriptionStatus statusId) {
-        this.statusId = statusId;
-    }
-
-//    @XmlTransient
-//    public List<User> getUserList() {
-//        return userList;
-//    }
-//
-//    public void setUserList(List<User> userList) {
-//        this.userList = userList;
-//    }
 
     @Override
     public int hashCode() {

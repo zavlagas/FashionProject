@@ -29,7 +29,7 @@ CREATE TABLE `brands` (
   `user_id` int NOT NULL,
   `name` varchar(50) NOT NULL,
   `descr` text,
-  `creation_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creation_date` datetime DEFAULT CURRENT_TIMESTAMP,
   `image_path` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
@@ -47,55 +47,6 @@ LOCK TABLES `brands` WRITE;
 /*!40000 ALTER TABLE `brands` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `genders`
---
-
-DROP TABLE IF EXISTS `genders`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `genders` (
-  `id` tinyint NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `genders`
---
-
-LOCK TABLES `genders` WRITE;
-/*!40000 ALTER TABLE `genders` DISABLE KEYS */;
-INSERT INTO `genders` VALUES (2,'FEMALE'),(1,'MALE');
-/*!40000 ALTER TABLE `genders` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `pay_methods`
---
-
-DROP TABLE IF EXISTS `pay_methods`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `pay_methods` (
-  `id` tinyint NOT NULL AUTO_INCREMENT,
-  `type` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `type` (`type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `pay_methods`
---
-
-LOCK TABLES `pay_methods` WRITE;
-/*!40000 ALTER TABLE `pay_methods` DISABLE KEYS */;
-INSERT INTO `pay_methods` VALUES (1,'CREDID CARD'),(2,'WIRE TRANSFER');
-/*!40000 ALTER TABLE `pay_methods` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `plans`
@@ -119,7 +70,7 @@ CREATE TABLE `plans` (
 
 LOCK TABLES `plans` WRITE;
 /*!40000 ALTER TABLE `plans` DISABLE KEYS */;
-INSERT INTO `plans` VALUES (1,'FASHION LOVER',0.00),(2,'FASHION MAKER',20.00);
+INSERT INTO `plans` VALUES (1,'FASHION_LOVER',0.00),(2,'FASHION_MAKER',20.00);
 /*!40000 ALTER TABLE `plans` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +84,7 @@ DROP TABLE IF EXISTS `product_images`;
 CREATE TABLE `product_images` (
   `id` int NOT NULL AUTO_INCREMENT,
   `product_id` int DEFAULT NULL,
-  `image_path` varchar(50) NOT NULL,
+  `image_path` varchar(50),
   PRIMARY KEY (`id`),
   UNIQUE KEY `image_path` (`image_path`),
   KEY `product_id` (`product_id`),
@@ -200,33 +151,8 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'LOVER'),(2,'MAKER');
+INSERT INTO `roles` VALUES (1,'USER'),(2,'ADMIN');
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `subscription_status`
---
-
-DROP TABLE IF EXISTS `subscription_status`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `subscription_status` (
-  `id` tinyint NOT NULL AUTO_INCREMENT,
-  `status` varchar(30) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `subscription_status`
---
-
-LOCK TABLES `subscription_status` WRITE;
-/*!40000 ALTER TABLE `subscription_status` DISABLE KEYS */;
-INSERT INTO `subscription_status` VALUES (1,'ACTIVE'),(2,'INACTIVE');
-/*!40000 ALTER TABLE `subscription_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -238,16 +164,10 @@ DROP TABLE IF EXISTS `subscriptions`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `subscriptions` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `pay_method_id` tinyint NOT NULL,
   `plan_id` tinyint NOT NULL,
-  `status_id` tinyint NOT NULL,
-  `start_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end_date` datetime NOT NULL,
+  `start_date` datetime null DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  KEY `pay_method_id` (`pay_method_id`),
   KEY `plan_id` (`plan_id`),
-  CONSTRAINT `subscriptions_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `subscription_status` (`id`),
-  CONSTRAINT `subscriptions_ibfk_1` FOREIGN KEY (`pay_method_id`) REFERENCES `pay_methods` (`id`),
   CONSTRAINT `subscriptions_ibfk_2` FOREIGN KEY (`plan_id`) REFERENCES `plans` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -258,7 +178,7 @@ CREATE TABLE `subscriptions` (
 
 LOCK TABLES `subscriptions` WRITE;
 /*!40000 ALTER TABLE `subscriptions` DISABLE KEYS */;
-INSERT INTO `subscriptions` VALUES (1,1,1,1,'2021-01-05 12:51:03','2030-09-01 00:00:00');
+INSERT INTO `subscriptions` VALUES (1,2,'2021-01-05 12:51:03');
 /*!40000 ALTER TABLE `subscriptions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -305,14 +225,10 @@ CREATE TABLE `users` (
   `username` varchar(68) NOT NULL,
   `password` varchar(68) NOT NULL,
   `image` varchar(100) DEFAULT NULL,
-  `gender_id` tinyint NOT NULL,
   `subscription_id` int not null,
-  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_date` datetime DEFAULT NULL,
+  `create_date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`),
-  KEY `gender_id` (`gender_id`),
-  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`gender_id`) REFERENCES `genders` (`id`),
   CONSTRAINT `users_ibfk_2` FOREIGN KEY (`subscription_id`) REFERENCES `subscriptions` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -323,7 +239,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'ADMIN','ADMIN','admin@hotmail.com','2020-11-17','admin','$2a$10$S0Hmqd0KiP7.vYCZQQbIq.kRGlh0RTXL1NhTmxVWoaAp7s8os1mK2',NULL,1,1,'2020-11-17 20:28:40',NULL);
+INSERT INTO `users` VALUES (1,'ADMIN','ADMIN','admin@hotmail.com','2020-11-17','admin','$2a$10$S0Hmqd0KiP7.vYCZQQbIq.kRGlh0RTXL1NhTmxVWoaAp7s8os1mK2',NULL,1,'2020-11-17 20:28:40');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
