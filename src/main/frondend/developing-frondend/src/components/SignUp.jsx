@@ -12,27 +12,42 @@ class SignUp extends Component {
       dob: "",
       password: "",
       username: "",
-      role: "",
+      role: "1",
       plan: {},
-      paymentStatus: false,
+      formIsChecked: false,
+      formSubmitted: false,
     };
+    this.sendPostRequest = this.sendPostRequest.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleRoleDetailsContainer = this.handleRoleDetailsContainer.bind(
-      this
-    );
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
-  handleAuthorizedPayment(isPaymentAuthorized) {
-    this.setState({ paymentStatus: isPaymentAuthorized });
+  checkIfFormIsFilled() {
+    if (
+      this.state.firstName.length > 1 &&
+      this.state.lastName.length > 1 &&
+      this.state.email.length > 1 &&
+      this.state.dob.length > 1 &&
+      this.state.password.length > 1 &&
+      this.state.username.length > 1
+    ) {
+      this.setState({
+        formIsChecked: true,
+      });
+    } else {
+      this.setState({
+        formIsChecked: false,
+      });
+    }
+    this.showStripeButton();
   }
 
   handleChange(event) {
+    this.checkIfFormIsFilled();
     this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(`${event.target.name} has value of ${event.target.value}`);
-    console.log(this.state.role);
+    this.checkIfFormIsFilled();
   }
 
   handleRoleDetailsContainer() {
@@ -46,7 +61,9 @@ class SignUp extends Component {
           </p>
           <div className="role-subscription">
             <span>Free Account</span>
-            <button>Subscribe Now</button>
+            <button onClick={() => this.sendPostRequest()}>
+              Subscribe Now
+            </button>
           </div>
         </>
       );
@@ -60,21 +77,36 @@ class SignUp extends Component {
           </p>
           <div className="role-subscription">
             <span>Premium Account</span>
-            <StripeButton
-              test={this.state.paymentStatus}
-              payStatus={(boolean) => this.handleAuthorizedPayment(boolean)}
-              email={this.state.email}
-              fullname={`${this.state.firstName} ${this.state.lastName}`}
-              price="20"
-            />
+            {this.showStripeButton()}
           </div>
         </>
       );
     }
   }
 
-  handleFormSubmit = (event) => {
-    event.preventDefault();
+  showStripeButton() {
+    if (this.state.formIsChecked) {
+      return (
+        <>
+          <StripeButton
+            sendPost={this.sendPostRequest}
+            email={this.state.email}
+            fullname={`${this.state.firstName} ${this.state.lastName}`}
+            price="20"
+          />
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button>Fill Out The Form</button>
+        </>
+      );
+    }
+  }
+
+  sendPostRequest() {
+    console.log("Send Post Request");
     const endpoint = "http://localhost:8080/FashionProject/signup";
     const user = {
       firstName: this.state.firstName,
@@ -85,21 +117,31 @@ class SignUp extends Component {
       password: this.state.password,
       roleList: [
         this.state.role === "1"
-          ? { id: 1, type: "LOVER" }
-          : { id: 2, type: "MAKER" },
+          ? { id: 1, type: "USER" }
+          : { id: 2, type: "ADMIN" },
       ],
       subscription: {
         plan:
           this.state.role === "1"
-            ? { id: 1, name: "FASHION LOVER", price: 0 }
-            : { id: 1, name: "FASHION MAKER", price: 20 },
+            ? { id: 1, name: "FASHION_LOVER", price: 0 }
+            : { id: 2, name: "FASHION_MAKER", price: 20 },
       },
     };
-    axios.put(endpoint, user).then((res) => {
-      try {
-        console.log(user);
-      } catch (error) {}
-    });
+    axios
+      .post(endpoint, user)
+      .then((res) => {
+        try {
+          this.setState({
+            formSubmitted: true,
+          });
+        } catch (error) {}
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+  handleFormSubmit = (event) => {
+    event.preventDefault();
   };
 
   render() {

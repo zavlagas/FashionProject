@@ -23,12 +23,10 @@ class StripeButton extends Component {
       .post(endPoint, priceObject)
       .then((response) => {
         if (response.status === 200) {
-          this.props.payStatus(true);
+          this.props.sendPost();
         }
       })
-      .catch((error) => {
-        this.props.payStatus(false);
-      });
+      .catch((error) => {});
   }
   render() {
     return (
@@ -38,6 +36,7 @@ class StripeButton extends Component {
         email={this.props.email}
         name={this.props.fullname}
         image=""
+        type="button"
         panelLabel="Pay Now"
         token={this.onToken}
         stripeKey={this.state.publ_stripe_key}
