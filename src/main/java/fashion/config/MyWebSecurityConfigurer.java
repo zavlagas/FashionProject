@@ -57,6 +57,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
     public void addCorsMappings(CorsRegistry registry) {
+//         registry.addMapping("/**").allowCredentials(true).allowedOrigins("*").allowedMethods("*");
         registry.addMapping("/**").allowedOrigins("*")
                 .allowedMethods("HEAD", "GET", "PUT", "POST",
                         "DELETE", "PATCH").allowedHeaders("*");
@@ -75,7 +76,7 @@ public class MyWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .deny()
                 .and()
                 // dont authenticate this particular request
-                .authorizeRequests().antMatchers("/authenticate","/signup","/payment").permitAll().
+                .authorizeRequests().antMatchers("/authenticate","/signup","/payment","/handler/**").permitAll().
                 // all other requests need to be authenticated
                 anyRequest().authenticated().and().
                 // make sure we use stateless session; session won't be used to

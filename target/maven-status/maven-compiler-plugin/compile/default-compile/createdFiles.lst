@@ -1,5 +1,6 @@
 fashion\services\RoleServiceImpl.class
 fashion\daos\BrandDaoImpl.class
+fashion\config\WebSocketConfig.class
 fashion\daos\ProductDaoImpl.class
 fashion\config\DatabaseConfig.class
 fashion\controllers\PaymentController.class
@@ -11,6 +12,7 @@ fashion\entity\PaymentRequest$Currency.class
 fashion\services\BrandServiceImpl.class
 fashion\config\MyWebAppConfig.class
 fashion\daos\RoleDaoImpl.class
+fashion\services\ChatHistoryService.class
 fashion\entity\JwtRequest.class
 fashion\config\JwtTokenUtil.class
 fashion\entity\Subscription.class
@@ -28,7 +30,9 @@ fashion\services\PlanServiceImpl.class
 fashion\config\MyWebSecurityApplicationInitializer.class
 fashion\services\UserServiceImpl.class
 fashion\entity\Plan.class
+fashion\controllers\SocketController.class
 fashion\controllers\ProductController.class
+fashion\entity\MessageBean.class
 fashion\controllers\JwtAuthenticationController.class
 fashion\entity\Role.class
 fashion\services\PlanService.class
@@ -46,4 +50,5 @@ fashion\services\PayMethodServiceImpl.class
 fashion\daos\UserDaoImpl.class
 fashion\controllers\SignUpController.class
 fashion\controllers\UserController.class
+fashion\services\ChatHistoryServiceImpl.class
 fashion\services\PayMethodService.class

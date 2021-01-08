@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import NavBar from "./NavBar";
+import Chat from "./Chat";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +28,7 @@ class Dashboard extends Component {
         </header>
         <main>
           <h1>WELCOME TO DASHBOARD</h1>
+          <Chat />
           <button type="button" onClick={this.handleLogout}>
             Signout
           </button>
