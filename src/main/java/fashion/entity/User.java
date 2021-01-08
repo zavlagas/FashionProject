@@ -27,6 +27,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -34,7 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
  */
 @Entity
 @Table(name = "users")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
     @NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
@@ -46,8 +47,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
     @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
-    @NamedQuery(name = "User.findByUpdatedDate", query = "SELECT u FROM User u WHERE u.updatedDate = :updatedDate"),
-    @NamedQuery(name = "User.findAllDetailsByUsername", query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")})
+    @NamedQuery(name ="User.findAllDetailsByUsername",query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -90,21 +90,19 @@ public class User implements Serializable {
     @Size(max = 100)
     @Column(name = "image")
     private String image;
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
-    @Column(name = "updated_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedDate;
     @JoinTable(name = "user_roles", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "id")})
     @ManyToMany
+    @Cascade(CascadeType.SAVE_UPDATE)
     private List<Role> roleList;
     @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @Cascade(CascadeType.ALL)
     private Subscription subscription;
 
     public User() {
@@ -114,16 +112,17 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public User(Integer id, String firstName, String lastName, String email, Date dob, String username, String password, Date createDate) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, Date dob, String username, String password, List<Role> roleList, Subscription subscription) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dob = dob;
         this.username = username;
         this.password = password;
-        this.createDate = createDate;
+        this.roleList = roleList;
+        this.subscription = subscription;
     }
+
 
     public Integer getId() {
         return id;
@@ -197,15 +196,6 @@ public class User implements Serializable {
         this.createDate = createDate;
     }
 
-    public Date getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(Date updatedDate) {
-        this.updatedDate = updatedDate;
-    }
-
-    @XmlTransient
     public List<Role> getRoleList() {
         return roleList;
     }
@@ -218,7 +208,7 @@ public class User implements Serializable {
         return subscription;
     }
 
-    public void setSubscriptionId(Subscription subscription) {
+    public void setSubscription(Subscription subscription) {
         this.subscription = subscription;
     }
 

@@ -6,17 +6,21 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      fname: "",
-      lname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       dob: "",
       password: "",
       username: "",
       role: "",
+      plan: {},
       paymentStatus: false,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleRoleDetailsContainer = this.handleRoleDetailsContainer.bind(this)
+    this.handleRoleDetailsContainer = this.handleRoleDetailsContainer.bind(
+      this
+    );
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleAuthorizedPayment(isPaymentAuthorized) {
@@ -28,6 +32,7 @@ class SignUp extends Component {
       [event.target.name]: event.target.value,
     });
     console.log(`${event.target.name} has value of ${event.target.value}`);
+    console.log(this.state.role);
   }
 
   handleRoleDetailsContainer() {
@@ -59,7 +64,7 @@ class SignUp extends Component {
               test={this.state.paymentStatus}
               payStatus={(boolean) => this.handleAuthorizedPayment(boolean)}
               email={this.state.email}
-              fullname={`${this.state.fname} ${this.state.lname}`}
+              fullname={`${this.state.firstName} ${this.state.lastName}`}
               price="20"
             />
           </div>
@@ -67,6 +72,35 @@ class SignUp extends Component {
       );
     }
   }
+
+  handleFormSubmit = (event) => {
+    event.preventDefault();
+    const endpoint = "http://localhost:8080/FashionProject/signup";
+    const user = {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      dob: this.state.dob,
+      username: this.state.username,
+      password: this.state.password,
+      roleList: [
+        this.state.role === "1"
+          ? { id: 1, type: "LOVER" }
+          : { id: 2, type: "MAKER" },
+      ],
+      subscription: {
+        plan:
+          this.state.role === "1"
+            ? { id: 1, name: "FASHION LOVER", price: 0 }
+            : { id: 1, name: "FASHION MAKER", price: 20 },
+      },
+    };
+    axios.put(endpoint, user).then((res) => {
+      try {
+        console.log(user);
+      } catch (error) {}
+    });
+  };
 
   render() {
     return (
@@ -82,8 +116,8 @@ class SignUp extends Component {
                 <input
                   required
                   type="text"
-                  name="fname"
-                  value={this.state.fname}
+                  name="firstName"
+                  value={this.state.firstName}
                   onChange={this.handleChange}
                   className="signup-input"
                   id="firstname"
@@ -96,8 +130,8 @@ class SignUp extends Component {
                 <input
                   required
                   type="text"
-                  name="lname"
-                  value={this.state.lname}
+                  name="lastName"
+                  value={this.state.lastName}
                   onChange={this.handleChange}
                   className="signup-input"
                   id="lastname"
@@ -166,7 +200,7 @@ class SignUp extends Component {
                 <input
                   type="radio"
                   name="role"
-                  value="1"
+                  value={1}
                   onChange={this.handleChange}
                   className="sr-only"
                   id="fashion-lover"
@@ -177,7 +211,7 @@ class SignUp extends Component {
                 <input
                   type="radio"
                   name="role"
-                  value="2"
+                  value={2}
                   onChange={this.handleChange}
                   className="sr-only"
                   id="fashion-maker"

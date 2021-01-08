@@ -20,8 +20,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -32,9 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Subscription.findAll", query = "SELECT s FROM Subscription s"),
-    @NamedQuery(name = "Subscription.findById", query = "SELECT s FROM Subscription s WHERE s.id = :id"),
-    @NamedQuery(name = "Subscription.findByStartDate", query = "SELECT s FROM Subscription s WHERE s.startDate = :startDate"),
-    @NamedQuery(name = "Subscription.findByEndDate", query = "SELECT s FROM Subscription s WHERE s.endDate = :endDate")})
+    @NamedQuery(name = "Subscription.findById", query = "SELECT s FROM Subscription s WHERE s.id = :id")})
 public class Subscription implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,26 +42,16 @@ public class Subscription implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
+    @Basic(optional = true)
     @Column(name = "start_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "end_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date endDate;
-    @JoinColumn(name = "pay_method_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PayMethod payMethod;
     @JoinColumn(name = "plan_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @Cascade(CascadeType.SAVE_UPDATE)
     private Plan plan;
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private SubscriptionStatus status;
-
+    
+    
     public Subscription() {
     }
 
@@ -70,10 +59,9 @@ public class Subscription implements Serializable {
         this.id = id;
     }
 
-    public Subscription(Integer id, Date startDate, Date endDate) {
+    public Subscription(Integer id, Plan plan) {
         this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.plan = plan;
     }
 
     public Integer getId() {
@@ -92,21 +80,6 @@ public class Subscription implements Serializable {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public PayMethod getPayMethodId() {
-        return payMethod;
-    }
-
-    public void setPayMethodId(PayMethod payMethod) {
-        this.payMethod = payMethod;
-    }
 
     public Plan getPlan() {
         return plan;
@@ -114,14 +87,6 @@ public class Subscription implements Serializable {
 
     public void setPlan(Plan plan) {
         this.plan = plan;
-    }
-
-    public SubscriptionStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(SubscriptionStatus status) {
-        this.status = status;
     }
 
     @Override
