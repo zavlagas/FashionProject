@@ -48,7 +48,7 @@ class Chat extends Component {
     return (
       <div>
         <TalkBox
-          topic="react-websocket-template"
+          topic="Chat"
           currentUserId={this.randomUserId}
           currentUser={this.randomUserName}
           messages={this.state.messages}

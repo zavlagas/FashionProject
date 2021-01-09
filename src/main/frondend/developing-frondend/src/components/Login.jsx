@@ -4,6 +4,7 @@ import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
+    document.querySelector(".app-container").classList.add("background-image");
     super(props);
     this.state = {
       username: "",
