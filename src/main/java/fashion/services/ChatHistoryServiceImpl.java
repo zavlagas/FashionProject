@@ -23,11 +23,13 @@ public class ChatHistoryServiceImpl implements ChatHistoryService {
 
     @Override
     public void save(Map<String, String> message) {
+        System.out.println("Message Stored " +message);
         this.chatHistoryCache.put(UUID.randomUUID(), message);
     }
 
     @Override
     public List<Map<String, String>> get() {
+        System.out.println("Message get Back From Stored " + chatHistoryCache);
         return chatHistoryCache.asMap().values().stream()
                 .sorted((c1, c2) -> Long.valueOf(c1.get("timestamp"))
                 .compareTo(Long.valueOf(c2.get("timestamp"))))

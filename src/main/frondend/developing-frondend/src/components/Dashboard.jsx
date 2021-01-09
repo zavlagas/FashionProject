@@ -28,7 +28,9 @@ class Dashboard extends Component {
         </header>
         <main>
           <h1>WELCOME TO DASHBOARD</h1>
-          <Chat />
+          <div className="chat-container">
+            <Chat />
+          </div>
           <button type="button" onClick={this.handleLogout}>
             Signout
           </button>

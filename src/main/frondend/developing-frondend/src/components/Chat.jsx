@@ -6,6 +6,7 @@ import UsernameGenerator from "username-generator";
 
 const randomstring = require("randomstring");
 class Chat extends Component {
+  _isMounted = false;
   constructor(props) {
     super(props);
     this.randomUserName = UsernameGenerator.generateUsername("-");
@@ -30,17 +31,20 @@ class Chat extends Component {
     }
   };
 
-  componentWillMount() {
+  componentDidMount() {
+    this._isMounted = true;
     axios
       .get("http://localhost:8080/FashionProject/history")
       .then((response) => {
-        this.setState({ messages: response.body });
+        console.log(response.data);
+        if (this._isMounted) {
+          this.setState({ messages: response.data });
+        }
       });
   }
 
   render() {
-    const wsSourceUrl =
-      window.location.protocol + "//" + window.location.host + "/handler";
+    const wsSourceUrl = "http://localhost:8080/FashionProject/handler";
     return (
       <div>
         <TalkBox
@@ -65,7 +69,7 @@ class Chat extends Component {
           onDisconnect={() => {
             this.setState({ clientConnected: false });
           }}
-          debug={false}
+          debug={true}
         />
       </div>
     );
