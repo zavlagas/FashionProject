@@ -28,7 +28,7 @@ body {
 .app-context {
   position: relative;
   display: grid;
-  grid-template-rows: 100px auto 100px;
+  grid-template-rows: 70px auto 100px;
   width: 100%;
   height: 100vh;
 }
@@ -331,6 +331,15 @@ input:focus {
   padding: 10px 15px;
   font-size: larger;
 }
+/* Dashboard */
+:root {
+  --primary-bcgrnd-color: rgb(92, 39, 81);
+  --primary-bcgrnd-color-hover: #e3a1f588;
+  --text-color: rgb(218, 255, 237);
+  --text-shadow: black;
+  --shadow-element: 2px 2px 10px black;
+}
+
 .chat-container {
   position: absolute;
   bottom: 10px;
@@ -347,45 +356,159 @@ input:focus {
   padding: 5px 10px;
   border-radius: 25%;
   transform: rotate(-90deg);
-  background-color: rgb(0 0 0 / 50%);
+  background-color: var(--primary-bcgrnd-color);
   color: white;
   transition: all 1s ease;
 }
 
 #chat-button:hover {
-  background-color: #e3a1f588;
+  background-color: var(--primary-bcgrnd-color-hover);
   padding: 8px 14px;
 }
 
 .app-header {
   display: grid;
-  grid-template-columns: 300px auto 300px;
-  background: linear-gradient(
-    -90deg,
-    #6a0386,
-    #2a056e
-  );
-  background-size: 400% 400%;
-  animation: backgroundchange 10s ease-in-out infinite;
+  grid-template-columns: 300px 300px auto 300px;
+  background-color: var(--primary-bcgrnd-color);
 }
-
-@keyframes backgroundchange {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.app-header > * {
+  padding: 0px;
 }
-
-
 #logo {
+  color: var(--text-color);
+  text-shadow: var(--shadow-element);
   grid-column: 1/2;
+  cursor: pointer;
   width: 300px;
   align-self: center;
   padding: 10px;
+  transition: all 1s ease;
 }
 
+#logo:hover {
+  transform: scale(1.1, 1.1);
+  filter: brightness(2);
+  box-shadow: none;
+}
+
+.search-container {
+  grid-column: 2/3;
+  align-self: center;
+}
+
+#navbar {
+  grid-column: 3/4;
+  align-self: center;
+  display: grid;
+}
+
+#navbar ul {
+  padding: 0px 20px;
+  margin: 0px;
+}
+
+#navbar ul li {
+  display: inline-block;
+  color: var(--text-color);
+  text-shadow: var(--shadow-element);
+  font-size: 1.3rem;
+  padding: 10px 10px;
+  transition: all 1s ease;
+}
+
+#navbar ul li:hover {
+  text-shadow: none;
+  color: var(--primary-bcgrnd-color-hover);
+  transform: scale(1.2, 1.2);
+  font-size: 1.3rem;
+}
+
+#navbar ul li > * {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.app-header-user {
+  align-self: center;
+  justify-self: center;
+  grid-column: 4/5;
+  display: grid;
+  grid-template-columns: 100px 50px;
+}
+
+.user-profile {
+  grid-column: 1/2;
+  display: flex;
+  border: 1px solid black;
+  border-radius: 50px;
+  justify-items: center;
+  align-items: center;
+  color: var(--text-color);
+  box-shadow: var(--shadow-element);
+  transition: all 1s ease;
+}
+
+.user-profile span {
+  text-transform: lowercase;
+}
+
+.user-profile:hover {
+  transform: scale(1.1, 1.1);
+  filter: brightness(2);
+  box-shadow: none;
+}
+
+.user-profile img {
+  align-self: center;
+  padding: 5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}
+
+.user-profile span {
+  align-self: center;
+}
+
+.sign-out-btn {
+  grid-column: 3/4;
+  align-self: center;
+  justify-self: center;
+  border: none;
+  box-shadow: var(--shadow-element);
+  padding: 5px 10px;
+  border-radius: 50px;
+  transition: all 1s ease;
+}
+
+.sign-out-btn:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: none;
+}
+
+.search-container {
+  width: 100%;
+  max-width: 800px;
+}
+.search-label {
+  position: relative;
+}
+.search-container input {
+  width: 250px;
+  height: 35px;
+  font-style: italic;
+  color: black;
+  box-sizing: border-box;
+  outline: none;
+  border-radius: 10px;
+  padding-left: 40px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 9px;
+  left: 7px;
+  font-size: 16px;
+  color: #555;
+  right: 18px;
+}

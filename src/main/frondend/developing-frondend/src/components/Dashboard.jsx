@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+import Search from "./Search";
 import NavBar from "./NavBar";
 import Chat from "./Chat";
+import Home from "./Home";
+import { Link, Route } from "react-router-dom";
+
 class Dashboard extends Component {
   constructor(props) {
     document
@@ -9,6 +13,8 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       chatActive: false,
+      props: this.props,
+      user: JSON.parse(localStorage.getItem("user")),
     };
     this.toggleChatButton = this.toggleChatButton.bind(this);
   }
@@ -43,20 +49,28 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { match } = this.state.props;
     return (
       <>
         <header className="app-header">
-          <img id="logo" src="https://i.imgur.com/4mrud7p.gif" />
-          <NavBar />
+          <h1 id="logo">FashionBook</h1>
+          <Search />
+          <NavBar url={match.url} />
+          <div className="app-header-user">
+            <div className="user-profile">
+              <img src="https://picsum.photos/100/100" />
+              <span>{this.state.user.firstName}</span>
+            </div>
+            <button
+              className="sign-out-btn"
+              type="button"
+              onClick={this.handleLogout}
+            >
+              Signout
+            </button>
+          </div>
         </header>
-        <main>
-          <h1>WELCOME TO DASHBOARD</h1>
-
-          <button type="button" onClick={this.handleLogout}>
-            Signout
-          </button>
-        </main>
-        <footer></footer>
+        <Route path={`${match.path}/home`} component={Home} />
         <div onClick={this.toggleChatButton} className="chat-container">
           <button id="chat-button">Chat</button>
           {this.toggleChatMovement()}

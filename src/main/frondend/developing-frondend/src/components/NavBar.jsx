@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
+class Navbar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      url: this.props.url,
+    };
+  }
 
-
-
-const Navbar = () => {
-  const [isOpen, setOpen] = useState(false);
-  return (
-    <nav className="navbar" role="navigation">
-      <ul>
-        <li>
-          <i class="fas fa-home"></i>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+  render() {
+    return (
+      <>
+        <nav id="navbar" role="navigation">
+          <ul>
+            <li>
+              <Link to={`${this.state.url}/home`}>Home</Link>
+            </li>
+            <li>
+              <Link to={`${this.state.url}/brands`}>Brands</Link>
+            </li>
+          </ul>
+        </nav>
+      </>
+    );
+  }
+}
 
 export default Navbar;
