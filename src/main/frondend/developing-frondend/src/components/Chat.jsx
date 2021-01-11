@@ -9,7 +9,7 @@ class Chat extends Component {
   _isMounted = false;
   constructor(props) {
     super(props);
-    this.randomUserName = UsernameGenerator.generateUsername("-");
+    this.randomUserName = this.props.username;
     this.randomUserId = randomstring.generate();
     this.state = {
       clientConnected: false,
@@ -46,7 +46,7 @@ class Chat extends Component {
   render() {
     const wsSourceUrl = "http://localhost:8080/FashionProject/handler";
     return (
-      <div>
+      <div className="talkbox-wrapper">
         <TalkBox
           topic="Chat"
           currentUserId={this.randomUserId}

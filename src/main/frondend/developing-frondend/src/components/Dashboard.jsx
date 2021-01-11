@@ -3,6 +3,7 @@ import Search from "./Search";
 import NavBar from "./NavBar";
 import Chat from "./Chat";
 import Home from "./Home";
+import Profile from "./Profile";
 import { Link, Route } from "react-router-dom";
 
 class Dashboard extends Component {
@@ -42,7 +43,7 @@ class Dashboard extends Component {
 
   toggleChatMovement() {
     if (this.state.chatActive) {
-      return <Chat />;
+      return <Chat username={this.state.user.username} />;
     } else {
       return null;
     }
@@ -57,10 +58,12 @@ class Dashboard extends Component {
           <Search />
           <NavBar url={match.url} />
           <div className="app-header-user">
-            <div className="user-profile">
-              <img src="https://picsum.photos/100/100" />
-              <span>{this.state.user.firstName}</span>
-            </div>
+            <Link to={`${match.url}/profile`}>
+              <div className="user-profile">
+                <img src="https://picsum.photos/100/100" />
+                <span>{this.state.user.username}</span>
+              </div>
+            </Link>
             <button
               className="sign-out-btn"
               type="button"
@@ -71,6 +74,17 @@ class Dashboard extends Component {
           </div>
         </header>
         <Route path={`${match.path}/home`} component={Home} />
+        <Route
+          path={`${match.path}/profile`}
+          {...this.props}
+          render={() => (
+            <Profile
+              key={this.state.user}
+              {...this.props}
+              authUser={this.state.user}
+            />
+          )}
+        />
         <div onClick={this.toggleChatButton} className="chat-container">
           <button id="chat-button">Chat</button>
           {this.toggleChatMovement()}
