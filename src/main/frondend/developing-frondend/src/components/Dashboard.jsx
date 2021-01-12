@@ -15,15 +15,29 @@ class Dashboard extends Component {
     this.state = {
       chatActive: false,
       props: this.props,
-      user: JSON.parse(localStorage.getItem("user")),
+      user: {
+        firstName: "",
+        lastName: "",
+        roleList: [],
+        username: "",
+      },
     };
     this.toggleChatButton = this.toggleChatButton.bind(this);
   }
 
   componentDidMount() {
-    const user = localStorage.getItem("user");
+    const user = JSON.parse(localStorage.getItem("user"));
     if (user === null) {
       this.handleLogout();
+    } else {
+      this.setState({
+        user: {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          roleList: user.roleList,
+          username: user.username,
+        },
+      });
     }
   }
 
@@ -79,9 +93,8 @@ class Dashboard extends Component {
           {...this.props}
           render={() => (
             <Profile
-              key={this.state.user}
               {...this.props}
-              authUser={this.state.user}
+              authUser={JSON.parse(localStorage.getItem("user"))}
             />
           )}
         />

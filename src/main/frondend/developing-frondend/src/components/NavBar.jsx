@@ -15,10 +15,14 @@ class Navbar extends Component {
         <nav id="navbar" role="navigation">
           <ul>
             <li>
-              <Link to={`${this.state.url}/home`}>Home</Link>
+              <Link className="hover-link" to={`${this.state.url}/home`}>
+                Home
+              </Link>
             </li>
             <li>
-              <Link to={`${this.state.url}/brands`}>Brands</Link>
+              <Link className="hover-link" to={`${this.state.url}/brands`}>
+                Brands
+              </Link>
             </li>
           </ul>
         </nav>

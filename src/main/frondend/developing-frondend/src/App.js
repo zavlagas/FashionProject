@@ -10,15 +10,11 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userAuthentication: true,
+      
     };
   }
 
-  authenticateUser(userExists) {
-    this.setState({
-      userAuthentication: userExists,
-    });
-  }
+ 
 
   render() {
     return (

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
@@ -9,9 +9,9 @@ class Login extends Component {
     this.state = {
       username: "",
       password: "",
-      hasError: false,
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleDashboard = this.handleDashboard.bind(this);
   }
 
   changeReactValue = (event) => {
