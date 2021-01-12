@@ -46,6 +46,8 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\en
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\ProductDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\ChatHistoryService.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\RoleDao.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\StorageService.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\StorageServiceImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\WebSocketConfig.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\controllers\BrandController.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\BrandService.java

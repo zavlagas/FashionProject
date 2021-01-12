@@ -72,7 +72,6 @@ public class Brand implements Serializable {
     @ManyToOne(optional = false)
     private User user;
     @OneToMany(mappedBy = "brand")
-    @Cascade(CascadeType.SAVE_UPDATE)
     @JsonIgnore
     private List<Product> productList;
 

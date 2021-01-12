@@ -25,7 +25,7 @@ class BrandGenerator extends Component {
       name: this.state.name,
       descr: this.state.descr,
       imagePath: this.state.image,
-      user: this.props.user,
+      user: this.props.user.id,
     };
     axios.put(endpoint, brand_object).then((res) => {
       if (res.status === 200) {

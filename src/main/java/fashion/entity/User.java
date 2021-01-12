@@ -101,7 +101,6 @@ public class User implements Serializable {
         @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "id")})
     @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private List<Role> roleList;
     @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     @ManyToOne(optional = false)

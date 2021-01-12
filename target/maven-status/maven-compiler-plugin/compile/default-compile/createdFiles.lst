@@ -27,6 +27,7 @@ fashion\daos\BrandDao.class
 fashion\config\MyWebSecurityConfigurer.class
 fashion\daos\PlanDaoImpl.class
 fashion\services\PlanServiceImpl.class
+fashion\services\StorageService.class
 fashion\config\MyWebSecurityApplicationInitializer.class
 fashion\services\UserServiceImpl.class
 fashion\entity\Plan.class
@@ -47,6 +48,7 @@ fashion\daos\PlanDao.class
 fashion\entity\PaymentRequest.class
 fashion\daos\ProductDao.class
 fashion\services\PayMethodServiceImpl.class
+fashion\services\StorageServiceImpl.class
 fashion\daos\UserDaoImpl.class
 fashion\controllers\SignUpController.class
 fashion\controllers\UserController.class

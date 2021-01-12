@@ -116,16 +116,9 @@ class SignUp extends Component {
       dob: this.state.dob,
       username: this.state.username,
       password: this.state.password,
-      roleList: [
-        this.state.role === "1"
-          ? { id: 1, type: "USER" }
-          : { id: 2, type: "ADMIN" },
-      ],
+      roleList: [{ id: parseInt(this.state.role) }],
       subscription: {
-        plan:
-          this.state.role === "1"
-            ? { id: 1, name: "FASHION_LOVER", price: 0 }
-            : { id: 2, name: "FASHION_MAKER", price: 20 },
+        plan: { id: this.state.role },
       },
     };
     axios

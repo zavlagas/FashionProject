@@ -33,11 +33,6 @@ public class SignUpController {
         boolean userExists = service.signUpNewUserIfNotExists(newUser);
         return (ResponseEntity.ok().body(userExists));
     }
-     @GetMapping("/signup")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<User> testJsonUser(){
-        User testUser = service.getAuthorizedUser("admin");
-        return ResponseEntity.ok().body(testUser);
-    }
+  
 
 }

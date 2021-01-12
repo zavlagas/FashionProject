@@ -48,7 +48,6 @@ public class Subscription implements Serializable {
     private Date startDate;
     @JoinColumn(name = "plan_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    @Cascade(CascadeType.SAVE_UPDATE)
     private Plan plan;
     
     

@@ -6,6 +6,7 @@ class ProductGenerator extends Component {
     this.state = {
       name: "",
       descr: "",
+      brandList: [],
       brand: {},
       productImageList: [],
     };
@@ -25,7 +26,9 @@ class ProductGenerator extends Component {
       )
       .then((res) => {
         if (res.status === 200) {
-          console.log(res);
+          this.setState({
+            brandList: res.data,
+          });
         } else {
           console.log("not showing");
         }
@@ -52,6 +55,7 @@ class ProductGenerator extends Component {
   }
 
   render() {
+    console.log(this.state.brandList);
     return (
       <>
         <form className="form-product-creator" onSubmit={this.handleFormSubmit}>
@@ -83,13 +87,16 @@ class ProductGenerator extends Component {
             />
           </div>
           <div className="product-brand-input-container">
-            <label htmlFor="product-descr">Description</label>
-            <input
+            <label htmlFor="product-brand">Brand</label>
+            <select
               onChange={this.handleChange}
-              type="text"
-              id="product-descr"
-              name="descr"
-            />
+              id="product-brand"
+              name="brand"
+            >
+              {this.state.brandList.map((brand) => {
+               return <option value={brand.id}>{brand.name}</option>;
+              })}
+            </select>
           </div>
           <button>Submit</button>
         </form>

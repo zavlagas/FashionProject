@@ -13,11 +13,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -29,7 +29,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "product_images")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p")})
+    @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p"),
+    @NamedQuery(name = "ProductImage.findById", query = "SELECT p FROM ProductImage p WHERE p.id = :id"),
+    @NamedQuery(name = "ProductImage.findByImageName", query = "SELECT p FROM ProductImage p WHERE p.imageName = :imageName"),
+    @NamedQuery(name = "ProductImage.findByImageType", query = "SELECT p FROM ProductImage p WHERE p.imageType = :imageType")})
 public class ProductImage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,11 +41,15 @@ public class ProductImage implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "image_path")
-    private String imagePath;
+    @Size(max = 50)
+    @Column(name = "image_name")
+    private String imageName;
+    @Size(max = 50)
+    @Column(name = "image_type")
+    private String imageType;
+    @Lob
+    @Column(name = "image_data")
+    private byte[] imageData;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne
     private Product product;
@@ -54,11 +61,6 @@ public class ProductImage implements Serializable {
         this.id = id;
     }
 
-    public ProductImage(Integer id, String imagePath) {
-        this.id = id;
-        this.imagePath = imagePath;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -67,20 +69,36 @@ public class ProductImage implements Serializable {
         this.id = id;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
+    }
+
+    public byte[] getImageData() {
+        return imageData;
+    }
+
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public void setProduct(Product productId) {
-        this.product = productId;
+    public void setProductId(Product product) {
+        this.product = product;
     }
 
     @Override
