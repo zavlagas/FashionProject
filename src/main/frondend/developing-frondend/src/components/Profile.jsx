@@ -18,6 +18,7 @@ class Profile extends Component {
         isAdmin: true,
       });
     }
+    console.log(this.props)
   }
 
   render() {
@@ -49,11 +50,17 @@ class Profile extends Component {
           <article className="article-form-container">
             <Route
               path={`${match.path}/profile/brands/create`}
-              component={BrandGenerator}
+              {...this.props}
+              render={() => (
+                <BrandGenerator {...this.props} user={this.props.authUser} />
+              )}
             />
             <Route
               path={`${match.path}/profile/products/create`}
-              component={ProductGenerator}
+              {...this.props}
+              render={() => (
+                <ProductGenerator {...this.props} user={this.props.authUser} />
+              )}
             />
           </article>
         </main>

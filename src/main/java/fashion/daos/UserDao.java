@@ -19,4 +19,6 @@ public interface UserDao {
 
     public void signUpToDatabase(User newUser);
 
+    public User findUserById(int userId);
+
 }

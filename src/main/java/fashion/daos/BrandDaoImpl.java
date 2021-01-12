@@ -34,4 +34,10 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
         return getSession().createNamedQuery("Brand.findAll", Brand.class).getResultList();
     }
 
+    @Override
+    public List<Brand> findAllUserBrands(int userId) {
+        return getSession().createNamedQuery("Brand.findBrandsByUserId",Brand.class)
+                .setParameter("id",userId).getResultList();
+    }
+
 }

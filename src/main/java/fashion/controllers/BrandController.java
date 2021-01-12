@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RequestMapping("/api")
 public class BrandController {
 
@@ -35,6 +36,13 @@ public class BrandController {
                 .map(brand -> ResponseEntity.ok().body(brand))
                 .orElseGet(() -> ResponseEntity.notFound().build()));
 
+    }
+    
+    
+    @GetMapping("/brands/user/{id}")
+    public ResponseEntity<List<Brand>> getAllBrandsByUser(@PathVariable("id") int userId){
+        List<Brand> allUserBrands = service.findUserBrands(userId);
+        return (ResponseEntity.ok().body(allUserBrands));
     }
 
     @PutMapping("/brands")

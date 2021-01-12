@@ -42,7 +42,8 @@ import org.json.JSONPropertyIgnore;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Brand.findAll", query = "SELECT b FROM Brand b"),
-    @NamedQuery(name = "Brand.findById", query = "SELECT b FROM Brand b WHERE b.id = :id")})
+    @NamedQuery(name = "Brand.findById", query = "SELECT b FROM Brand b WHERE b.id = :id"),
+    @NamedQuery(name = "Brand.findBrandsByUserId", query = "SELECT b FROM Brand b WHERE b.user.id = :id")})
 public class Brand implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,7 +62,6 @@ public class Brand implements Serializable {
     @Column(name = "descr")
     private String descr;
     @Basic(optional = false)
-    @NotNull
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;//dont insert it to a form , its on auto
@@ -170,5 +170,5 @@ public class Brand implements Serializable {
     public String toString() {
         return "fashion.entity.Brand[ id=" + id + " ]";
     }
-    
+
 }

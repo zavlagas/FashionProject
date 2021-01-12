@@ -27,4 +27,10 @@ public class UserDaoImpl extends SuperDao implements UserDao {
         getSession().save(newUser);
     }
 
+    @Override
+    public User findUserById(int userId) {
+        return (getSession().createNamedQuery("User.findById", User.class)
+                .setParameter("id", userId).uniqueResult());
+    }
+
 }
