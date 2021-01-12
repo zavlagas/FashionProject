@@ -5,6 +5,7 @@
  */
 package fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +31,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Fetch;
+import org.json.JSONPropertyIgnore;
 
 /**
  *
@@ -71,6 +73,7 @@ public class Brand implements Serializable {
     private User user;
     @OneToMany(mappedBy = "brand")
     @Cascade(CascadeType.SAVE_UPDATE)
+    @JsonIgnore
     private List<Product> productList;
 
     public Brand() {

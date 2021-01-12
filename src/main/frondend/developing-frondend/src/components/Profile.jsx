@@ -46,7 +46,7 @@ class Profile extends Component {
               </li>
             </ul>
           </aside>
-          <article>
+          <article className="article-form-container">
             <Route
               path={`${match.path}/profile/brands/create`}
               component={BrandGenerator}

@@ -1,16 +1,28 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
+
+class BrandGenerator extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
 
 
-class BrandGenerator extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
+  handleFormSubmit(){
 
-        }
-    }
-    render(){
-        return(<><h1>BrandGenerator</h1></>)
-    }
+  }
+
+
+
+  render() {
+    return (
+      <>
+        <form className="form-brand-creator" onSubmit={this.handleFormSubmit}>
+            
+        </form>
+      </>
+    );
+  }
 }
 
 export default BrandGenerator;

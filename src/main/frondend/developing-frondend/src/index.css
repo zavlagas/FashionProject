@@ -528,6 +528,7 @@ input:focus {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   color: var(--text-color);
+  transition: all 1s ease;
 }
 
 .sidebar-container-hide {
@@ -559,4 +560,8 @@ input:focus {
 .hover-link:hover {
   color: white;
   text-decoration: none;
+}
+
+.article-form-container{
+  display: grid;
 }
