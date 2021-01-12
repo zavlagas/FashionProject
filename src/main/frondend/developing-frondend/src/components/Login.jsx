@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import axios from "axios";
 
 class Login extends Component {
   constructor(props) {
+    document.querySelector(".app-container").classList.add("background-image");
     super(props);
     this.state = {
       username: "",
       password: "",
-      hasError: false,
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    this.handleDashboard = this.handleDashboard.bind(this);
   }
 
   changeReactValue = (event) => {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import interceptors from "../Interceptors";
 
 class StripeButton extends Component {
   constructor(props) {

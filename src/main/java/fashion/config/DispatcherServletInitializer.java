@@ -13,7 +13,7 @@ public class DispatcherServletInitializer extends AbstractAnnotationConfigDispat
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        Class [] configClasses = {MyWebAppConfig.class};
+        Class [] configClasses = {MyWebAppConfig.class,WebSocketConfig.class};
         return configClasses;
     }
 
