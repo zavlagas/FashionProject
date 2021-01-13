@@ -84,9 +84,7 @@ DROP TABLE IF EXISTS `product_images`;
 CREATE TABLE `product_images` (
   `id` int NOT NULL AUTO_INCREMENT,
   `product_id` int DEFAULT NULL,
-  `image_name` varchar(50),
- `image_type` varchar(50),
- `image_data` blob,
+  `image_path` varchar(200),
   PRIMARY KEY (`id`),
   UNIQUE KEY `image_path` (`image_path`),
   KEY `product_id` (`product_id`),

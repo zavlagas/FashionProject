@@ -58,8 +58,9 @@ public class Product implements Serializable {
     @JoinColumn(name = "brand_id", referencedColumnName = "id")
     @ManyToOne
     private Brand brand;
-    @Cascade(CascadeType.SAVE_UPDATE)
-    @OneToMany(mappedBy = "product")
+    @Cascade(CascadeType.ALL)
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name="product_id")
     private List<ProductImage> productImageList;
 
     public Product() {

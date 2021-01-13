@@ -8,21 +8,28 @@ class ProductGenerator extends Component {
       name: "",
       descr: "",
       brandList: [],
-      brand: {},
+      brand: 0,
       productImageList: [],
+      imageContainerDisplay: false,
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleResponseFromCloudinaryWidget(urlImages) {
-    console.log(urlImages);
+    const imageList = this.state.productImageList;
+    imageList.push({ imagePath: urlImages.info.secure_url });
+    this.setState({
+      productImageList: imageList,
+      imageContainerDisplay: true,
+    });
   }
 
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
+    console.log(this.state.brand)
   }
   componentDidMount() {
     axios
@@ -46,9 +53,10 @@ class ProductGenerator extends Component {
     const product_object = {
       name: this.state.name,
       descr: this.state.descr,
-      imagePath: this.state.productImageList,
-      brand: this.state.brand,
+      brand: { id: this.state.brand },
+      productImageList: this.state.productImageList,
     };
+    console.log(product_object);
     axios.put(endpoint, product_object).then((res) => {
       if (res.status === 200) {
         console.log(res);
@@ -64,12 +72,23 @@ class ProductGenerator extends Component {
     return (
       <>
         <div className="product-image-input-container">
-          <label htmlFor="product-image">Image</label>
+          <h5>Insert Images</h5>
           <CloudinaryWidget
             passResponse={(data) =>
               this.handleResponseFromCloudinaryWidget(data)
             }
           />
+        </div>
+        <div
+          className={
+            this.state.imageContainerDisplay
+              ? "image-show-container"
+              : "display-none"
+          }
+        >
+          {this.state.productImageList.map((image) => (
+            <img src={image.imagePath} />
+          ))}
         </div>
         <form className="form-product-creator" onSubmit={this.handleFormSubmit}>
           <div className="product-name-input-container">
@@ -97,6 +116,9 @@ class ProductGenerator extends Component {
               id="product-brand"
               name="brand"
             >
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
               {this.state.brandList.map((brand) => {
                 return <option value={brand.id}>{brand.name}</option>;
               })}

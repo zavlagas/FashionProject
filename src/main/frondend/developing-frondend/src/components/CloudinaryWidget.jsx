@@ -41,7 +41,7 @@ class CloudinaryWidget extends Component {
             border: "none",
             width: "120px",
             backgroundColor: "green",
-            borderRadius: "4px",
+            borderRadius: "10px",
             height: "25px",
           }} // inline styling only or style id='cloudinary_upload_button'
           folder={"fashion"} // set cloudinary folder name to send file

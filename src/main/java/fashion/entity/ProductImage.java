@@ -26,7 +26,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "product_images")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p"),
     @NamedQuery(name = "ProductImage.findById", query = "SELECT p FROM ProductImage p WHERE p.id = :id"),
@@ -42,9 +41,6 @@ public class ProductImage implements Serializable {
     @Size(max = 200)
     @Column(name = "image_path")
     private String imagePath;
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @ManyToOne
-    private Product product;
 
     public ProductImage() {
     }
@@ -69,13 +65,13 @@ public class ProductImage implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProductId(Product product) {
-        this.product = product;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProductId(Product product) {
+//        this.product = product;
+//    }
 
     @Override
     public int hashCode() {
