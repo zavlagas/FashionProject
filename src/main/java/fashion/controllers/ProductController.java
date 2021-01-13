@@ -7,6 +7,7 @@ package fashion.controllers;
 
 import fashion.entity.Product;
 import fashion.services.ProductService;
+import java.io.File;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api")
@@ -30,14 +32,12 @@ public class ProductController {
     ///Get All Products
     @GetMapping("/products")
     public ResponseEntity<List<Product>> findAllProducts() {
-
         return (ResponseEntity.ok().body(service.getAllProducts()));
     }
 
     //Get Single Product
     @GetMapping("/products/{id}")
     public ResponseEntity<Product> findProductById(@PathVariable("id") int id) {
-
         return (Optional
                 .ofNullable(service.getProductById(id))
                 .map(product -> ResponseEntity.ok().body(product))
@@ -47,7 +47,7 @@ public class ProductController {
 
     //Put New Product 
     @PutMapping("/products")
-    public ResponseEntity<?> createProduct(@RequestBody Product newProduct) {
+    public ResponseEntity<?> createProduct(@RequestBody Product newProduct,MultipartFile file) {
         service.createProduct(newProduct);
         return (ResponseEntity.ok().body("New Product has Been Saved"));
     }

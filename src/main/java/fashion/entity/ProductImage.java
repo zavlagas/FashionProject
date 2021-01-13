@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -31,8 +30,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p"),
     @NamedQuery(name = "ProductImage.findById", query = "SELECT p FROM ProductImage p WHERE p.id = :id"),
-    @NamedQuery(name = "ProductImage.findByImageName", query = "SELECT p FROM ProductImage p WHERE p.imageName = :imageName"),
-    @NamedQuery(name = "ProductImage.findByImageType", query = "SELECT p FROM ProductImage p WHERE p.imageType = :imageType")})
+    @NamedQuery(name = "ProductImage.findByImagePath", query = "SELECT p FROM ProductImage p WHERE p.imagePath = :imagePath")})
 public class ProductImage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -41,15 +39,9 @@ public class ProductImage implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Size(max = 50)
-    @Column(name = "image_name")
-    private String imageName;
-    @Size(max = 50)
-    @Column(name = "image_type")
-    private String imageType;
-    @Lob
-    @Column(name = "image_data")
-    private byte[] imageData;
+    @Size(max = 200)
+    @Column(name = "image_path")
+    private String imagePath;
     @JoinColumn(name = "product_id", referencedColumnName = "id")
     @ManyToOne
     private Product product;
@@ -69,28 +61,12 @@ public class ProductImage implements Serializable {
         this.id = id;
     }
 
-    public String getImageName() {
-        return imageName;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setImageName(String imageName) {
-        this.imageName = imageName;
-    }
-
-    public String getImageType() {
-        return imageType;
-    }
-
-    public void setImageType(String imageType) {
-        this.imageType = imageType;
-    }
-
-    public byte[] getImageData() {
-        return imageData;
-    }
-
-    public void setImageData(byte[] imageData) {
-        this.imageData = imageData;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public Product getProduct() {

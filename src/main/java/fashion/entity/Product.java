@@ -40,7 +40,7 @@ import org.hibernate.annotations.CascadeType;
     @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name")})
 public class Product implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -68,11 +68,15 @@ public class Product implements Serializable {
     public Product(Integer id) {
         this.id = id;
     }
+    
 
     public Product(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
+    
+    
+    
 
     public Integer getId() {
         return id;
@@ -98,6 +102,7 @@ public class Product implements Serializable {
         this.descr = descr;
     }
 
+    @XmlTransient
     public List<ProductImage> getProductImageList() {
         return productImageList;
     }
@@ -131,4 +136,12 @@ public class Product implements Serializable {
         return "fashion.entity.Product[ id=" + id + " ]";
     }
 
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
+    }
+    
 }

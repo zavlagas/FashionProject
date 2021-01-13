@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CloudinaryWidget from "./CloudinaryWidget";
 class ProductGenerator extends Component {
   constructor(props) {
     super(props);
@@ -12,6 +13,10 @@ class ProductGenerator extends Component {
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleResponseFromCloudinaryWidget(urlImages) {
+    console.log(urlImages);
   }
 
   handleChange(event) {
@@ -58,6 +63,14 @@ class ProductGenerator extends Component {
     console.log(this.state.brandList);
     return (
       <>
+        <div className="product-image-input-container">
+          <label htmlFor="product-image">Image</label>
+          <CloudinaryWidget
+            passResponse={(data) =>
+              this.handleResponseFromCloudinaryWidget(data)
+            }
+          />
+        </div>
         <form className="form-product-creator" onSubmit={this.handleFormSubmit}>
           <div className="product-name-input-container">
             <label htmlFor="product-name">Title</label>
@@ -77,15 +90,6 @@ class ProductGenerator extends Component {
               name="descr"
             />
           </div>
-          <div className="product-image-input-container">
-            <label htmlFor="product-image">Image</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              id="product-image"
-              name="image"
-            />
-          </div>
           <div className="product-brand-input-container">
             <label htmlFor="product-brand">Brand</label>
             <select
@@ -94,7 +98,7 @@ class ProductGenerator extends Component {
               name="brand"
             >
               {this.state.brandList.map((brand) => {
-               return <option value={brand.id}>{brand.name}</option>;
+                return <option value={brand.id}>{brand.name}</option>;
               })}
             </select>
           </div>
