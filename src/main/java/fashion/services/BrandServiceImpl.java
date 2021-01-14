@@ -14,15 +14,15 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandDao dao;
-  
+
     @Override
     public boolean create(Brand newBrand) {
-       return (dao.create(newBrand));
+        return (dao.create(newBrand));
     }
 
     @Override
     public Brand findByIdThe(Integer brandId) {
-        return(dao.findBrandBy(brandId));
+        return (dao.findBrandBy(brandId));
     }
 
     @Override
@@ -31,8 +31,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void deleteBrandBy(int brandId) {
-        dao.deleteBrandBy(brandId);
+    public boolean deleteBrandBy(int brandId) {
+        return (dao.deleteBrandBy(brandId));
     }
 
     @Override
@@ -42,8 +42,7 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public List<Brand> findUserBrands(int userId) {
-       return dao.findAllUserBrands(userId);
+        return dao.findAllUserBrands(userId);
     }
 
-    
 }

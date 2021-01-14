@@ -37,13 +37,23 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
         } catch (ConstraintViolationException e) {
             System.out.println(e.fillInStackTrace());
         }
-        return(isUpdated);
+        return (isUpdated);
     }
 
     @Override
-    public void deleteBrandBy(int brandId) {
+    public boolean deleteBrandBy(int brandId) {
         Brand brand = findBrandBy(brandId);
-        getSession().delete(brand);
+        boolean isDeleted = false;
+        try {
+            getSession().delete(brand);
+            isDeleted = true;
+
+        } catch (ConstraintViolationException e) {
+            System.out.println(e.fillInStackTrace());
+
+        }
+        return (isDeleted);
+
     }
 
     @Override

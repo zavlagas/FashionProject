@@ -65,7 +65,7 @@ public class BrandController {
 
     @DeleteMapping("/brands/{id}")
     public ResponseEntity<?> deleteBrand(@PathVariable("id") int brandId) {
-        service.deleteBrandBy(brandId);
-        return (ResponseEntity.ok().body("The Brand With The Id : " + brandId + " Has Been Deleted"));
+        boolean isBrandDeleted  = service.deleteBrandBy(brandId);
+        return (ResponseEntity.ok().body(isBrandDeleted));
     }
 }
