@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import CloudinaryWidget from "./CloudinaryWidget";
 class BrandGenerator extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +11,12 @@ class BrandGenerator extends Component {
     };
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleResponseFromCloudinaryWidget(urlImages) {
+    this.setState({
+      image: urlImages.info.secure_url,
+    });
   }
 
   handleChange(event) {
@@ -24,10 +31,14 @@ class BrandGenerator extends Component {
     const brand_object = {
       name: this.state.name,
       descr: this.state.descr,
+      creationDate: new Date(),
       imagePath: this.state.image,
       user: this.props.user.id,
     };
-    axios.put(endpoint, brand_object).then((res) => {
+
+    console.log(brand_object);
+
+    axios.post(endpoint, brand_object).then((res) => {
       if (res.status === 200) {
         console.log(res);
       } else {
@@ -40,10 +51,12 @@ class BrandGenerator extends Component {
   render() {
     return (
       <>
-        <form className="form-brand-creator" onSubmit={this.handleFormSubmit}>
+        <div id="create-brands">
+          <form id="form-brand-creator" onSubmit={this.handleFormSubmit}></form>
           <div className="brand-name-input-container">
             <label htmlFor="brand-name">Title</label>
             <input
+              form="form-brand-creator"
               onChange={this.handleChange}
               type="text"
               id="brand-name"
@@ -52,7 +65,8 @@ class BrandGenerator extends Component {
           </div>
           <div className="brand-descr-input-container">
             <label htmlFor="brand-descr">Description</label>
-            <input
+            <textarea
+              form="form-brand-creator"
               onChange={this.handleChange}
               type="text"
               id="brand-descr"
@@ -61,15 +75,14 @@ class BrandGenerator extends Component {
           </div>
           <div className="brand-image-input-container">
             <label htmlFor="brand-image">Image</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              id="brand-image"
-              name="image"
+            <CloudinaryWidget
+              passResponse={(data) =>
+                this.handleResponseFromCloudinaryWidget(data)
+              }
             />
           </div>
-          <button>Submit</button>
-        </form>
+          <button form="form-brand-creator">Submit</button>
+        </div>
       </>
     );
   }

@@ -3,6 +3,7 @@ import { Role } from "../variables/Roles";
 import { Link, Route } from "react-router-dom";
 import BrandGenerator from "./BrandGenerator";
 import ProductGenerator from "./ProductGenerator";
+import BrandsInspector from "./BrandsInspector";
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class Profile extends Component {
         isAdmin: true,
       });
     }
-    console.log(this.props)
+    console.log(this.props);
   }
 
   render() {
@@ -30,29 +31,55 @@ class Profile extends Component {
             <h5 className="sidebar-heading">Dashboard</h5>
             <ul>
               <li>
-                <Link
-                  className="hover-link"
-                  to={`${match.url}/profile/brands/create`}
-                >
-                  Create Brand
-                </Link>
+                Brand
+                <ul>
+                  <li>
+                    <Link
+                      className="hover-link"
+                      to={`${match.url}/profile/brands`}
+                    >
+                      Your Brands
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="hover-link"
+                      to={`${match.url}/profile/brands/create`}
+                    >
+                      Create Brand
+                    </Link>
+                  </li>
+                </ul>
               </li>
               <li>
-                <Link
-                  className="hover-link"
-                  to={`${match.url}/profile/products/create`}
-                >
-                  Create Product
-                </Link>
+                Product
+                <ul>
+                  <li>
+                    <Link
+                      className="hover-link"
+                      to={`${match.url}/profile/products/create`}
+                    >
+                      Create Product
+                    </Link>
+                  </li>
+                </ul>
               </li>
             </ul>
           </aside>
-          <article className="article-form-container">
+          <article className="article-container">
             <Route
               path={`${match.path}/profile/brands/create`}
               {...this.props}
               render={() => (
                 <BrandGenerator {...this.props} user={this.props.authUser} />
+              )}
+            />
+            <Route
+              exact
+              path={`${match.path}/profile/brands`}
+              {...this.props}
+              render={() => (
+                <BrandsInspector {...this.props} user={this.props.authUser} />
               )}
             />
             <Route

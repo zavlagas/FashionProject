@@ -2,14 +2,23 @@ package fashion.daos;
 
 import fashion.entity.Brand;
 import java.util.List;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class BrandDaoImpl extends SuperDao implements BrandDao {
 
     @Override
-    public void create(Brand newBrand) {
-        getSession().save(newBrand);
+    public boolean create(Brand newBrand) {
+        boolean isSaved = false;
+        try {
+            getSession().save(newBrand);
+            isSaved = true;
+
+        } catch (ConstraintViolationException e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        return (isSaved);
     }
 
     @Override
@@ -19,8 +28,16 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
     }
 
     @Override
-    public void update(Brand oldBrand) {
-        getSession().save(oldBrand);
+    public boolean update(Brand oldBrand) {
+        boolean isUpdated = false;
+        try {
+            getSession().save(oldBrand);
+            isUpdated = true;
+
+        } catch (ConstraintViolationException e) {
+            System.out.println(e.fillInStackTrace());
+        }
+        return(isUpdated);
     }
 
     @Override
@@ -36,8 +53,8 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
 
     @Override
     public List<Brand> findAllUserBrands(int userId) {
-        return getSession().createNamedQuery("Brand.findBrandsByUserId",Brand.class)
-                .setParameter("id",userId).getResultList();
+        return getSession().createNamedQuery("Brand.findBrandsByUserId", Brand.class)
+                .setParameter("id", userId).getResultList();
     }
 
 }

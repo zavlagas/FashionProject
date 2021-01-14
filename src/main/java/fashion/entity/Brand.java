@@ -64,8 +64,8 @@ public class Brand implements Serializable {
     @Basic(optional = false)
     @Column(name = "creation_date")
     @Temporal(TemporalType.TIMESTAMP)
-    private Date creationDate;//dont insert it to a form , its on auto
-    @Size(max = 100)
+    private Date creationDate;
+    @Size(max = 200)
     @Column(name = "image_path")
     private String imagePath;
     @JoinColumn(name = "user_id", referencedColumnName = "id")

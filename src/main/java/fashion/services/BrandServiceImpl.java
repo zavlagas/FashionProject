@@ -3,7 +3,6 @@ package fashion.services;
 import fashion.daos.BrandDao;
 import fashion.daos.UserDao;
 import fashion.entity.Brand;
-import fashion.entity.User;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +14,10 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandDao dao;
-    @Autowired
-    private UserDao userDao;
   
     @Override
-    public void create(Brand newBrand) {
-        dao.create(newBrand);
+    public boolean create(Brand newBrand) {
+       return (dao.create(newBrand));
     }
 
     @Override
@@ -29,8 +26,8 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
-    public void update(Brand oldBrand) {
-        dao.update(oldBrand);
+    public boolean update(Brand oldBrand) {
+        return (dao.update(oldBrand));
     }
 
     @Override

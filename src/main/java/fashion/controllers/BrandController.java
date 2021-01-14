@@ -23,6 +23,7 @@ public class BrandController {
 
     @Autowired
     private BrandService service;
+
     @GetMapping("/brands")
     public ResponseEntity<List<Brand>> getAllBrands() {
         return ResponseEntity.ok().body(service.findAll());
@@ -37,21 +38,20 @@ public class BrandController {
                 .orElseGet(() -> ResponseEntity.notFound().build()));
 
     }
-    
-    
+
     @GetMapping("/brands/user/{id}")
-    public ResponseEntity<List<Brand>> getAllBrandsByUser(@PathVariable("id") int userId){
+    public ResponseEntity<List<Brand>> getAllBrandsByUser(@PathVariable("id") int userId) {
         List<Brand> allUserBrands = service.findUserBrands(userId);
         return (ResponseEntity.ok().body(allUserBrands));
     }
 
-    @PutMapping("/brands")
+    @PostMapping("/brands")
     public ResponseEntity<?> createBrand(@RequestBody Brand newBrand) {
-        service.create(newBrand);
-        return ResponseEntity.ok().body("New Brand has Been Saved");
+        boolean isSaved = service.create(newBrand);
+        return ResponseEntity.ok().body(isSaved);
     }
 
-    @PostMapping("/brands/{id}")
+    @PutMapping("/brands/{id}")
     public ResponseEntity<?> updateBrand(@RequestBody Brand newBrand, @PathVariable("id") int id) {
         Brand oldBrand = service.findByIdThe(id);
         oldBrand.setName(newBrand.getName());
@@ -59,8 +59,8 @@ public class BrandController {
         oldBrand.setDescr(newBrand.getDescr());
         oldBrand.setImagePath(newBrand.getImagePath());
         oldBrand.setUser(newBrand.getUser());
-        service.update(oldBrand);
-        return (ResponseEntity.ok().body("The Brand With The Id : " + oldBrand.getId() + " Has Been Updated"));
+        boolean isUpdated = service.update(oldBrand);
+        return (ResponseEntity.ok().body(isUpdated));
     }
 
     @DeleteMapping("/brands/{id}")

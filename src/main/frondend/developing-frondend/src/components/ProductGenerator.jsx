@@ -29,7 +29,6 @@ class ProductGenerator extends Component {
     this.setState({
       [event.target.name]: event.target.value,
     });
-    console.log(this.state.brand)
   }
   componentDidMount() {
     axios
@@ -71,47 +70,39 @@ class ProductGenerator extends Component {
     console.log(this.state.brandList);
     return (
       <>
-        <div className="product-image-input-container">
-          <h5>Insert Images</h5>
-          <CloudinaryWidget
-            passResponse={(data) =>
-              this.handleResponseFromCloudinaryWidget(data)
-            }
+        <div className="create-products">
+          <div className="product-image-input-container">
+            <CloudinaryWidget
+              passResponse={(data) =>
+                this.handleResponseFromCloudinaryWidget(data)
+              }
+            />
+          </div>
+          <form
+            onSubmit={this.handleFormSubmit}
+          ></form>
+          <input
+            form="form-product-creator"
+            onChange={this.handleChange}
+            type="text"
+            id="product-input-name"
+            name="name"
+            placeholder="Title"
           />
-        </div>
-        <div
-          className={
-            this.state.imageContainerDisplay
-              ? "image-show-container"
-              : "display-none"
-          }
-        >
-          {this.state.productImageList.map((image) => (
-            <img src={image.imagePath} />
-          ))}
-        </div>
-        <form className="form-product-creator" onSubmit={this.handleFormSubmit}>
-          <div className="product-name-input-container">
-            <label htmlFor="product-name">Title</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              id="product-name"
-              name="name"
-            />
-          </div>
-          <div className="product-descr-input-container">
-            <label htmlFor="product-descr">Description</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              id="product-descr"
-              name="descr"
-            />
-          </div>
-          <div className="product-brand-input-container">
+
+          <textarea
+            form="form-product-creator"
+            onChange={this.handleChange}
+            type="text"
+            id="product-input-descr"
+            name="descr"
+            placeholder="Description"
+          />
+
+          <div id="product-brand-input-container">
             <label htmlFor="product-brand">Brand</label>
             <select
+              form="form-product-creator"
               onChange={this.handleChange}
               id="product-brand"
               name="brand"
@@ -124,8 +115,26 @@ class ProductGenerator extends Component {
               })}
             </select>
           </div>
-          <button>Submit</button>
-        </form>
+
+          <div
+          className={
+            this.state.imageContainerDisplay
+              ? "image-show-container"
+              : "display-none"
+          }
+        >
+          {this.state.productImageList.map((image) => (
+            <div className="image-container">
+              <img src={image.imagePath} />
+              <i
+                onClick={this.deleteImages}
+                class="far fa-trash-alt delete-photo"
+              ></i>
+            </div>
+          ))}
+        </div>
+          <button id="product-submit-btn" form="form-product-creator">Submit</button>
+        </div>
       </>
     );
   }

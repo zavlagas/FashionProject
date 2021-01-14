@@ -17,6 +17,7 @@ class SignUp extends Component {
       plan: {},
       formIsChecked: false,
       formSubmitted: false,
+      userSubscribed: false,
     };
     this.sendPostRequest = this.sendPostRequest.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -116,19 +117,21 @@ class SignUp extends Component {
       dob: this.state.dob,
       username: this.state.username,
       password: this.state.password,
+      createDate: new Date(),
       roleList: [{ id: parseInt(this.state.role) }],
       subscription: {
+        startDate: new Date(),
         plan: { id: this.state.role },
       },
     };
     axios
       .post(endpoint, user)
       .then((res) => {
-        try {
-          this.setState({
-            formSubmitted: true,
-          });
-        } catch (error) {}
+        console.log(res);
+        this.setState({
+          formSubmitted: true,
+          userSubscribed: res.data,
+        });
       })
       .catch((error) => {
         console.error(error);
@@ -143,6 +146,7 @@ class SignUp extends Component {
       <>
         <main className="" id="signup-container">
           <h1 className="signup-title">Create an account</h1>
+          {/* {this.state.userSubscribed ? "User Exists" : "Registration Completed"} */}
           <section className="form-container">
             <form className="form-signup" onSubmit={this.handleFormSubmit}>
               <div id="firstname-input-section" className="input-form-group ">

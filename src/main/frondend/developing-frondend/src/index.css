@@ -5,11 +5,53 @@
   margin: 0px;
   padding: 0px;
 }
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white purple;
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgb(241, 241, 241);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(61, 0, 173);
+  border-radius: 20px;
+  border: 3px solid rgb(236, 236, 236);
+}
+
+textarea {
+  resize: none;
+}
+
 html,
 body {
   height: 100vh;
   width: 100vw;
   font-family: "Numans", sans-serif;
+  /* background: linear-gradient(-45deg, #49a09d, #5f2c82); */
+  background: linear-gradient(-45deg, #b65a3f, #be4372, #23a6d5, #23d5ab);
+  animation: myanime 15s ease infinite;
+  background-size: 400% 400%;
+}
+
+@keyframes myanime {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .app-container {
@@ -370,8 +412,11 @@ input:focus {
 .app-header {
   display: grid;
   grid-template-columns: 300px 300px auto 300px;
-  background-color: var(--primary-bcgrnd-color);
+  background-color: rgba(22, 22, 22, 0.4);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
+
 .app-header > * {
   padding: 0px;
 }
@@ -562,27 +607,58 @@ input:focus {
   text-decoration: none;
 }
 
-.article-form-container {
+.article-container {
   display: grid;
-  grid-template-rows: 100px 1fr 1fr;
+  grid-template-columns: repeat(24, 1fr);
+  grid-template-rows: repeat(12, auto);
+  margin-left: 5px;
+  margin-right: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.create-products {
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+  display: grid;
+  gap: 2px;
+  grid-template-areas:
+    ". title title title title ."
+    ". descr descr descr descr ."
+    ". descr descr descr descr ."
+    ". brand brand brand brand ."
+    ". . imgbtn imgbtn . ."
+    ". image image image image ."
+    ". . submit submit . ."
+    ". . . . . .";
 }
 
 .product-image-input-container {
-  grid-row: 1/2;
+  grid-area: imgbtn;
 }
 
-.display-none {
-  display: none;
+#product-input-name {
+  grid-area: title;
 }
 
-.image-show-container {
-  grid-row: 2/3;
+#product-input-descr {
+  grid-area: descr;
+}
+
+#product-brand-input-container {
+  grid-area: brand;
+}
+
+#product-submit-btn {
+  grid-area: submit;
+}
+
+/* Brands Container  */
+
+#brands-container {
+  grid-row: 1/-1;
+  grid-column: 1/-1;
   display: flex;
-  flex-wrap: wrap;
-}
-
-.image-show-container > img{
-  width: 200px;
-  height: 200px;
-  margin:0px 5px;
+  flex-direction: column;
+  align-content: center;
 }
