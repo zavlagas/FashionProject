@@ -10,6 +10,7 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -59,7 +60,7 @@ public class Product implements Serializable {
     @ManyToOne
     private Brand brand;
     @Cascade(CascadeType.ALL)
-    @OneToMany(orphanRemoval = true)
+    @OneToMany(orphanRemoval = true,fetch = FetchType.EAGER)
     @JoinColumn(name="product_id")
     private List<ProductImage> productImageList;
 

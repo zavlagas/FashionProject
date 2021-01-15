@@ -69,39 +69,37 @@ class ProductGenerator extends Component {
     console.log(this.state.brandList);
     return (
       <>
-        <div className="create-products">
-          <div className="product-image-input-container">
-            <CloudinaryWidget
-              passResponse={(data) =>
-                this.handleResponseFromCloudinaryWidget(data)
-              }
-            />
-          </div>
+        <div className="create-section">
           <form
             id="form-product-creator"
             onSubmit={this.handleFormSubmit}
           ></form>
-          <input
-            form="form-product-creator"
-            onChange={this.handleChange}
-            type="text"
-            id="product-input-name"
-            name="name"
-            placeholder="Title"
-          />
-
-          <textarea
-            form="form-product-creator"
-            onChange={this.handleChange}
-            type="text"
-            id="product-input-descr"
-            name="descr"
-            placeholder="Description"
-          />
-
-          <div id="product-brand-input-container">
+          <div className="input-section">
+            <label htmlFor="product-input-name">Title</label>
+            <input
+              className="styled-input"
+              form="form-product-creator"
+              onChange={this.handleChange}
+              type="text"
+              id="product-input-name"
+              name="name"
+            />
+          </div>
+          <div className="input-section">
+            <label htmlFor="product-input-descr">Description</label>
+            <textarea
+              className="styled-input"
+              form="form-product-creator"
+              onChange={this.handleChange}
+              type="text"
+              id="product-input-descr"
+              name="descr"
+            />
+          </div>
+          <div className="input-section">
             <label htmlFor="product-brand">Brand</label>
             <select
+              className="styled-input"
               form="form-product-creator"
               onChange={this.handleChange}
               id="product-brand"
@@ -115,25 +113,15 @@ class ProductGenerator extends Component {
               })}
             </select>
           </div>
-
-          <div
-            className={
-              this.state.imageContainerDisplay
-                ? "image-show-container"
-                : "display-none"
-            }
-          >
-            {this.state.productImageList.map((image) => (
-              <div className="image-container">
-                <img src={image.imagePath} />
-                <i
-                  onClick={this.deleteImages}
-                  class="far fa-trash-alt delete-photo"
-                ></i>
-              </div>
-            ))}
+          <div className="input-section">
+            <label htmlFor="brand-image">Image</label>
+            <CloudinaryWidget
+              passResponse={(data) =>
+                this.handleResponseFromCloudinaryWidget(data)
+              }
+            />
           </div>
-          <button id="product-submit-btn" form="form-product-creator">
+          <button className="create-btn" form="form-product-creator">
             Submit
           </button>
         </div>

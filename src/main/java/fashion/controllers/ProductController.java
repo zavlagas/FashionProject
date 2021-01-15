@@ -58,7 +58,6 @@ public class ProductController {
     @PostMapping("/products/{id}")
     public ResponseEntity<?> updateProduct(@RequestBody Product updatedProduct, @PathVariable("id") int id) {
         Product oldProduct = service.getProductById(id);
-        oldProduct.setBrand(updatedProduct.getBrand());
         oldProduct.setDescr(updatedProduct.getDescr());
         oldProduct.setName(updatedProduct.getName());
         oldProduct.setProductImageList(updatedProduct.getProductImageList());

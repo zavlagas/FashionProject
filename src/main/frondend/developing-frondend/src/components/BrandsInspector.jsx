@@ -156,13 +156,13 @@ class BrandsInspector extends Component {
   render() {
     return (
       <>
-        <div id="brands-container">
+        <div id="list-container">
           {this.state.popUpForEdit ? (
             this.popUpContainer()
           ) : (
             <>
-              <h2 className="brands-title-list">Brands List</h2>
-              <table className="brands-table" onClick={this.handleClick}>
+              <h2 className="title-list">Brands List</h2>
+              <table className="my-table" onClick={this.handleClick}>
                 <thead>
                   <tr>
                     <th>Id</th>

@@ -22,6 +22,6 @@ public interface ProductDao {
 
     public boolean updateProduct(Product oldProduct);
 
-    public void deleteProduct(int id);
+    public boolean deleteProduct(int id);
     
 }

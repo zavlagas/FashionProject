@@ -5,48 +5,48 @@ class ProductInspector extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      brandsList: [],
-      brandIsDeleted: false,
+      productList: [],
+      productIsDeleted: false,
       popUpForEdit: false,
-      brandId: 0,
-      brandName: "",
-      brandimagePath: "",
-      brandDescr: "",
+      productId: 0,
+      productName: "",
+      productImagePath: "",
+      productImageList: [],
+      productDescr: "",
     };
     this.handleClick = this.handleClick.bind(this);
     this.handleUpdate = this.handleUpdate.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
     this.handleExit = this.handleExit.bind(this);
   }
 
   handleClick(event) {
     const buttonAction = event.target.textContent;
-    const targetedBrand = event.target.value;
+    const targetedProduct = event.target.value;
     if (buttonAction === "delete") {
-      const endPoint = `http://localhost:8080/FashionProject/api/brands/${targetedBrand}`;
+      const endPoint = `http://localhost:8080/FashionProject/api/products/${targetedProduct}`;
       axios.delete(endPoint).then((response) => {
         console.log(response);
         this.setState({
-          brandIsDeleted: response.data,
+          productIsDeleted: response.data,
         });
       });
-      const tempBrandList = this.state.brandsList.filter((brand) => {
-        return brand.id != targetedBrand;
+      const tempProductList = this.state.productList.filter((product) => {
+        return product.id != targetedProduct;
       });
       this.setState({
-        brandsList: tempBrandList,
+        productList: tempProductList,
       });
     }
     if (buttonAction === "Edit") {
-      const endPoint = `http://localhost:8080/FashionProject/api/brands/${targetedBrand}`;
+      const endPoint = `http://localhost:8080/FashionProject/api/products/${targetedProduct}`;
       axios.get(endPoint).then((response) => {
         console.log(response);
         this.setState({
-          brandId: response.data.id,
-          brandName: response.data.name,
-          brandimagePath: response.data.imagePath,
-          brandDescr: response.data.descr,
+          productId: response.data.id,
+          productName: response.data.name,
+          productImagePath: response.data.productImageList[0].imagePath,
+          productDescr: response.data.descr,
           popUpForEdit: true,
         });
       });
@@ -54,46 +54,45 @@ class ProductInspector extends Component {
   }
 
   getAllProducts() {
-    const endpoint = "http://localhost:8080/FashionProject/api/brands";
+    const endpoint = "http://localhost:8080/FashionProject/api/products";
 
     axios.get(endpoint).then((response) => {
+      console.log(response);
       this.setState({
-        brandsList: response.data,
+        productList: response.data,
       });
     });
   }
 
   componentDidMount() {
-    // this.getAllBrands();
+    this.getAllProducts();
   }
 
   handleResponseFromCloudinaryWidget(urlImages) {
+    const tempImageList = [];
+    tempImageList.push({ imagePath: urlImages.info.secure_url });
     this.setState({
-      brandimagePath: urlImages.info.secure_url,
+      productImageList: tempImageList,
+      productImagePath: urlImages.info.secure_url,
     });
   }
 
   handleUpdate(event) {
     event.preventDefault();
-    const endPoint = `http://localhost:8080/FashionProject/api/brands/${this.state.brandId}`;
-    const Brand_object = {
-      name: this.state.brandName,
-      descr: this.state.brandDescr,
-      imagePath: this.state.brandimagePath,
-      user: this.props.user.id,
+    const endPoint = `http://localhost:8080/FashionProject/api/products/${this.state.productId}`;
+    const Product_object = {
+      name: this.state.productName,
+      descr: this.state.productDescr,
+      productImageList: this.state.productImageList,
     };
 
-    axios.put(endPoint, Brand_object).then((response) => {
+    axios.post(endPoint, Product_object).then((response) => {
       console.log(response);
-      this.getAllBrands();
+      this.getAllProducts();
       this.setState({
         popUpForEdit: false,
       });
     });
-  }
-
-  forceUpdateHandler() {
-    this.forceUpdate();
   }
 
   handleChange(event) {
@@ -115,7 +114,7 @@ class ProductInspector extends Component {
           <i onClick={this.handleExit} class="far fa-times-circle exit-btn"></i>
           <form id="update-form" onSubmit={this.handleUpdate}></form>
           <div className="update-image-icon">
-            <img src={this.state.brandimagePath} />
+            <img src={this.state.productImagePath} />
             <div className="image-cloudinary-btn">
               <CloudinaryWidget
                 passResponse={(data) =>
@@ -125,24 +124,24 @@ class ProductInspector extends Component {
             </div>
           </div>
           <div className="update-details">
-            <label htmlFor="brand-update-name">Title</label>
+            <label htmlFor="product-update-name">Title</label>
             <input
               className="update-input-first styled-input"
               onChange
-              form="update-brand-form"
+              form="update-form"
               type="text"
-              value={this.state.brandName}
+              value={this.state.productName}
               onChange={this.handleChange}
-              id="brand-update-name"
-              name="brandName"
+              id="product-update-name"
+              name="productName"
             />
             <label htmlFor="brand-update-name">Description</label>
             <textarea
               className="update-input-second styled-input"
-              form="update-brand-form"
-              value={this.state.brandDescr}
+              form="update-form"
+              value={this.state.productDescr}
               onChange={this.handleChange}
-              name="brandDescr"
+              name="productDescr"
             />
             <button form="update-form" className="update-button">
               Update
@@ -156,36 +155,38 @@ class ProductInspector extends Component {
   render() {
     return (
       <>
-        <div id="brands-container">
+        <div id="list-container">
           {this.state.popUpForEdit ? (
             this.popUpContainer()
           ) : (
             <>
-              <h2 className="brands-title-list">Brands List</h2>
-              <table className="brands-table" onClick={this.handleClick}>
+              <h2 className="title-list">Products List</h2>
+              <table className="my-table" onClick={this.handleClick}>
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Logo</th>
+                    <th>Image</th>
                     <th>Name</th>
+                    <th>Brand</th>
                     <th>Edit</th>
                     <th>Delete</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.brandsList.map((brand) => {
+                  {this.state.productList.map((product) => {
                     return (
                       <tr>
-                        <td>{brand.id}</td>
+                        <td>{product.id}</td>
                         <td>
-                          <img src={brand.imagePath} />
+                          <img src={product.productImageList[0].imagePath} />
                         </td>
-                        <td>{brand.name}</td>
+                        <td>{product.name}</td>
+                        <td>{product.brand.name}</td>
                         <td>
-                          <button value={brand.id}>Edit</button>
+                          <button value={product.id}>Edit</button>
                         </td>
                         <td>
-                          <button value={brand.id}>delete</button>
+                          <button value={product.id}>delete</button>
                         </td>
                       </tr>
                     );
@@ -193,7 +194,7 @@ class ProductInspector extends Component {
                 </tbody>
               </table>
               <p className="message">
-                {this.state.brandIsDeleted ? "Succesfully Deleted" : ""}
+                {this.state.productIsDeleted ? "Succesfully Deleted" : ""}
               </p>
             </>
           )}

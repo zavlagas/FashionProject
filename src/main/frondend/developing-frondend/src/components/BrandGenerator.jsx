@@ -51,11 +51,12 @@ class BrandGenerator extends Component {
   render() {
     return (
       <>
-        <div id="create-brands">
+        <div className="create-section">
           <form id="form-brand-creator" onSubmit={this.handleFormSubmit}></form>
-          <div className="brand-name-input-container">
+          <div className="input-section">
             <label htmlFor="brand-name">Title</label>
             <input
+              className="styled-input"
               form="form-brand-creator"
               onChange={this.handleChange}
               type="text"
@@ -63,9 +64,10 @@ class BrandGenerator extends Component {
               name="name"
             />
           </div>
-          <div className="brand-descr-input-container">
+          <div className="input-section">
             <label htmlFor="brand-descr">Description</label>
             <textarea
+              className="styled-input"
               form="form-brand-creator"
               onChange={this.handleChange}
               type="text"
@@ -73,7 +75,7 @@ class BrandGenerator extends Component {
               name="descr"
             />
           </div>
-          <div className="brand-image-input-container">
+          <div className="input-section">
             <label htmlFor="brand-image">Image</label>
             <CloudinaryWidget
               passResponse={(data) =>
@@ -81,7 +83,7 @@ class BrandGenerator extends Component {
               }
             />
           </div>
-          <button form="form-brand-creator">Submit</button>
+          <button className="create-btn" form="form-brand-creator">Submit</button>
         </div>
       </>
     );

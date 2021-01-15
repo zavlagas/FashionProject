@@ -691,12 +691,13 @@ input:focus {
 .sidebar-container ul li {
   padding: 5px 5px 5px 10px;
   font-size: 1.2rem;
-  transition: all 1s ease;
+  transition: all 1s ease-in-out;
+  list-style: none;
 }
 
 .sidebar-container ul li:hover {
   padding: 5px 5px 5px 50px;
-  transform: scale(1.2, 1.2);
+  transform: scale(1.1, 1.1);
 }
 
 .hover-link {
@@ -718,45 +719,9 @@ input:focus {
   margin-bottom: 20px;
 }
 
-.create-products {
-  grid-row: 1/-1;
-  grid-column: 1/-1;
-  display: grid;
-  gap: 2px;
-  grid-template-areas:
-    ". title title title title ."
-    ". descr descr descr descr ."
-    ". descr descr descr descr ."
-    ". brand brand brand brand ."
-    ". . imgbtn imgbtn . ."
-    ". image image image image ."
-    ". . submit submit . ."
-    ". . . . . .";
-}
+/* Lists Container  */
 
-.product-image-input-container {
-  grid-area: imgbtn;
-}
-
-#product-input-name {
-  grid-area: title;
-}
-
-#product-input-descr {
-  grid-area: descr;
-}
-
-#product-brand-input-container {
-  grid-area: brand;
-}
-
-#product-submit-btn {
-  grid-area: submit;
-}
-
-/* Brands Container  */
-
-#brands-container {
+#list-container {
   grid-row: 1/-1;
   grid-column: 1/-1;
   display: flex;
@@ -765,12 +730,12 @@ input:focus {
   position: relative;
 }
 
-#brands-container .brands-title-list {
+#list-container .title-list {
   align-self: center;
   padding: 10px;
 }
 
-.brands-table {
+.my-table {
   align-self: center;
   width: 700px;
   text-align: center;
@@ -857,5 +822,26 @@ input:focus {
 .update-button {
   grid-column: 2/3;
   grid-row: 3/4;
+  align-self: center;
+}
+
+/* End OF Lists Container */
+/* Create Objects Section */
+
+.create-section {
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-section {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.create-btn {
   align-self: center;
 }
