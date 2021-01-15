@@ -31,13 +31,13 @@ public class ProductServiceImpl implements ProductService{
     }
 
     @Override
-    public void createProduct(Product newProduct) {
-        dao.createProduct(newProduct);
+    public boolean createProduct(Product newProduct) {
+       return(dao.createProduct(newProduct));
     }
 
     @Override
-    public void updateProduct(Product oldProduct) {
-       dao.updateProduct(oldProduct);
+    public boolean updateProduct(Product oldProduct) {
+       return(dao.updateProduct(oldProduct)) ;
     }
 
     @Override

@@ -55,7 +55,6 @@ class ProductGenerator extends Component {
       brand: { id: this.state.brand },
       productImageList: this.state.productImageList,
     };
-    console.log(product_object);
     axios.put(endpoint, product_object).then((res) => {
       if (res.status === 200) {
         console.log(res);
@@ -79,6 +78,7 @@ class ProductGenerator extends Component {
             />
           </div>
           <form
+            id="form-product-creator"
             onSubmit={this.handleFormSubmit}
           ></form>
           <input
@@ -117,23 +117,25 @@ class ProductGenerator extends Component {
           </div>
 
           <div
-          className={
-            this.state.imageContainerDisplay
-              ? "image-show-container"
-              : "display-none"
-          }
-        >
-          {this.state.productImageList.map((image) => (
-            <div className="image-container">
-              <img src={image.imagePath} />
-              <i
-                onClick={this.deleteImages}
-                class="far fa-trash-alt delete-photo"
-              ></i>
-            </div>
-          ))}
-        </div>
-          <button id="product-submit-btn" form="form-product-creator">Submit</button>
+            className={
+              this.state.imageContainerDisplay
+                ? "image-show-container"
+                : "display-none"
+            }
+          >
+            {this.state.productImageList.map((image) => (
+              <div className="image-container">
+                <img src={image.imagePath} />
+                <i
+                  onClick={this.deleteImages}
+                  class="far fa-trash-alt delete-photo"
+                ></i>
+              </div>
+            ))}
+          </div>
+          <button id="product-submit-btn" form="form-product-creator">
+            Submit
+          </button>
         </div>
       </>
     );

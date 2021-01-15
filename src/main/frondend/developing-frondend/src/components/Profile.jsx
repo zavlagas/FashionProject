@@ -4,6 +4,7 @@ import { Link, Route } from "react-router-dom";
 import BrandGenerator from "./BrandGenerator";
 import ProductGenerator from "./ProductGenerator";
 import BrandsInspector from "./BrandsInspector";
+import ProductInspector from "./ProductInspector";
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -57,6 +58,14 @@ class Profile extends Component {
                   <li>
                     <Link
                       className="hover-link"
+                      to={`${match.url}/profile/products`}
+                    >
+                      Your Products
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      className="hover-link"
                       to={`${match.url}/profile/products/create`}
                     >
                       Create Product
@@ -87,6 +96,14 @@ class Profile extends Component {
               {...this.props}
               render={() => (
                 <ProductGenerator {...this.props} user={this.props.authUser} />
+              )}
+            />
+            <Route
+              exact
+              path={`${match.path}/profile/products`}
+              {...this.props}
+              render={() => (
+                <ProductInspector {...this.props} user={this.props.authUser} />
               )}
             />
           </article>

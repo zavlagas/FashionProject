@@ -49,9 +49,9 @@ public class ProductController {
 
     //Put New Product 
     @PutMapping("/products")
-    public ResponseEntity<?> createProduct(@RequestBody Product newProduct,MultipartFile file) {
-        service.createProduct(newProduct);
-        return (ResponseEntity.ok().body("New Product has Been Saved"));
+    public ResponseEntity<?> createProduct(@RequestBody Product newProduct, MultipartFile file) {
+        boolean isCreated = service.createProduct(newProduct);
+        return (ResponseEntity.ok().body(isCreated));
     }
 
     //Post/Update Product
@@ -62,16 +62,16 @@ public class ProductController {
         oldProduct.setDescr(updatedProduct.getDescr());
         oldProduct.setName(updatedProduct.getName());
         oldProduct.setProductImageList(updatedProduct.getProductImageList());
-        service.updateProduct(oldProduct);
+        boolean isUpdated = service.updateProduct(oldProduct);
         return (ResponseEntity.ok()
-                .body("The Product With The Id : " + oldProduct.getId() + " Has Been Updated"));
+                .body(isUpdated));
     }
-    
+
     @DeleteMapping("/products/{id}")
-    public ResponseEntity<?> deleteProduct(@PathVariable("id") int id){
-        service.deleteProduct(id);
-         return (ResponseEntity.ok()
-                .body("The Product With The Id : " + id + " Has Been Deleted"));
+    public ResponseEntity<?> deleteProduct(@PathVariable("id") int id) {
+        boolean isDeleted = service.deleteProduct(id);
+        return (ResponseEntity.ok()
+                .body(isDeleted));
     }
 
 }

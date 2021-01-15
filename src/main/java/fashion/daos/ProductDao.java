@@ -18,9 +18,9 @@ public interface ProductDao {
 
     public Product getProductById(int id);
 
-    public void createProduct(Product newProduct);
+    public boolean createProduct(Product newProduct);
 
-    public void updateProduct(Product oldProduct);
+    public boolean updateProduct(Product oldProduct);
 
     public void deleteProduct(int id);
     
