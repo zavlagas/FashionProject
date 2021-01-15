@@ -55,10 +55,8 @@ public class BrandController {
     public ResponseEntity<?> updateBrand(@RequestBody Brand newBrand, @PathVariable("id") int id) {
         Brand oldBrand = service.findByIdThe(id);
         oldBrand.setName(newBrand.getName());
-        oldBrand.setProductList(newBrand.getProductList());
         oldBrand.setDescr(newBrand.getDescr());
         oldBrand.setImagePath(newBrand.getImagePath());
-        oldBrand.setUser(newBrand.getUser());
         boolean isUpdated = service.update(oldBrand);
         return (ResponseEntity.ok().body(isUpdated));
     }

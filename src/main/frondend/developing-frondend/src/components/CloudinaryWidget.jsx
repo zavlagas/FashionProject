@@ -30,8 +30,8 @@ class CloudinaryWidget extends Component {
           style={{
             color: "white",
             border: "none",
-            width: "130px",
-            backgroundColor: "rgba(92, 39, 81, 1)",
+            width: "150px",
+            backgroundColor: "rgba(92, 39, 81, 0.2)",
             borderRadius: "10px",
             height: "35px",
           }}

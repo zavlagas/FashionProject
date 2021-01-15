@@ -1,16 +1,23 @@
 import React, { Component } from "react";
 import axios from "axios";
-
+import CloudinaryWidget from "./CloudinaryWidget";
 class BrandsInspector extends Component {
   constructor(props) {
     super(props);
     this.state = {
       brandsList: [],
       brandIsDeleted: false,
-      editBrand: {},
       popUpForEdit: false,
+      brandId: 0,
+      brandName: "",
+      brandimagePath: "",
+      brandDescr: "",
     };
     this.handleClick = this.handleClick.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.forceUpdateHandler = this.forceUpdateHandler.bind(this);
+    this.handleExit = this.handleExit.bind(this);
   }
 
   handleClick(event) {
@@ -34,15 +41,19 @@ class BrandsInspector extends Component {
     if (buttonAction === "Edit") {
       const endPoint = `http://localhost:8080/FashionProject/api/brands/${targetedBrand}`;
       axios.get(endPoint).then((response) => {
+        console.log(response);
         this.setState({
-          editBrand: response.data,
+          brandId: response.data.id,
+          brandName: response.data.name,
+          brandimagePath: response.data.imagePath,
+          brandDescr: response.data.descr,
           popUpForEdit: true,
         });
       });
     }
   }
 
-  componentDidMount() {
+  getAllBrands() {
     const endpoint = "http://localhost:8080/FashionProject/api/brands";
 
     axios.get(endpoint).then((response) => {
@@ -52,11 +63,91 @@ class BrandsInspector extends Component {
     });
   }
 
+  componentDidMount() {
+    this.getAllBrands();
+  }
+
+  handleResponseFromCloudinaryWidget(urlImages) {
+    this.setState({
+      brandimagePath: urlImages.info.secure_url,
+    });
+  }
+
+  handleUpdate(event) {
+    event.preventDefault();
+    const endPoint = `http://localhost:8080/FashionProject/api/brands/${this.state.brandId}`;
+    const Brand_object = {
+      name: this.state.brandName,
+      descr: this.state.brandDescr,
+      imagePath: this.state.brandimagePath,
+      user: this.props.user.id,
+    };
+
+    axios.put(endPoint, Brand_object).then((response) => {
+      console.log(response);
+      this.getAllBrands();
+      this.setState({
+        popUpForEdit: false,
+      });
+    });
+  }
+
+  forceUpdateHandler() {
+    this.forceUpdate();
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleExit() {
+    this.setState({
+      popUpForEdit: false,
+    });
+  }
+
   popUpContainer() {
     return (
       <>
         <div className="popup-content">
-          <h1>Hi from Popup</h1>
+          <i onClick={this.handleExit} class="far fa-times-circle exit-btn"></i>
+          <form id="update-form" onSubmit={this.handleUpdate}></form>
+          <div className="update-image-icon">
+            <img src={this.state.brandimagePath} />
+            <div className="image-cloudinary-btn">
+              <CloudinaryWidget
+                passResponse={(data) =>
+                  this.handleResponseFromCloudinaryWidget(data)
+                }
+              />
+            </div>
+          </div>
+          <div className="update-details">
+            <label htmlFor="brand-update-name">Title</label>
+            <input
+              className="update-input-first styled-input"
+              onChange
+              form="update-brand-form"
+              type="text"
+              value={this.state.brandName}
+              onChange={this.handleChange}
+              id="brand-update-name"
+              name="brandName"
+            />
+            <label htmlFor="brand-update-name">Description</label>
+            <textarea
+              className="update-input-second styled-input"
+              form="update-brand-form"
+              value={this.state.brandDescr}
+              onChange={this.handleChange}
+              name="brandDescr"
+            />
+            <button form="update-form" className="update-button">
+              Update
+            </button>
+          </div>
         </div>
       </>
     );

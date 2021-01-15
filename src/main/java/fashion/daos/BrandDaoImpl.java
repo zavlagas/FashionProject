@@ -31,7 +31,7 @@ public class BrandDaoImpl extends SuperDao implements BrandDao {
     public boolean update(Brand oldBrand) {
         boolean isUpdated = false;
         try {
-            getSession().save(oldBrand);
+            getSession().saveOrUpdate(oldBrand);
             isUpdated = true;
 
         } catch (ConstraintViolationException e) {
