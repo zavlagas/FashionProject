@@ -14,10 +14,13 @@ class Home extends Component {
             <article className="post-container">
               <section className="post-header-user-container">
                 <img
-                  className="user-image"
-                  src="https://picsum.photos/100/100"
+                  className="brand-image"
+                  src="https://res.cloudinary.com/zavlagas/image/upload/v1610798782/fashion/Versace-Logo_yrewuq.png"
                 />
-                <p className="user-dtls">Nick Zavlagas</p>
+                <p className="brand-dtls">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Magnam necessitatibus aspernatur
+                </p>
               </section>
               <section className="post-image-container">
                 <img
@@ -26,7 +29,14 @@ class Home extends Component {
                 />
               </section>
               <section className="post-interact-container">
-                <i class="far fa-heart"></i>
+                <div className="rating-section">
+                  <i class="far fa-heart"></i>
+                </div>
+                <div className="product-description">
+                  ducimus est consectetur nulla architecto quasi fugit quibusdam
+                  eum eos deleniti velit ipsa facere voluptatibus? Facilis
+                  blanditiis, consequatur impedit commodi odit ut ad tempore.
+                </div>
               </section>
             </article>
           </div>
