@@ -44,5 +44,10 @@ public class ProductServiceImpl implements ProductService{
     public boolean deleteProduct(int id) {
        return(dao.deleteProduct(id));
     }
+
+    @Override
+    public List<Product> findUserProducts(int userId) {
+        return (dao.findProductsOfUser(userId));
+    }
     
 }

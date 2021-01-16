@@ -30,7 +30,7 @@ CREATE TABLE `brands` (
   `name` varchar(50) NOT NULL,
   `descr` text,
   `creation_date` datetime DEFAULT CURRENT_TIMESTAMP,
-  `image_path` varchar(100) DEFAULT NULL,
+  `image_path` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   KEY `user_id` (`user_id`),

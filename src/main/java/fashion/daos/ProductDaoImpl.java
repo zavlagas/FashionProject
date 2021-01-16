@@ -60,4 +60,10 @@ public class ProductDaoImpl extends SuperDao implements ProductDao {
         return (isDeleted);
     }
 
+    @Override
+    public List<Product> findProductsOfUser(int userId) {
+        return(getSession().createNamedQuery("Product.findByUser", Product.class)
+                .setParameter("id", userId).getResultList());
+    }
+
 }

@@ -54,7 +54,7 @@ class ProductInspector extends Component {
   }
 
   getAllProducts() {
-    const endpoint = "http://localhost:8080/FashionProject/api/products";
+    const endpoint = `http://localhost:8080/FashionProject/api/products/user/${this.props.user.id}`;
 
     axios.get(endpoint).then((response) => {
       console.log(response);
@@ -178,7 +178,13 @@ class ProductInspector extends Component {
                       <tr>
                         <td>{product.id}</td>
                         <td>
-                          <img src={product.productImageList[0].imagePath} />
+                          <img
+                            src={
+                              product.productImageList.length != 0
+                                ? product.productImageList[0].imagePath
+                                : null
+                            }
+                          />
                         </td>
                         <td>{product.name}</td>
                         <td>{product.brand.name}</td>

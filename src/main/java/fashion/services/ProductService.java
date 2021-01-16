@@ -20,5 +20,7 @@ public interface ProductService {
     public boolean updateProduct(Product oldProduct);
 
     public boolean deleteProduct(int id);
+
+    public List<Product> findUserProducts(int userId);
     
 }

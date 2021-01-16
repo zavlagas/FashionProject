@@ -54,7 +54,7 @@ class BrandsInspector extends Component {
   }
 
   getAllBrands() {
-    const endpoint = "http://localhost:8080/FashionProject/api/brands";
+    const endpoint = `http://localhost:8080/FashionProject/api/brands/user/${this.props.user.id}`;
 
     axios.get(endpoint).then((response) => {
       this.setState({

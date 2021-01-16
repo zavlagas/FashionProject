@@ -38,10 +38,11 @@ import org.hibernate.annotations.CascadeType;
 @NamedQueries({
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
-    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name")})
+    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+    @NamedQuery(name = "Product.findByUser", query = "SELECT p FROM Product p WHERE p.brand.user.id = :id")})
 public class Product implements Serializable {
 
-   private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -60,8 +61,8 @@ public class Product implements Serializable {
     @ManyToOne
     private Brand brand;
     @Cascade(CascadeType.ALL)
-    @OneToMany(orphanRemoval = true,fetch = FetchType.EAGER)
-    @JoinColumn(name="product_id")
+    @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "product_id")
     private List<ProductImage> productImageList;
 
     public Product() {
@@ -70,15 +71,11 @@ public class Product implements Serializable {
     public Product(Integer id) {
         this.id = id;
     }
-    
 
     public Product(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
-    
-    
-    
 
     public Integer getId() {
         return id;
@@ -145,5 +142,5 @@ public class Product implements Serializable {
     public void setBrand(Brand brand) {
         this.brand = brand;
     }
-    
+
 }

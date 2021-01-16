@@ -23,5 +23,7 @@ public interface ProductDao {
     public boolean updateProduct(Product oldProduct);
 
     public boolean deleteProduct(int id);
+
+    public List<Product> findProductsOfUser(int userId);
     
 }

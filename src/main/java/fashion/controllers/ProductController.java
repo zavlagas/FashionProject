@@ -46,6 +46,13 @@ public class ProductController {
                 .orElseGet(() -> ResponseEntity.notFound().build()));
 
     }
+    
+    
+    @GetMapping("/products/user/{id}")
+    public ResponseEntity<List<Product>> getAllProductsByUser(@PathVariable("id") int userId) {
+        List<Product> allUserProducts = service.findUserProducts(userId);
+        return (ResponseEntity.ok().body(allUserProducts));
+    }
 
     //Put New Product 
     @PutMapping("/products")
