@@ -1,9 +1,20 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      productList: [],
+    };
+  }
+
+  componentDidMount() {
+    const endPoint = "http://localhost:8080/FashionProject/api/products";
+    axios.get(endPoint).then((response) => {
+      this.setState({
+        productList: response.data,
+      });
+    });
   }
 
   render() {
@@ -11,34 +22,33 @@ class Home extends Component {
       <>
         <main className="home-container">
           <div className="posts-list-container">
-            <article className="post-container">
-              <section className="post-header-user-container">
-                <img
-                  className="brand-image"
-                  src="https://res.cloudinary.com/zavlagas/image/upload/v1610798782/fashion/Versace-Logo_yrewuq.png"
-                />
-                <p className="brand-dtls">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Magnam necessitatibus aspernatur
-                </p>
-              </section>
-              <section className="post-image-container">
-                <img
-                  className="post-image"
-                  src="https://picsum.photos/800/800"
-                />
-              </section>
-              <section className="post-interact-container">
-                <div className="rating-section">
-                  <i class="far fa-heart"></i>
-                </div>
-                <div className="product-description">
-                  ducimus est consectetur nulla architecto quasi fugit quibusdam
-                  eum eos deleniti velit ipsa facere voluptatibus? Facilis
-                  blanditiis, consequatur impedit commodi odit ut ad tempore.
-                </div>
-              </section>
-            </article>
+            {this.state.productList.map((product) => {
+              return (
+                <>
+                  <article className="post-container">
+                    <section className="post-header-user-container">
+                      <img
+                        className="brand-image"
+                        src={product.brand.imagePath}
+                      />
+                      <p className="brand-dtls">{product.name}</p>
+                    </section>
+                    <section className="post-image-container">
+                      <img
+                        className="post-image"
+                        src={product.productImageList[0].imagePath}
+                      />
+                    </section>
+                    <section className="post-interact-container">
+                      <div className="rating-section">
+                        <i class="far fa-heart"></i>
+                      </div>
+                      <div className="product-description">{product.descr}</div>
+                    </section>
+                  </article>
+                </>
+              );
+            })}
           </div>
           <aside>Aside</aside>
         </main>

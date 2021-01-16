@@ -10,22 +10,22 @@
 /* Works on Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: white purple;
+  scrollbar-color: white rgba(250, 2, 2, 0);
 }
 
 /* Works on Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 *::-webkit-scrollbar-track {
-  background: rgb(241, 241, 241);
+  background: rgba(241, 241, 241, 0);
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: rgb(61, 0, 173);
-  border-radius: 20px;
-  border: 3px solid rgb(236, 236, 236);
+  background-color: rgba(184, 184, 184, 0.431);
+  border-radius: 50px;
+  border: 3px solid rgba(236, 236, 236, 0);
 }
 
 textarea {
@@ -852,6 +852,7 @@ input:focus {
   display: grid;
   grid-template-columns: 1fr 5fr 2fr 1fr;
   height: 100%;
+  overflow: auto;
   gap: 10px;
 }
 
@@ -875,7 +876,7 @@ input:focus {
 }
 
 .brand-image {
-  width: 80px;
+  width: 90px;
   height: 60px;
   margin-right: 20px;
   margin-left: 10px;
@@ -915,8 +916,10 @@ input:focus {
 }
 
 .product-description {
-  flex: 9;
-  overflow-wrap: break-word;
+  flex: 8;
+  max-height: 200px;
+  width: 90%;
+  overflow: auto;
 }
 
 .home-container aside {

@@ -55,7 +55,7 @@ class Login extends Component {
       console.log(res);
       if (res.status === 200) {
         localStorage.setItem("user", JSON.stringify(res.data.success));
-        this.props.history.push("/dashboard");
+        this.props.history.push("/dashboard/home");
       } else {
         console.log("not showing");
       }
