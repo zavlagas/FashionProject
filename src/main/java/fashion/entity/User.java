@@ -5,6 +5,7 @@
  */
 package fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.springframework.lang.Nullable;
 
 /**
  *
@@ -102,6 +106,14 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     @Cascade(CascadeType.ALL)
     private Subscription subscription;
+    @JsonIgnore
+    @JoinTable(name = "user_product_likes", joinColumns = {
+        @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "product_id", referencedColumnName = "id")})
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Cascade(CascadeType.ALL)
+    @Fetch(value = FetchMode.SUBSELECT)
+    private List<Product> likedProducts;
 
     public User() {
     }
@@ -233,6 +245,14 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "fashion.entity.User[ id=" + id + " ]";
+    }
+
+    public List<Product> getLikedProducts() {
+        return likedProducts;
+    }
+
+    public void setLikedProducts(List<Product> likedProducts) {
+        this.likedProducts = likedProducts;
     }
 
 }
