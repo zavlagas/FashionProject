@@ -21,4 +21,6 @@ public interface UserDao {
 
     public User findUserById(int userId);
 
+    public boolean updateUserDetails(User oldUserDetails);
+
 }

@@ -50,7 +50,7 @@ import org.springframework.lang.Nullable;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
     @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
-    @NamedQuery(name ="User.findAllDetailsByUsername",query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")})
+    @NamedQuery(name ="User.findAllDetailsByUsername",query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r  WHERE u.username = :username")})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -106,7 +106,6 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     @Cascade(CascadeType.ALL)
     private Subscription subscription;
-    @JsonIgnore
     @JoinTable(name = "user_product_likes", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "product_id", referencedColumnName = "id")})

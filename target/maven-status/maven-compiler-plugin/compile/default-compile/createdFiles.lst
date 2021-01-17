@@ -13,6 +13,7 @@ fashion\services\BrandServiceImpl.class
 fashion\config\MyWebAppConfig.class
 fashion\daos\RoleDaoImpl.class
 fashion\services\ChatHistoryService.class
+fashion\controllers\UserLikesController.class
 fashion\entity\JwtRequest.class
 fashion\config\JwtTokenUtil.class
 fashion\entity\Subscription.class

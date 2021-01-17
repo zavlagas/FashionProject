@@ -9,4 +9,6 @@ public interface UserService extends UserDetailsService {
 
     public boolean signUpNewUserIfNotExists(User newUser);
 
+    public boolean updateNewUserDetails(User oldUserDetails);
+
 }

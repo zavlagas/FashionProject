@@ -87,7 +87,15 @@ class Dashboard extends Component {
             </button>
           </div>
         </header>
-        <Route path={`${match.path}/home`} component={Home} />
+        <Route
+          path={`${match.path}/home`}
+          render={() => (
+            <Home
+              {...this.props}
+              authUser={JSON.parse(localStorage.getItem("user"))}
+            />
+          )}
+        />
         <Route
           path={`${match.path}/profile`}
           {...this.props}

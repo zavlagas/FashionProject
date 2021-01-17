@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public fashion.entity.User getAuthorizedUser(String username) {
-        fashion.entity.User databaseUser = udao.fetchAllUserDetails(username);
+        fashion.entity.User databaseUser = udao.findByUsername(username);
         return databaseUser;
     }
 
@@ -66,6 +66,11 @@ public class UserServiceImpl implements UserService {
 
         }
         return (userExists);
+    }
+
+    @Override
+    public boolean updateNewUserDetails(fashion.entity.User oldUserDetails) {
+        return (udao.updateUserDetails(oldUserDetails));
     }
 
 }

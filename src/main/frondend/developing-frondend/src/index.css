@@ -913,6 +913,19 @@ input:focus {
 .rating-section {
   flex: 1;
   font-size: 2rem;
+  display: flex;
+}
+
+.heart{
+  align-self: center;
+  width: 45px;
+  fill: rgba(255, 255, 255, 0.192);
+}
+
+
+.liked{
+  fill: red;
+  transform: scale(1.1,1.1);
 }
 
 .product-description {
