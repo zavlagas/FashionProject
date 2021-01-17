@@ -6,6 +6,7 @@
 package fashion.services;
 
 import fashion.daos.UserDao;
+import fashion.entity.Product;
 import fashion.entity.Role;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,5 +73,18 @@ public class UserServiceImpl implements UserService {
     public boolean updateNewUserDetails(fashion.entity.User oldUserDetails) {
         return (udao.updateUserDetails(oldUserDetails));
     }
+
+    @Override
+    public fashion.entity.User findUserById(int id) {
+        return(udao.findUserById(id));
+    }
+
+    @Override
+    public fashion.entity.User getAllUserDetails(String username) {
+      return (udao.fetchAllUserDetails(username));
+    }
+
+    
+    
 
 }

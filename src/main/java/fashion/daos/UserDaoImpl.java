@@ -1,6 +1,8 @@
 package fashion.daos;
 
+import fashion.entity.Product;
 import fashion.entity.User;
+import java.util.List;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Repository;
 
@@ -38,6 +40,13 @@ public class UserDaoImpl extends SuperDao implements UserDao {
             System.out.println(e.fillInStackTrace());
         }
         return (isUpdated);
+    }
+
+    @Override
+    public User fetchAllUserDetails(String username) {
+        return(getSession()
+                .createNamedQuery("User.findAllDetailsByUsername", User.class)
+                .setParameter("username", username).uniqueResult());
     }
 
 }

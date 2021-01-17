@@ -5,6 +5,7 @@
  */
 package fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -15,7 +16,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -39,7 +42,10 @@ import org.hibernate.annotations.CascadeType;
     @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
     @NamedQuery(name = "Product.findById", query = "SELECT p FROM Product p WHERE p.id = :id"),
     @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
-    @NamedQuery(name = "Product.findByUser", query = "SELECT p FROM Product p WHERE p.brand.user.id = :id")})
+    @NamedQuery(name = "Product.findByUser", query = "SELECT p FROM Product p WHERE p.brand.user.id = :id"),
+    @NamedQuery(name = "Product.findAllLikesByUserId", query = "SELECT p FROM Product p INNER JOIN FETCH p.likedProductUsers u WHERE u.id = :id"),
+    @NamedQuery(name = "Product.findByIdWithLikes", query = "SELECT p FROM Product p LEFT JOIN FETCH p.likedProductUsers u WHERE p.id = :id")})
+
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,6 +70,13 @@ public class Product implements Serializable {
     @OneToMany(orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "product_id")
     private List<ProductImage> productImageList;
+    @JoinTable(name = "user_product_likes", joinColumns = {
+        @JoinColumn(name = "product_id", referencedColumnName = "id")}, inverseJoinColumns = {
+        @JoinColumn(name = "user_id", referencedColumnName = "id")
+    })
+    @ManyToMany
+    @JsonIgnore
+    private List<User> likedProductUsers;
 
     public Product() {
     }
@@ -141,6 +154,14 @@ public class Product implements Serializable {
 
     public void setBrand(Brand brand) {
         this.brand = brand;
+    }
+
+    public List<User> getLikedProductUsers() {
+        return likedProductUsers;
+    }
+
+    public void setLikedProductUsers(List<User> likedProductUsers) {
+        this.likedProductUsers = likedProductUsers;
     }
 
 }

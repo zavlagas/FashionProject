@@ -5,15 +5,19 @@ class Home extends Component {
     super(props);
     this.state = {
       productList: [],
+      likedProducts: [],
       checkedLikedProducts: new Map(),
     };
     this.findTheLikedProducts = this.findTheLikedProducts.bind(this);
     this.handleLikes = this.handleLikes.bind(this);
+    this.addLikesInDb = this.addLikesInDb.bind(this);
+    this.removeLikesInDb = this.removeLikesInDb.bind(this);
   }
 
   componentDidMount() {
     const endPoint = "http://localhost:8080/FashionProject/api/products";
     axios.get(endPoint).then((response) => {
+      console.log(" ?????", response.data);
       this.findTheLikedProducts(response.data);
       this.setState({
         productList: response.data,
@@ -22,33 +26,56 @@ class Home extends Component {
   }
 
   findTheLikedProducts(productDataList) {
-    const likedProducts = this.props.authUser.likedProducts;
-    const allProducts = productDataList;
-    const checkedLikedProducts = new Map();
-    allProducts.forEach((product) => {
-      if (likedProducts.some((likedProduct) => likedProduct.id == product.id)) {
-        checkedLikedProducts.set(product.id, true);
-      } else {
-        checkedLikedProducts.set(product.id, false);
-      }
-    });
-    this.setState({
-      checkedLikedProducts
-    });
+    axios
+      .get(
+        `http://localhost:8080/FashionProject/api/likes/user/${this.props.authUser.id}`
+      )
+      .then((response) => {
+        console.log(response);
+        const likedProducts = response.data;
+        const allProducts = productDataList;
+        const checkedLikedProducts = new Map();
+        allProducts.forEach((product) => {
+          if (
+            likedProducts.some((likedProduct) => likedProduct.id == product.id)
+          ) {
+            checkedLikedProducts.set(product.id, true);
+          } else {
+            checkedLikedProducts.set(product.id, false);
+          }
+        });
+        this.setState({
+          checkedLikedProducts,
+          likedProducts,
+        });
+      });
   }
 
   handleLikes(productId) {
-    const likedProductsOfUser = this.props.authUser.likedProducts;
-    const likedProductsMap = this.state.checkedLikedProducts;
+    const checkedLikedProducts = this.state.checkedLikedProducts;
     if (!this.state.checkedLikedProducts.get(productId)) {
-      likedProductsMap.set(productId, true);
-      likedProductsOfUser.push(productId)
+      checkedLikedProducts.set(productId, true);
+      this.addLikesInDb(productId);
     } else {
-      likedProductsMap.set(productId, false);
+      checkedLikedProducts.set(productId, false);
+      this.removeLikesInDb(productId);
     }
-
     this.setState({
-      checkedLikedProducts: likedProductsMap,
+      checkedLikedProducts,
+    });
+  }
+
+  addLikesInDb(productId) {
+    const endPoint = `http://localhost:8080/FashionProject/api/likes/user/${this.props.authUser.id}/product/${productId}`;
+    axios.get(endPoint).then((response) => {
+      console.log(response);
+    });
+  }
+
+  removeLikesInDb(productId) {
+    const endPoint = `http://localhost:8080/FashionProject/api/likes/user/${this.props.authUser.id}/product/${productId}`;
+    axios.delete(endPoint).then((response) => {
+      console.log(response);
     });
   }
 

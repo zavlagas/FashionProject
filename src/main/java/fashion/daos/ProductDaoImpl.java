@@ -66,4 +66,19 @@ public class ProductDaoImpl extends SuperDao implements ProductDao {
                 .setParameter("id", userId).getResultList());
     }
 
+    @Override
+    public List<Product> findLikedUserProducts(int id) {
+        return(getSession()
+                .createNamedQuery("Product.findAllLikesByUserId",Product.class)
+                .setParameter("id", id)
+                .getResultList());
+    }
+
+    @Override
+    public Product getProductWithLikes(int productId) {
+        return(getSession()
+                .createNamedQuery("Product.findByIdWithLikes",Product.class)
+                .setParameter("id", productId).uniqueResult());
+    }
+
 }

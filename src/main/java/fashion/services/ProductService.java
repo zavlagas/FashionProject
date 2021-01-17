@@ -22,5 +22,9 @@ public interface ProductService {
     public boolean deleteProduct(int id);
 
     public List<Product> findUserProducts(int userId);
+
+    public List<Product> getUserLikedProducts(int id);
+
+    public Product getProductByIdwithTheLikes(int productId);
     
 }

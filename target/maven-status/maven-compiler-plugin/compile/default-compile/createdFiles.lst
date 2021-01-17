@@ -13,7 +13,6 @@ fashion\services\BrandServiceImpl.class
 fashion\config\MyWebAppConfig.class
 fashion\daos\RoleDaoImpl.class
 fashion\services\ChatHistoryService.class
-fashion\controllers\UserLikesController.class
 fashion\entity\JwtRequest.class
 fashion\config\JwtTokenUtil.class
 fashion\entity\Subscription.class
@@ -29,6 +28,7 @@ fashion\config\MyWebSecurityConfigurer.class
 fashion\daos\PlanDaoImpl.class
 fashion\services\PlanServiceImpl.class
 fashion\config\MyWebSecurityApplicationInitializer.class
+fashion\controllers\UserProductLikesController.class
 fashion\services\UserServiceImpl.class
 fashion\entity\Plan.class
 fashion\controllers\SocketController.class

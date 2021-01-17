@@ -29,9 +29,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springframework.lang.Nullable;
 
 /**
  *
@@ -50,7 +47,8 @@ import org.springframework.lang.Nullable;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
     @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
-    @NamedQuery(name ="User.findAllDetailsByUsername",query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r  WHERE u.username = :username")})
+    @NamedQuery(name = "User.findAllDetailsByUsername", query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -106,13 +104,6 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     @Cascade(CascadeType.ALL)
     private Subscription subscription;
-    @JoinTable(name = "user_product_likes", joinColumns = {
-        @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
-        @JoinColumn(name = "product_id", referencedColumnName = "id")})
-    @ManyToMany(fetch = FetchType.EAGER)
-    @Cascade(CascadeType.ALL)
-    @Fetch(value = FetchMode.SUBSELECT)
-    private List<Product> likedProducts;
 
     public User() {
     }
@@ -131,7 +122,6 @@ public class User implements Serializable {
         this.roleList = roleList;
         this.subscription = subscription;
     }
-
 
     public Integer getId() {
         return id;
@@ -244,14 +234,6 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return "fashion.entity.User[ id=" + id + " ]";
-    }
-
-    public List<Product> getLikedProducts() {
-        return likedProducts;
-    }
-
-    public void setLikedProducts(List<Product> likedProducts) {
-        this.likedProducts = likedProducts;
     }
 
 }

@@ -5,7 +5,9 @@
  */
 package fashion.daos;
 
+import fashion.entity.Product;
 import fashion.entity.User;
+import java.util.List;
 
 /**
  *
