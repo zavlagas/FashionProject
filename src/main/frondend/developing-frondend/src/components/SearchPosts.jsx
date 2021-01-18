@@ -50,6 +50,24 @@ class SearchPosts extends React.Component {
     }
   }
 
+  searchBrand(query) {
+    console.log(query);
+    const filterList = this.props.data.filter((product) => {
+      return product.brand.id === parseInt(query);
+    });
+
+    if (filterList.length === 0) {
+      this.setState({
+        productBrandValue: query,
+      });
+    } else {
+      this.setState({
+        productBrandValue: query,
+      });
+      this.props.filter(filterList);
+    }
+  }
+
   handleOnInputChange = (event) => {
     const query = event.target.value.toLowerCase();
     if (event.target.id === "search-title-input") {
@@ -58,9 +76,20 @@ class SearchPosts extends React.Component {
     if (event.target.id === "search-description-input") {
       this.searchDescription(query);
     }
+
+    if (event.target.id === "search-brand-input") {
+      this.searchBrand(query);
+    }
   };
 
   render() {
+    const brandMap = new Map([]);
+    const data = this.props.data;
+
+    data.forEach((product) => {
+      brandMap.set(product.brand.name, product.brand.id);
+    });
+
     return (
       <>
         <div className="filter-child-container">
@@ -101,11 +130,9 @@ class SearchPosts extends React.Component {
             <option value="" selected disabled hidden>
               Choose here
             </option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
+            {Array.from(brandMap).map(([key, value]) => {
+              return <option value={value}>{key}</option>;
+            })}
           </select>
           <p className="message">{this.state.productDescriptionMessage}</p>
         </div>
