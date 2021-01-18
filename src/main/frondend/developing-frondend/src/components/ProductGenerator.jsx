@@ -55,18 +55,12 @@ class ProductGenerator extends Component {
       brand: { id: this.state.brand },
       productImageList: this.state.productImageList,
     };
-    axios.put(endpoint, product_object).then((res) => {
-      if (res.status === 200) {
-        console.log(res);
-      } else {
-        console.log("not showing");
-      }
-    });
+    axios.put(endpoint, product_object).then((res) => {});
     event.target.reset();
   }
 
   render() {
-    console.log(this.state.brandList);
+   
     return (
       <>
         <div className="create-section">

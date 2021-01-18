@@ -52,7 +52,7 @@ class Login extends Component {
       password: this.state.password,
     };
     axios.post(endpoint, user_object).then((res) => {
-      console.log(res);
+      
       if (res.status === 200) {
         localStorage.setItem("user", JSON.stringify(res.data.success));
         this.props.history.push("/dashboard/home");

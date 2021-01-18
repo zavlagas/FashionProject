@@ -26,7 +26,7 @@ class ProductInspector extends Component {
     if (buttonAction === "delete") {
       const endPoint = `http://localhost:8080/FashionProject/api/products/${targetedProduct}`;
       axios.delete(endPoint).then((response) => {
-        console.log(response);
+        
         this.setState({
           productIsDeleted: response.data,
         });
@@ -41,7 +41,7 @@ class ProductInspector extends Component {
     if (buttonAction === "Edit") {
       const endPoint = `http://localhost:8080/FashionProject/api/products/${targetedProduct}`;
       axios.get(endPoint).then((response) => {
-        console.log(response);
+       
         this.setState({
           productId: response.data.id,
           productName: response.data.name,
@@ -57,7 +57,7 @@ class ProductInspector extends Component {
     const endpoint = `http://localhost:8080/FashionProject/api/products/user/${this.props.user.id}`;
 
     axios.get(endpoint).then((response) => {
-      console.log(response);
+      
       this.setState({
         productList: response.data,
       });
@@ -87,7 +87,7 @@ class ProductInspector extends Component {
     };
 
     axios.post(endPoint, Product_object).then((response) => {
-      console.log(response);
+      
       this.getAllProducts();
       this.setState({
         popUpForEdit: false,

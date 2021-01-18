@@ -34,7 +34,7 @@ class Home extends Component {
         `http://localhost:8080/FashionProject/api/likes/user/${this.props.authUser.id}`
       )
       .then((response) => {
-        console.log(response);
+       
         const likedProducts = response.data;
         const allProducts = productDataList;
         const checkedLikedProducts = new Map();
@@ -71,7 +71,7 @@ class Home extends Component {
   addLikesInDb(productId) {
     const endPoint = `http://localhost:8080/FashionProject/api/likes/user/${this.props.authUser.id}/product/${productId}`;
     axios.get(endPoint).then((response) => {
-      console.log(response);
+     
     });
   }
 

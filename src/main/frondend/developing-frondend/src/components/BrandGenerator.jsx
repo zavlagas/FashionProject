@@ -36,7 +36,7 @@ class BrandGenerator extends Component {
       user: this.props.user.id,
     };
 
-    console.log(brand_object);
+    
 
     axios.post(endpoint, brand_object).then((res) => {
       if (res.status === 200) {
@@ -83,7 +83,9 @@ class BrandGenerator extends Component {
               }
             />
           </div>
-          <button className="create-btn" form="form-brand-creator">Submit</button>
+          <button className="create-btn" form="form-brand-creator">
+            Submit
+          </button>
         </div>
       </>
     );

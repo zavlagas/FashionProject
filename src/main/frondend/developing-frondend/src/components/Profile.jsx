@@ -33,10 +33,10 @@ class Profile extends Component {
     const { roleList } = this.props.authUser;
     if (roleList.some((e) => e.type === Role.Admin)) {
       this.setState({
-        isAdmin: false,
+        isAdmin: true,
       });
     }
-    console.log(this.props);
+    
   }
 
   adminLayout() {
@@ -46,6 +46,11 @@ class Profile extends Component {
         <aside className="sidebar-container">
           <h5 className="sidebar-heading">Dashboard</h5>
           <ul>
+            <li>
+              <Link className="hover-link" to={`${match.url}/profile`}>
+                User Settings
+              </Link>
+            </li>
             <li>
               Brand
               <ul>
@@ -91,6 +96,14 @@ class Profile extends Component {
           </ul>
         </aside>
         <article className="article-container">
+          <Route
+          exact
+            path={`${match.path}/profile`}
+            {...this.props}
+            render={() => (
+              this.userLayout()
+            )}
+          />
           <Route
             path={`${match.path}/profile/brands/create`}
             {...this.props}
