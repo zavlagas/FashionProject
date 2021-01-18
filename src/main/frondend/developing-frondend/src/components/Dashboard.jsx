@@ -68,14 +68,19 @@ class Dashboard extends Component {
     return (
       <>
         <header className="app-header">
-          <h1 id="logo">FashionBook</h1>
+          <h1
+            onClick={() => this.props.history.push("/dashboard/home")}
+            id="logo"
+          >
+            FashionBook
+          </h1>
           <Search />
           <NavBar url={match.url} />
           <div className="app-header-user">
-            <Link to={`${match.url}/profile`}>
+            <Link className="profile-link" to={`${match.url}/profile`}>
               <div className="user-profile">
                 <img src="https://picsum.photos/100/100" />
-                <span>{this.state.user.username}</span>
+                <span>Profile</span>
               </div>
             </Link>
             <button

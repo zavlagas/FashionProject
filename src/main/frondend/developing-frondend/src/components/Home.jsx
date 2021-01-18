@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import axios from "axios";
+import SearchPosts from "./SearchPosts";
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productList: [],
+      dbProductList: [],
+      filterList: [],
       likedProducts: [],
       checkedLikedProducts: new Map(),
     };
@@ -12,15 +14,16 @@ class Home extends Component {
     this.handleLikes = this.handleLikes.bind(this);
     this.addLikesInDb = this.addLikesInDb.bind(this);
     this.removeLikesInDb = this.removeLikesInDb.bind(this);
+    this.handleFilteringValues = this.handleFilteringValues.bind(this);
   }
 
   componentDidMount() {
     const endPoint = "http://localhost:8080/FashionProject/api/products";
     axios.get(endPoint).then((response) => {
-      console.log(" ?????", response.data);
       this.findTheLikedProducts(response.data);
       this.setState({
-        productList: response.data,
+        dbProductList: response.data,
+        filterList: response.data,
       });
     });
   }
@@ -79,13 +82,20 @@ class Home extends Component {
     });
   }
 
+  handleFilteringValues(filterList) {
+    this.setState({
+      filterList,
+    });
+  }
+
   render() {
-    console.log(this.state.checkedLikedProducts);
+    
+
     return (
       <>
         <main className="home-container">
           <div className="posts-list-container">
-            {this.state.productList.map((product) => {
+            {this.state.filterList.map((product) => {
               return (
                 <>
                   <article className="post-container">
@@ -128,7 +138,12 @@ class Home extends Component {
               );
             })}
           </div>
-          <aside>Aside</aside>
+          <aside className="filter-section">
+            <SearchPosts
+              filter={(data) => this.handleFilteringValues(data)}
+              data={this.state.dbProductList}
+            />
+          </aside>
         </main>
       </>
     );

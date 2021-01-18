@@ -20,9 +20,7 @@ class Navbar extends Component {
               </Link>
             </li>
             <li>
-              <Link className="hover-link" to={`${this.state.url}/brands`}>
-                Brands
-              </Link>
+             
             </li>
           </ul>
         </nav>

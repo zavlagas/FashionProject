@@ -40,7 +40,7 @@ class BrandGenerator extends Component {
 
     axios.post(endpoint, brand_object).then((res) => {
       if (res.status === 200) {
-        console.log(res);
+        // console.log(res);
       } else {
         console.log("not showing");
       }
