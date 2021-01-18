@@ -50,5 +50,6 @@ fashion\daos\ProductDao.class
 fashion\services\PayMethodServiceImpl.class
 fashion\daos\UserDaoImpl.class
 fashion\controllers\SignUpController.class
+fashion\controllers\UserController.class
 fashion\services\ChatHistoryServiceImpl.class
 fashion\services\PayMethodService.class

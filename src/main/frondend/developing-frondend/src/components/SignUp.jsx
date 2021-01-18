@@ -118,6 +118,8 @@ class SignUp extends Component {
       username: this.state.username,
       password: this.state.password,
       createDate: new Date(),
+      image:
+        "https://i1.wp.com/www.awesomegreece.com/wp-content/uploads/2018/10/default-user-image.png",
       roleList: [{ id: parseInt(this.state.role) }],
       subscription: {
         startDate: new Date(),

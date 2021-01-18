@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao udao;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -71,20 +71,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateNewUserDetails(fashion.entity.User oldUserDetails) {
+        String userPassword = oldUserDetails.getPassword();
+        oldUserDetails.setPassword(passwordEncoder.encode(userPassword));
         return (udao.updateUserDetails(oldUserDetails));
     }
 
     @Override
     public fashion.entity.User findUserById(int id) {
-        return(udao.findUserById(id));
+        return (udao.findUserById(id));
     }
 
     @Override
     public fashion.entity.User getAllUserDetails(String username) {
-      return (udao.fetchAllUserDetails(username));
+        return (udao.fetchAllUserDetails(username));
     }
 
-    
-    
+    @Override
+    public boolean deleteUserFromDb(int id) {
+        return (udao.deleteUserFromDb(id));
+    }
 
 }

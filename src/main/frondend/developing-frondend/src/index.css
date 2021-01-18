@@ -666,6 +666,7 @@ input:focus {
   grid-row: 2/3;
   display: grid;
   grid-template-columns: 1fr 4fr;
+  overflow: auto;
 }
 
 .sidebar-container {
@@ -956,5 +957,61 @@ input:focus {
 
 .filter-child-container:hover {
   font-weight: bolder;
-  transform: scale(1.1,1.1);
+  transform: scale(1.1, 1.1);
+}
+
+.not-admin-user-container {
+  grid-row: 1/-1;
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: 1fr 5fr 5fr 1fr;
+  grid-template-rows: 100px auto;
+}
+
+.not-admin-user-content-container {
+  grid-column: 2/4;
+  grid-row: 1/-1;
+  grid-template-columns: 1/-1;
+  padding: 10px;
+  margin: 10px;
+  background-color: var(--secondary-bcgrnd-color);
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+  position: relative;
+}
+
+.image-user-profile {
+  justify-self: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.user-details {
+  margin-top: 5px;
+  border-top: 1px groove var(--text-color);
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(3, 120px);
+}
+
+.user-details-profile-inputs {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-user {
+  color: red;
+  font-size: 2rem;
+}
+
+.user-message {
+  font-size: 2.3rem;
+  align-self: center;
+}
+
+.cloudinary-absolute-position-container {
+  margin-top: 20px;
 }

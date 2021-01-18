@@ -20,6 +20,7 @@ class Dashboard extends Component {
         lastName: "",
         roleList: [],
         username: "",
+        image: "",
       },
     };
     this.toggleChatButton = this.toggleChatButton.bind(this);
@@ -36,6 +37,7 @@ class Dashboard extends Component {
           lastName: user.lastName,
           roleList: user.roleList,
           username: user.username,
+          image: user.image,
         },
       });
     }
@@ -74,12 +76,11 @@ class Dashboard extends Component {
           >
             FashionBook
           </h1>
-          <Search />
           <NavBar url={match.url} />
           <div className="app-header-user">
             <Link className="profile-link" to={`${match.url}/profile`}>
               <div className="user-profile">
-                <img src="https://picsum.photos/100/100" />
+                <img src={this.state.user.image} />
                 <span>Profile</span>
               </div>
             </Link>

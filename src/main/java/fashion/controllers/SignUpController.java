@@ -17,10 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SignUpController {
 
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private PlanService planService;
+
     @Autowired
     private UserService service;
     

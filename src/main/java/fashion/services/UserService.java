@@ -17,4 +17,6 @@ public interface UserService extends UserDetailsService {
     
     
     public User findUserById(int id);
+
+    public boolean deleteUserFromDb(int id);
 }

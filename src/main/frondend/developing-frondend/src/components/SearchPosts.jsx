@@ -51,7 +51,6 @@ class SearchPosts extends React.Component {
   }
 
   searchBrand(query) {
-    console.log(query);
     const filterList = this.props.data.filter((product) => {
       return product.brand.id === parseInt(query);
     });
