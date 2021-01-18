@@ -27,10 +27,11 @@ class Search extends React.Component {
           <input
             type="text"
             id="search-input"
-            placeholder="Search..."
+            className="styled-input"
+            placeholder="Search Profiles..."
             onChange={this.handleOnInputChange}
           />
-          <i className="fa fa-search search-icon" />
+          {/* <i className="fa fa-search search-icon" /> */}
         </label>
       </div>
     );

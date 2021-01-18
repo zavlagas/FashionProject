@@ -18,6 +18,7 @@ C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\en
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\MyWebAppConfig.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\UserDaoImpl.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\MyWebSecurityConfigurer.java
+C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\controllers\UserProductLikesController.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\daos\PlanDao.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\services\RoleService.java
 C:\Users\User\Documents\java\ServletApps\FashionProject\src\main\java\fashion\config\JwtAuthenticationEntryPoint.java

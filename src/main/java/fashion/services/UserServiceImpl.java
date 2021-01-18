@@ -6,6 +6,7 @@
 package fashion.services;
 
 import fashion.daos.UserDao;
+import fashion.entity.Product;
 import fashion.entity.Role;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao udao;
-    
+
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -49,7 +50,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public fashion.entity.User getAuthorizedUser(String username) {
-        fashion.entity.User databaseUser = udao.fetchAllUserDetails(username);
+        fashion.entity.User databaseUser = udao.findByUsername(username);
         return databaseUser;
     }
 
@@ -66,6 +67,28 @@ public class UserServiceImpl implements UserService {
 
         }
         return (userExists);
+    }
+
+    @Override
+    public boolean updateNewUserDetails(fashion.entity.User oldUserDetails) {
+        String userPassword = oldUserDetails.getPassword();
+        oldUserDetails.setPassword(passwordEncoder.encode(userPassword));
+        return (udao.updateUserDetails(oldUserDetails));
+    }
+
+    @Override
+    public fashion.entity.User findUserById(int id) {
+        return (udao.findUserById(id));
+    }
+
+    @Override
+    public fashion.entity.User getAllUserDetails(String username) {
+        return (udao.fetchAllUserDetails(username));
+    }
+
+    @Override
+    public boolean deleteUserFromDb(int id) {
+        return (udao.deleteUserFromDb(id));
     }
 
 }

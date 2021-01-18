@@ -14,12 +14,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class ProductServiceImpl implements ProductService{
-    
+public class ProductServiceImpl implements ProductService {
+
     @Autowired
     private ProductDao dao;
-    
-    
+
     @Override
     public List<Product> getAllProducts() {
         return (dao.getAllProducts());
@@ -27,22 +26,37 @@ public class ProductServiceImpl implements ProductService{
 
     @Override
     public Product getProductById(int id) {
-       return (dao.getProductById(id));
+        return (dao.getProductById(id));
     }
 
     @Override
-    public void createProduct(Product newProduct) {
-        dao.createProduct(newProduct);
+    public boolean createProduct(Product newProduct) {
+        return (dao.createProduct(newProduct));
     }
 
     @Override
-    public void updateProduct(Product oldProduct) {
-       dao.updateProduct(oldProduct);
+    public boolean updateProduct(Product oldProduct) {
+        return (dao.updateProduct(oldProduct));
     }
 
     @Override
-    public void deleteProduct(int id) {
-        dao.deleteProduct(id);
+    public boolean deleteProduct(int id) {
+        return (dao.deleteProduct(id));
     }
-    
+
+    @Override
+    public List<Product> findUserProducts(int userId) {
+        return (dao.findProductsOfUser(userId));
+    }
+
+    @Override
+    public List<Product> getUserLikedProducts(int id) {
+        return (dao.findLikedUserProducts(id));
+    }
+
+    @Override
+    public Product getProductByIdwithTheLikes(int productId) {
+        return (dao.getProductWithLikes(productId));
+    }
+
 }

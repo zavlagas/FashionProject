@@ -61,7 +61,7 @@ public class JwtAuthenticationController {
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.POST)
     public ResponseEntity<Map<String, User>> successLogin(@RequestBody JwtRequest user) {
-        User authorizedUser = userDetailsService.getAuthorizedUser(user.getUsername());
+        User authorizedUser = userDetailsService.getAllUserDetails(user.getUsername());
         Map<String, User> response = new HashMap();
         response.put("success", authorizedUser);
         return ResponseEntity.ok().body(response);

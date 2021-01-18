@@ -28,6 +28,7 @@ fashion\config\MyWebSecurityConfigurer.class
 fashion\daos\PlanDaoImpl.class
 fashion\services\PlanServiceImpl.class
 fashion\config\MyWebSecurityApplicationInitializer.class
+fashion\controllers\UserProductLikesController.class
 fashion\services\UserServiceImpl.class
 fashion\entity\Plan.class
 fashion\controllers\SocketController.class

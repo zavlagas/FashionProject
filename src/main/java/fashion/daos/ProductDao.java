@@ -18,10 +18,16 @@ public interface ProductDao {
 
     public Product getProductById(int id);
 
-    public void createProduct(Product newProduct);
+    public boolean createProduct(Product newProduct);
 
-    public void updateProduct(Product oldProduct);
+    public boolean updateProduct(Product oldProduct);
 
-    public void deleteProduct(int id);
+    public boolean deleteProduct(int id);
+
+    public List<Product> findProductsOfUser(int userId);
+
+    public List<Product> findLikedUserProducts(int id);
+
+    public Product getProductWithLikes(int productId);
     
 }

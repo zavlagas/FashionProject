@@ -5,12 +5,10 @@ import fashion.services.PlanService;
 import fashion.services.RoleService;
 import fashion.services.UserService;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SignUpController {
 
-    @Autowired
-    private RoleService roleService;
-    @Autowired
-    private PlanService planService;
+
     @Autowired
     private UserService service;
     
@@ -33,11 +28,6 @@ public class SignUpController {
         boolean userExists = service.signUpNewUserIfNotExists(newUser);
         return (ResponseEntity.ok().body(userExists));
     }
-     @GetMapping("/signup")
-    @Produces(MediaType.APPLICATION_JSON)
-    public ResponseEntity<User> testJsonUser(){
-        User testUser = service.getAuthorizedUser("admin");
-        return ResponseEntity.ok().body(testUser);
-    }
+  
 
 }

@@ -17,6 +17,7 @@ class SignUp extends Component {
       plan: {},
       formIsChecked: false,
       formSubmitted: false,
+      userSubscribed: false,
     };
     this.sendPostRequest = this.sendPostRequest.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -62,9 +63,7 @@ class SignUp extends Component {
           </p>
           <div className="role-subscription">
             <span>Free Account</span>
-            <button onClick={() => this.sendPostRequest()}>
-              Subscribe Now
-            </button>
+            <button form="sign-up-form">Subscribe Now</button>
           </div>
         </>
       );
@@ -107,7 +106,7 @@ class SignUp extends Component {
   }
 
   sendPostRequest() {
-    console.log("Send Post Request");
+    
     const endpoint = "http://localhost:8080/FashionProject/signup";
     const user = {
       firstName: this.state.firstName,
@@ -116,33 +115,35 @@ class SignUp extends Component {
       dob: this.state.dob,
       username: this.state.username,
       password: this.state.password,
-      roleList: [
-        this.state.role === "1"
-          ? { id: 1, type: "USER" }
-          : { id: 2, type: "ADMIN" },
-      ],
+      createDate: new Date(),
+      image:
+        "https://i1.wp.com/www.awesomegreece.com/wp-content/uploads/2018/10/default-user-image.png",
+      roleList: [{ id: parseInt(this.state.role) }],
       subscription: {
-        plan:
-          this.state.role === "1"
-            ? { id: 1, name: "FASHION_LOVER", price: 0 }
-            : { id: 2, name: "FASHION_MAKER", price: 20 },
+        startDate: new Date(),
+        plan: { id: this.state.role },
       },
     };
     axios
       .post(endpoint, user)
       .then((res) => {
-        try {
-          this.setState({
-            formSubmitted: true,
-          });
-        } catch (error) {}
+       
+        this.setState({
+          formSubmitted: true,
+          userSubscribed: res.data,
+        });
       })
       .catch((error) => {
         console.error(error);
       });
   }
+
   handleFormSubmit = (event) => {
     event.preventDefault();
+    this.sendPostRequest();
+    if (this.state.formSubmitted) {
+      this.props.history.push("/");
+    }
   };
 
   render() {
@@ -151,7 +152,11 @@ class SignUp extends Component {
         <main className="" id="signup-container">
           <h1 className="signup-title">Create an account</h1>
           <section className="form-container">
-            <form className="form-signup" onSubmit={this.handleFormSubmit}>
+            <form
+              id="sign-up-form"
+              className="form-signup"
+              onSubmit={this.handleFormSubmit}
+            >
               <div id="firstname-input-section" className="input-form-group ">
                 <label className="signup-label" htmlFor="firstname">
                   First Name
@@ -162,6 +167,7 @@ class SignUp extends Component {
                   name="firstName"
                   value={this.state.firstName}
                   onChange={this.handleChange}
+                  required
                   className="signup-input"
                   id="firstname"
                 />
@@ -231,12 +237,18 @@ class SignUp extends Component {
                   required
                   type="password"
                   name="password"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                  title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                   value={this.state.password}
                   onChange={this.handleChange}
                   autoComplete="current-password"
                   className="signup-input"
                   id="signup-password"
                 />
+                <span className="password-reminder">
+                  Must contain at least one number and one uppercase and <br/>
+                  lowercase letter, and at least 8 or more characters
+                </span>
               </div>
               <div id="roles-input-section" className="input-form-group ">
                 <p>Please Select Your Role</p>
@@ -263,10 +275,17 @@ class SignUp extends Component {
                   <img src="https://i.imgur.com/HvbINLy.gif" />
                 </label>
               </div>
-              <div className="role-details-container">
-                {this.handleRoleDetailsContainer()}
-              </div>
             </form>
+            <div className="role-details-container">
+              {this.handleRoleDetailsContainer()}
+            </div>
+            <div>
+              <p className="message">
+                {this.state.formSubmitted
+                  ? "You have successfully subscribed"
+                  : ""}
+              </p>
+            </div>
           </section>
         </main>
       </>

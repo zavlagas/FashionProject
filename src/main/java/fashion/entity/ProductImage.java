@@ -17,7 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -27,9 +26,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @Entity
 @Table(name = "product_images")
-@XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p")})
+    @NamedQuery(name = "ProductImage.findAll", query = "SELECT p FROM ProductImage p"),
+    @NamedQuery(name = "ProductImage.findById", query = "SELECT p FROM ProductImage p WHERE p.id = :id"),
+    @NamedQuery(name = "ProductImage.findByImagePath", query = "SELECT p FROM ProductImage p WHERE p.imagePath = :imagePath")})
 public class ProductImage implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,25 +38,15 @@ public class ProductImage implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 200)
     @Column(name = "image_path")
     private String imagePath;
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    @ManyToOne
-    private Product product;
 
     public ProductImage() {
     }
 
     public ProductImage(Integer id) {
         this.id = id;
-    }
-
-    public ProductImage(Integer id, String imagePath) {
-        this.id = id;
-        this.imagePath = imagePath;
     }
 
     public Integer getId() {
@@ -75,13 +65,13 @@ public class ProductImage implements Serializable {
         this.imagePath = imagePath;
     }
 
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product productId) {
-        this.product = productId;
-    }
+//    public Product getProduct() {
+//        return product;
+//    }
+//
+//    public void setProductId(Product product) {
+//        this.product = product;
+//    }
 
     @Override
     public int hashCode() {

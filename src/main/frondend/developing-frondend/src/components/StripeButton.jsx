@@ -25,6 +25,7 @@ class StripeButton extends Component {
       .then((response) => {
         if (response.status === 200) {
           this.props.sendPost();
+          this.props.history.push("/");
         }
       })
       .catch((error) => {});

@@ -20,6 +20,7 @@ class Dashboard extends Component {
         lastName: "",
         roleList: [],
         username: "",
+        image: "",
       },
     };
     this.toggleChatButton = this.toggleChatButton.bind(this);
@@ -36,6 +37,7 @@ class Dashboard extends Component {
           lastName: user.lastName,
           roleList: user.roleList,
           username: user.username,
+          image: user.image,
         },
       });
     }
@@ -68,14 +70,18 @@ class Dashboard extends Component {
     return (
       <>
         <header className="app-header">
-          <h1 id="logo">FashionBook</h1>
-          <Search />
+          <h1
+            onClick={() => this.props.history.push("/dashboard/home")}
+            id="logo"
+          >
+            FashionBook
+          </h1>
           <NavBar url={match.url} />
           <div className="app-header-user">
-            <Link to={`${match.url}/profile`}>
+            <Link className="profile-link" to={`${match.url}/profile`}>
               <div className="user-profile">
-                <img src="https://picsum.photos/100/100" />
-                <span>{this.state.user.username}</span>
+                <img src={this.state.user.image} />
+                <span>Profile</span>
               </div>
             </Link>
             <button
@@ -87,7 +93,15 @@ class Dashboard extends Component {
             </button>
           </div>
         </header>
-        <Route path={`${match.path}/home`} component={Home} />
+        <Route
+          path={`${match.path}/home`}
+          render={() => (
+            <Home
+              {...this.props}
+              authUser={JSON.parse(localStorage.getItem("user"))}
+            />
+          )}
+        />
         <Route
           path={`${match.path}/profile`}
           {...this.props}

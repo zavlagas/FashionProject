@@ -5,12 +5,14 @@
  */
 package fashion.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -25,8 +27,6 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -47,7 +47,8 @@ import org.hibernate.annotations.CascadeType;
     @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     @NamedQuery(name = "User.findByImage", query = "SELECT u FROM User u WHERE u.image = :image"),
     @NamedQuery(name = "User.findByCreateDate", query = "SELECT u FROM User u WHERE u.createDate = :createDate"),
-    @NamedQuery(name ="User.findAllDetailsByUsername",query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")})
+    @NamedQuery(name = "User.findAllDetailsByUsername", query = "SELECT u FROM User u INNER JOIN FETCH u.roleList r WHERE u.username = :username")
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -97,8 +98,7 @@ public class User implements Serializable {
     @JoinTable(name = "user_roles", joinColumns = {
         @JoinColumn(name = "user_id", referencedColumnName = "id")}, inverseJoinColumns = {
         @JoinColumn(name = "role_id", referencedColumnName = "id")})
-    @ManyToMany
-    @Cascade(CascadeType.SAVE_UPDATE)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Role> roleList;
     @JoinColumn(name = "subscription_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
@@ -122,7 +122,6 @@ public class User implements Serializable {
         this.roleList = roleList;
         this.subscription = subscription;
     }
-
 
     public Integer getId() {
         return id;

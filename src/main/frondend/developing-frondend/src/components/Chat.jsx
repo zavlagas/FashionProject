@@ -36,7 +36,7 @@ class Chat extends Component {
     axios
       .get("http://localhost:8080/FashionProject/history")
       .then((response) => {
-        console.log(response.data);
+      
         if (this._isMounted) {
           this.setState({ messages: response.data });
         }

@@ -5,7 +5,9 @@
  */
 package fashion.daos;
 
+import fashion.entity.Product;
 import fashion.entity.User;
+import java.util.List;
 
 /**
  *
@@ -18,5 +20,11 @@ public interface UserDao {
     fashion.entity.User fetchAllUserDetails(String username);
 
     public void signUpToDatabase(User newUser);
+
+    public User findUserById(int userId);
+
+    public boolean updateUserDetails(User oldUserDetails);
+
+    public boolean deleteUserFromDb(int id);
 
 }
